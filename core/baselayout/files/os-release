@@ -1,0 +1,6 @@
+NAME="Carbs Linux"
+PRETTY_NAME="Carbs Linux"
+ID=carbs
+BUILD_ID=rolling
+HOME_URL="https://carbslinux.org"
+DOCUMENTATION_URL="https://carbslinux.org"

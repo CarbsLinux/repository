@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+machine=$(cc -dumpmachine)
+
+./configure \
+    --prefix=/usr \
+    --build="$machine" \
+    --host="$machine" \
+    --disable-blkid
+
+make
+make DESTDIR="$1" install

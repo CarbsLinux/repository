@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+meson \
+    --prefix=/usr \
+    -Dgir=false \
+    -Dgtk_doc=false \
+    -Dintrospection=false \
+    . build
+
+ninja -C build
+ninja -C build install
+
+# Remove unneeded tests
+rm -rf "$1/usr/share/installed-tests"
+rm -rf "$1/usr/libexec/installed-tests"

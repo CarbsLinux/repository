@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+# Remove 'libelf' dependency.
+sed -i 's/if have_libelf/if not have_libelf/' gio/meson.build
+
+meson \
+    --prefix=/usr \
+    -Dman=false \
+    -Dfam=false \
+    . build
+
+ninja -C build
+ninja -C build install
+
+# Purge gdbus.
+rm -rf "$1/usr/bin/gdbus"

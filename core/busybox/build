@@ -1,0 +1,35 @@
+#!/bin/sh -e
+
+# Build and install regular busybox.
+# This excludes utilities which require 'suid' to function.
+make CC="${CC:-gcc}"
+make CONFIG_PREFIX="$1/usr" install
+
+# Rename the binary temporarily.
+mv "$1/usr/bin/busybox" "$1/usr/bin/busybox-nosuid"
+
+# Build and install suid busybox.
+# This _only_ includes utlities which require 'suid' to function.
+cp -f .config-suid .config
+make CC="${CC:-gcc}"
+make CONFIG_PREFIX="$1/usr" install
+
+# Aptly name the busybox binaries.
+mv "$1/usr/bin/busybox"        "$1/usr/bin/busybox-suid"
+mv "$1/usr/bin/busybox-nosuid" "$1/usr/bin/busybox"
+
+# Install the non-suid symlinks.
+"$1/usr/bin/busybox" --list | while read -r bin; do
+    ln -s busybox "$1/usr/bin/$bin"
+done
+
+# Install the suid symlinks.
+"$1/usr/bin/busybox-suid" --list | while read -r bin; do
+    ln -s busybox-suid "$1/usr/bin/$bin"
+done
+
+# Set suid on busybox suid.
+chmod u+s "$1/usr/bin/busybox-suid"
+
+# Install runit services
+install -Dm755 acpid.run           "$1/etc/sv/acpid/run"

@@ -1,0 +1,18 @@
+Carbs Linux Repository
+======================
+
+Official Repository of Carbs Linux
+
+* Forked from Kiss Linux Repositories to fit Carbs Linux
+
+
+List of Changes
+---------------
+
+Until the repository is different enough, there 
+will be a list of changes here
+
+* Removed musl libc and package fixes of musl
+* Removed baseinit
+* Added own baselayout configuration
+* Added own busybox configuration

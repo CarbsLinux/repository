@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+
+./configure \
+	--prefix=/ \
+	--enable-compat-symlinks \
+	--mandir=/usr/share/man \
+	--docdir=/usr/share/doc/dosfstools-4.1
+
+make
+make DESTDIR="$1" install

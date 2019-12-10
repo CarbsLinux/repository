@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+for patch in bash50-0??; do
+    patch -p0 < "$patch"
+done
+
+./configure \
+    --prefix=/usr \
+    --without-bash-malloc \
+    --without-installed-readline \
+    --disable-nls
+
+export MAKEFLAGS="TERMCAP_LIB=/usr/lib/libncursesw.a $MAKEFLAGS"
+
+make
+make DESTDIR="$1" install

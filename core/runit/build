@@ -1,0 +1,26 @@
+#!/bin/sh -e
+
+cd runit-2.1.2/src
+
+sed -e 's@sbin/runit@usr/bin/runit@g' -i runit.h
+
+# Build statically
+echo "${CC:-gcc} -D_GNU_SOURCE $CFLAGS -static" > conf-cc
+echo "${CC:-gcc} $LDFLAGS -static -Wl,-z -Wl,noexecstack" > conf-ld
+
+# Set service path to /var/service
+sed -i -e 's:^char \*varservice ="/service/";$:char \*varservice ="/var/service/";:' sv.c
+
+make
+
+for bin in chpst runit runit-init runsv runsvchdir runsvdir sv svlogd utmpset; do
+	install -Dm755 "$bin" "$1/usr/bin/$bin"
+done
+cd ../man
+for man in ./*; do
+	install -Dm644 "$man" "$1/usr/share/man/man8/$man"
+done
+
+
+mkdir -p "$1/var"
+ln -s ../run/runit/runsvdir/current "$1/var/service"

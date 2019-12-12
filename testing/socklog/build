@@ -13,19 +13,21 @@ mkdir -p "$1/usr/share/man/man1" "$1/usr/share/man/man8"
 
 # Install programs and manpages
 for bin in command/*; do
-	cp "$bin" "$1/usr/bin/$bin"
+	cp "$bin" "$1/usr/bin/$(basename "$bin")"
 done
 
 for man1 in man/*.1; do
-	cp "$man1" "$1/usr/share/man/man1/$man1"
+	cp "$man1" "$1/usr/share/man/man1/$(basename $man1)"
 done
 
 for man8 in man/*.8; do
-	cp "$man1" "$1/usr/share/man/man8/$man8"
+	cp "$man1" "$1/usr/share/man/man8/$(basename $man8)"
 done
+
+cd ..
 
 
 install -Dm755 socklog-unix.run "$1/etc/sv/socklog-unix/run"
-ln -s /run/runit/supervise.socklog "$1/etc/sv/socklog-unix/run"
+ln -s /run/runit/supervise.socklog "$1/etc/sv/socklog-unix/supervise"
 install -Dm755 svlogd.run "$1/etc/sv/socklog-unix/log/run"
-ln -s /run/runit/supervise.svlogd "$1/etc/sv/socklog-unix/log/run"
+ln -s ../run/runit/supervise.svlogd "$1/etc/sv/socklog-unix/log/supervise"

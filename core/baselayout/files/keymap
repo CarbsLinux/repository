@@ -1,0 +1,11 @@
+#
+# /etc/keymap
+#
+
+# Set full path to keymap to 
+# load them on boot time
+
+# e.g. 
+#   KEYMAP=/usr/share/bkeymaps/us/us.bmap
+
+KEYMAP=

@@ -17,11 +17,11 @@ for bin in command/*; do
 done
 
 for man1 in man/*.1; do
-	cp "$man1" "$1/usr/share/man/man1/$(basename $man1)"
+	cp "$man1" "$1/usr/share/man/man1/$(basename "$man1")"
 done
 
 for man8 in man/*.8; do
-	cp "$man1" "$1/usr/share/man/man8/$(basename $man8)"
+	cp "$man1" "$1/usr/share/man/man8/$(basename "$man8")"
 done
 
 cd ..

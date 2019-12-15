@@ -3,17 +3,3 @@ Carbs Linux Repository
 
 Official Repository of Carbs Linux
 
-* Forked from Kiss Linux Repositories to fit Carbs Linux
-
-
-List of Changes
----------------
-
-Until the repository is different enough, there 
-will be a list of changes here
-
-* Added carbs-init
-* Added scron (Carbs configuration of busybox does not come with a cron daemon)
-* Removed baseinit
-* Added own baselayout configuration
-* Added own busybox configuration

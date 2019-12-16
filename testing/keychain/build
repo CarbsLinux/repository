@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+install -Dm755 keychain "$1/usr/bin/keychain"
+install -Dm644 keychain.1 "$1/usr/share/man/keychain.1"

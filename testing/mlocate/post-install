@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+if grep -q mlocate /etc/group; then
+	echo "mlocate group already exists, skipping creation"
+else
+	echo "Creating mlocate group"
+	addgroup mlocate
+fi
+
+cat <<EOF
+
+NOTE: In order to use "locate" command without 
+root priviliges add yourself to the
+
+            mlocate
+
+group.
+
+EOF

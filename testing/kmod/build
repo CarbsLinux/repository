@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./configure \
+	--prefix=/usr \
+	--libdir=/usr/lib \
+	--sysconfdir=/etc
+
+make
+
+make DESTDIR="$1" install
+

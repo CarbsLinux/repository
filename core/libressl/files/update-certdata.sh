@@ -9,6 +9,8 @@
 
 cd /etc/ssl && {
     wget https://curl.haxx.se/ca/cacert.pem
+    mkdir -p /etc/ssl/certs
+    cp -f cacert.pem certs
     mv -f cacert.pem cert.pem
     printf '%s\n' "${0##*/}: updated cert.pm"
 }

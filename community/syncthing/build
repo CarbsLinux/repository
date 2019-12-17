@@ -3,3 +3,17 @@
 go run build.go build
 
 install -Dm755 syncthing "$1/usr/bin/syncthing"
+
+cd man
+
+for man in *.1; do
+	install -Dm644 "$man" "$1/usr/share/man/man1/$man"
+done
+
+for man in *.5; do
+	install -Dm644 "$man" "$1/usr/share/man/man5/$man"
+done
+
+for man in *.7; do
+	install -Dm644 "$man" "$1/usr/share/man/man7/$man"
+done

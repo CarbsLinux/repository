@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+go run build.go build
+
+install -Dm755 syncthing "$1/usr/bin/syncthing"

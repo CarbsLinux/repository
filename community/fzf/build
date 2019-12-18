@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+make
+make install
+
+mkdir -p "$1/usr/bin"
+cp bin/* "$1/usr/bin/"
+
+mkdir "$1/usr/share"
+cp -r man "$1/usr/share/man"

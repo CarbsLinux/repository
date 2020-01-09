@@ -17,7 +17,10 @@
     --disable-sulogin \
     --without-udev \
     --without-python \
-    --without-systemd
+    --without-systemd \
+    --disable-nologin \
+    --disable-logger
 
 make
 make DESTDIR="$1" install
+rm -f "$1/usr/bin/getopt"

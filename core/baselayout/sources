@@ -3,6 +3,7 @@ files/fstab
 files/group
 files/host.conf
 files/hosts
+files/installkernel
 files/issue
 files/keymap
 files/mime.types

@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+./configure --prefix=/usr --without-docs
+
+make
+make DESTDIR="$1" install

@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+mkdir build
+cd build
+
+meson --prefix=/usr -Dlibproxy=disabled -Dopenssl=enabled ..
+ninja
+DESTDIR="$1" ninja install

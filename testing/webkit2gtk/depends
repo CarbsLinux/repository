@@ -1,0 +1,14 @@
+libsoup
+cairo
+cmake
+gettext
+gtk+2
+gtk+3
+mesa
+sqlite
+libwebp
+ruby
+freetype-harfbuzz
+libxslt
+libtasn1
+mesa

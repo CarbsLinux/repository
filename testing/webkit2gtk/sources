@@ -1,0 +1,3 @@
+https://webkitgtk.org/releases/webkitgtk-2.26.2.tar.xz
+patches/u16-fix.patch
+patches/fix-musl.patch

@@ -3,4 +3,5 @@ files/.config
 files/.config-suid
 files/acpid.run
 files/crond.run
+files/ntpd.run
 files/ntp.conf

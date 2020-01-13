@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+make CFLAGS="$CFLAGS -static" ubase-box
+install -Dm755 ubase-box "$1/usr/bin/ubase-box"

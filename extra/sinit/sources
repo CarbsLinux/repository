@@ -1,0 +1,7 @@
+https://dl.carbslinux.org/distfiles/sinit-1.1.tar.gz
+files/config.h
+files/reboot
+files/poweroff
+files/sinit-launch-services.boot
+files/sinit.pre.shutdown
+files/sinit.post.shutdown

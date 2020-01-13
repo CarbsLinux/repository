@@ -15,6 +15,8 @@
     --disable-rpath \
     --disable-kill \
     --disable-sulogin \
+    --disable-su \
+    --disable-login \
     --without-udev \
     --without-python \
     --without-systemd \

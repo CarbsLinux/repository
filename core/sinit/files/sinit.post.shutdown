@@ -8,7 +8,7 @@ if [ "$SINIT_SHUTDOWN_HOOKS" = 1 ]; then
 			out "Requesting system reboot..."
 			/usr/bin/ubase-box halt -r 
 			;;
-		poweroff) 
+		*) 
 			out "Requesting system poweroff..."
 			/usr/bin/ubase-box halt -p 
 			;;

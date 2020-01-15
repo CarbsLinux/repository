@@ -2,13 +2,15 @@
 
 patch -p1 < u16-fix.patch
 patch -p0 < fix-musl.patch
+patch -p1 < nogl.patch
 
 mkdir build
 cd build
 
+CFLAGS="${CFLAGS} -Wno-expansion-to-defined" \
+CXXFLAGS="${CXXFLAGS} -Wno-expansion-to-defined" \
 cmake \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DENABLE_ACCESSIBILITY=OFF \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_SKIP_RPATH=ON \
 	-DPORT=GTK \

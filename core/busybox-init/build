@@ -10,3 +10,5 @@ mv "$1/usr/bin/busybox" "$1/usr/bin/busybox-init"
 "$1/usr/bin/busybox-init" --list | while read -r bin; do
     ln -s busybox-init "$1/usr/bin/$bin"
 done
+
+install -Dm644 inittab "$1/etc/inittab"

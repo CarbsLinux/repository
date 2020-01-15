@@ -2,10 +2,10 @@
 
 grep -q SINIT_ /etc/init/rc.conf || cat <<EOF >> /etc/init/rc.conf
 
-# Uncomment these to run the scripts for sinit
-# SINIT_SHUTDOWN_HOOKS=1
-# SINIT_ENABLE_GETTY=1
-# SINIT_ENABLE_RUNIT=1
+# Comment these to run the scripts for sinit
+SINIT_SHUTDOWN_HOOKS=1
+SINIT_ENABLE_GETTY=1
+SINIT_ENABLE_RUNIT=1
 EOF
 
 cat <<EOF

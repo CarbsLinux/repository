@@ -6,11 +6,11 @@ if [ "$SINIT_SHUTDOWN_HOOKS" = 1 ]; then
 	case "$1" in
 		reboot)	
 			out "Requesting system reboot..."
-			/usr/bin/ubase-box halt -r 
+			halt -r 
 			;;
 		*) 
 			out "Requesting system poweroff..."
-			/usr/bin/ubase-box halt -p 
+			halt -p 
 			;;
 	esac
 fi

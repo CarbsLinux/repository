@@ -1,4 +1,5 @@
-https://dl.carbslinux.org/distfiles/sinit-1.1.tar.gz
+https://dl.carbslinux.org/distfiles/sinit-1.1.tar.gz sinit
+https://github.com/michaelforney/ubase/archive/b33bdaa.tar.gz ubase
 files/config.h
 files/reboot
 files/poweroff

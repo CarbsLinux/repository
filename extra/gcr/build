@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+./configure \
+	--prefix=/usr \
+	--sysconfdir=/etc \
+	--disable-scheams-compile \
+	--disable-update-mime \
+	--disable-introspection \
+	--disable-update-icon-cache \
+	--disable-gir \
+	--disable-nls
+
+make
+make DESTDIR="$1" install

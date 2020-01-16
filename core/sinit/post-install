@@ -10,7 +10,7 @@ EOF
 
 cat <<EOF
 
-Important: If you want to sinit to boot, edit your
-/etc/init/rc.conf to enable SINIT variables."
+Important: If you want to replace sinit, you need to 
+edit your /etc/init/rc.conf to disable SINIT variables."
 
 EOF

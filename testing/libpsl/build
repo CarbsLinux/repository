@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-sed -i 's#env python#&3#' src/psl-make-dafsa
-./configure --prefix=/usr
+./configure \
+    --prefix=/usr
+
 make
 make DESTDIR="$1" install

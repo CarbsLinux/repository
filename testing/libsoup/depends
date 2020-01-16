@@ -1,6 +1,6 @@
 glib
 libpsl
 libxml2
-meson
-samurai
+meson make
 sqlite
+zlib

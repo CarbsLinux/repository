@@ -1,14 +1,15 @@
-libsoup
+gtk+3
+glib-networking
 cairo
 cmake
-gettext
-gtk+2
-gtk+3
-mesa
-sqlite
+gperf
+harfbuzz-icu
+libXslt
+libgcrypt
+libsoup
 libwebp
-ruby
-freetype-harfbuzz
-libxslt
-libtasn1
 mesa
+perl make
+python
+ruby
+sqlite

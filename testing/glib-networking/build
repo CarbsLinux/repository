@@ -1,8 +1,14 @@
 #!/bin/sh -e
 
-mkdir build
-cd build
+export DESTDIR="$1"
 
-meson --prefix=/usr -Dlibproxy=disabled -Dopenssl=enabled ..
-ninja
-DESTDIR="$1" ninja install
+meson \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    -Dlibproxy=disabled \
+    -Dopenssl=enabled \
+    . output
+
+ninja -C output
+ninja -C output install

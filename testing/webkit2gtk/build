@@ -1,38 +1,41 @@
 #!/bin/sh -e
 
-patch -p1 < u16-fix.patch
-patch -p0 < fix-musl.patch
-patch -p1 < nogl.patch
+for patch in *.patch; do
+    patch -p1 < "$patch"
+done
 
-mkdir build
-cd build
+# Remove gettext requirement.
+sed -i 's/ngettext/printf/g' Tools/MiniBrowser/gtk/BrowserDownloadsBar.c
+sed -i '/po_files *.po/d'    Source/WebCore/platform/gtk/po/CMakeLists.txt
+sed -i '/^GETTEXT_C/d'       Source/WebCore/platform/gtk/po/CMakeLists.txt
 
-CFLAGS="${CFLAGS} -Wno-expansion-to-defined" \
-CXXFLAGS="${CXXFLAGS} -Wno-expansion-to-defined" \
-cmake \
+export DESTDIR="$1"
+
+cmake -B build \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_INSTALL_PREFIX=/usr \
-	-DCMAKE_SKIP_RPATH=ON \
-	-DPORT=GTK \
 	-DLIB_INSTALL_DIR=/usr/lib \
-	-DUSE_LIBHYPHEN=OFF \
-	-DENABLE_MINIBROWSER=OFF \
-	-DUSE_WOFF2=OFF \
-	-DUSE_WPE_RENDERER=OFF \
-	-DENABLE_INTROSPECTION=OFF \
-	-DENABLE_INTL=OFF \
-	-DUSE_LIBSECRET=OFF \
-	-DUSE_OPENJPEG=OFF \
+	-DPORT=GTK \
+	-DCMAKE_SKIP_RPATH=ON \
 	-DENABLE_BUBBLEWRAP_SANDBOX=OFF \
 	-DENABLE_GEOLOCATION=OFF \
-	-DENABLE_SPELLCHECK=OFF \
 	-DENABLE_GLES2=ON \
-	-DENABLE_VIDEO=OFF \
+	-DENABLE_INTL=OFF \
+	-DENABLE_INTROSPECTION=OFF \
+	-DENABLE_MINIBROWSER=OFF \
 	-DENABLE_OPENGL=OFF \
+	-DENABLE_SPELLCHECK=OFF \
+	-DENABLE_VIDEO=OFF \
 	-DENABLE_WEBGL=OFF \
 	-DENABLE_WEB_AUDIO=OFF \
+	-DUSE_LIBHYPHEN=OFF \
 	-DUSE_LIBNOTIFY=OFF \
-	-Wno-dev -G Ninja ..
+	-DUSE_LIBSECRET=OFF \
+	-DUSE_OPENJPEG=OFF \
+	-DUSE_WOFF2=OFF \
+	-DUSE_WPE_RENDERER=OFF \
+    -DENABLE_WEB_CRYPTO=OFF \
+	-Wno-dev
 
-ninja
-DESTDIR="$1" ninja install
+cmake --build   build
+cmake --install build

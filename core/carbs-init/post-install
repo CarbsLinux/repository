@@ -2,14 +2,6 @@
 
 cat <<EOF
 
-NOTE: 'udevd' is now killed once the boot is 
-       complete as the daemon is optional.
-
-NOTE: If you require the daemon, it can be 
-       enabled as a runit service
-
--> ln -s /etc/sv/udevd/ /var/service/
-
 NOTE: You can configure init from /etc/init/rc.conf
 
 EOF

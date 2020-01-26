@@ -53,9 +53,6 @@ for f in fstab group host.conf hosts issue keymap os-release \
     install -m 644 "$f" "$1/etc"
 done
 
-# Install installkernel
-install -Dm755 installkernel "$1/usr/bin/installkernel"
-
 for f in crypttab shadow; do
     install -m 600 "$f" "$1/etc"
 done

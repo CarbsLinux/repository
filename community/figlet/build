@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+sed -i '/DECLS/d' utf8.h
+make prefix=/usr
+make prefix=/usr DESTDIR="$1" install

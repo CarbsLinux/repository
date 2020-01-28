@@ -1,2 +1,0 @@
-#!/bin/sh
-exec svlogd -ttt /var/log/socklog/* #2>/dev/tty12

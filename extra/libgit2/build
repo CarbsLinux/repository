@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+mkdir build && cd build
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+cmake --build .
+DESTDIR="$1" cmake --install .

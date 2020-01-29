@@ -2,9 +2,7 @@
 
 export CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1"
 
-sed 's/ -ltinfo//g' configure > configure.bak
-mv configure.bak configure
-chmod +x configure
+sed -i 's/ -ltinfo//g' configure
 
 ./configure \
     --prefix=/usr \

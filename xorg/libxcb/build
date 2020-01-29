@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-sed 's/pthread-stubs //' configure > configure.bak
-mv configure.bak configure
-chmod +x configure
+sed -i 's/pthread-stubs //' configure
 
 ./configure \
     --prefix=/usr

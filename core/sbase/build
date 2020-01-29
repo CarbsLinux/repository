@@ -2,3 +2,4 @@
 
 make sbase-box
 make PREFIX=/usr DESTDIR="$1" sbase-box-install
+unlink "$1/usr/bin/tar"

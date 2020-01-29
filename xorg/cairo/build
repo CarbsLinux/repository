@@ -1,8 +1,9 @@
 #!/bin/sh -e
 
 # Disable building 'cairo-sphinx'.
-sed -i "s/BUILD_SPHINX_TRUE=/BUILD_SPHINX_TRUE='#'/"   configure
-sed -i "s/BUILD_SPHINX_FALSE='#'/BUILD_SPHINX_FALSE=/" configure
+sed "s/BUILD_SPHINX_TRUE=/BUILD_SPHINX_TRUE='#'/"   configure > configure.bak
+sed "s/BUILD_SPHINX_FALSE='#'/BUILD_SPHINX_FALSE=/" configure.bak > configure
+chmod +x configure
 
 ./configure \
     --prefix=/usr \

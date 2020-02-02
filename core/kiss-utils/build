@@ -1,3 +1,5 @@
 #!/bin/sh -e
 
+patch -p1 < carbs-chbuild.patch
+
 install -t "$1/usr/bin" -D contrib/*

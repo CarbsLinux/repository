@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-go run build.go -no-upgrade -version "v1.3.3" build
+go run build.go -no-upgrade -version "v$(cut -d ' ' -f 1 version)" build
 
 install -Dm755 syncthing "$1/usr/bin/syncthing"
 

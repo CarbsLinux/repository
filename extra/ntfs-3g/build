@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+./configure \
+	--prefix=/usr \
+	--sbindir=/usr/bin
+
+make
+make DESTDIR="$1" install
+
+install -Dm755 "$1/bin/"* -t "$1/usr/bin"
+install -Dm755 "$1/sbin/"* -t "$1/usr/bin"
+
+rm -r "$1/bin" "$1/sbin"

@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+# shellcheck disable=SC2016
+sed -i '/chown ${BINOWN}:${BINGRP}/d' bsd.prog.mk
+
+./configure \
+    --enable-static \
+    --without-pam
+
+make
+make DESTDIR="$1" install
+
+install -D doas.conf "$1/etc/doas.conf"

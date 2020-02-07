@@ -1,16 +1,1 @@
-# vim:filetype=sh
-
-# We handle the shutdown from here
-
-if [ "$SINIT_SHUTDOWN_HOOKS" = 1 ]; then
-	case "$1" in
-		reboot)	
-			out "Requesting system reboot..."
-			halt -r 
-			;;
-		*) 
-			out "Requesting system poweroff..."
-			halt -p 
-			;;
-	esac
-fi
+case "$1" in reboot) kpow r ;; poweroff) kpow p ;; esac

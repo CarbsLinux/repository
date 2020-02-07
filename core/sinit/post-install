@@ -1,16 +1,26 @@
 #!/bin/sh -e
 
-grep -q SINIT_ /etc/init/rc.conf || cat <<EOF >> /etc/init/rc.conf
-
-# Comment these to run the scripts for sinit
-SINIT_SHUTDOWN_HOOKS=1
-SINIT_ENABLE_GETTY=1
-SINIT_ENABLE_RUNIT=1
-EOF
-
 cat <<EOF
 
-Important: If you want to replace sinit, you need to 
-edit your /etc/init/rc.conf to disable SINIT variables."
+!! IMPORTANT !!
+
+To start using sinit, edit
+/etc/init/sinit-launch-services.boot
+And uncomment the getty function, and
+Optionally uncomment the runit function
+If you deem necessary.
+
+sinit is installed as /usr/bin/sinit. It
+can fully replace busybox init by running
+the following command.
+
+      kiss a | grep ^sinit | kiss a -
+
+NOTE: If swapping from busybox init on a 
+      running system, shutdown/reboot by 
+      invoking 'busybox-init poweroff'. 
+      sinit's poweroff/reboot utilities 
+      can't be of use until it is actually 
+      running.
 
 EOF

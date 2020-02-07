@@ -1,24 +1,15 @@
 #!/bin/sh -e
 
-ls
-cp config.h sinit/config.h
-cd sinit
-make CFLAGS="$CFLAGS -static" PREFIX=/usr DESTDIR="$1" install
-mv "$1/usr/bin/sinit" "$1/usr/bin/init"
+(
+    cd sinit
+    make CFLAGS="$CFLAGS -static" PREFIX=/usr DESTDIR="$1" install
+)
+ln -s sinit "$1/usr/bin/init"
 
-cd ..
 install -Dm755 poweroff "$1/usr/bin/poweroff"
 install -Dm755 reboot "$1/usr/bin/reboot"
 
 install -Dm644 sinit-launch-services.boot "$1/etc/init/sinit-launch-services.boot"
-install -Dm644 sinit.post.shutdown "$1/etc/init/sinit.post.shutdown"
 
-# We are building ubase here so we don't need
-# the full package
-
-cd ubase
-make halt
-make respawn
-
-install -Dm755 halt "$1/usr/bin/halt"
-install -Dm755 respawn "$1/usr/bin/respawn"
+# shellcheck disable=2086
+"${CC:-gcc}" -o "$1/usr/bin/kpow" init/bin/kpow.c $CFLAGS -static

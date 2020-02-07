@@ -1,14 +1,10 @@
-# we are going to start runit and getty here
+# We are going to start runit and getty here
 
-sinit_run_getty() {
-	for getty in 1 2 3 4 5 6; do
-		respawn /sbin/getty 38400 tty${getty} 2>&1 &
-	done
-}
+# Uncomment to enable gettys
+# for getty in 1 2 3 4 5 6 ; do
+#     while :; do /sbin/getty tty${getty} 0 linux ; done &  # busybox getty
+# #    while :; do /sbin/getty tty${getty} linux ; done &   # ubase getty
+# done
 
-sinit_runit() {
-	respawn /usr/bin/runsvdir -P /var/service &
-}
-
-[ "$SINIT_ENABLE_GETTY" = 1 ] && sinit_run_getty
-[ "$SINIT_ENABLE_RUNIT" = 1 ] && sinit_runit
+# Uncomment enable runit services
+# while :; do /usr/bin/runsvdir -P /var/service ; done &

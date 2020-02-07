@@ -1,0 +1,5 @@
+https://github.com/cemkeylan/minit/archive/0.1.0.tar.gz
+files/poweroff
+files/reboot
+files/launch-services.boot
+files/minit.post.shutdown

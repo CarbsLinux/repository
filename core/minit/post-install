@@ -1,0 +1,22 @@
+#!/bin/sh
+
+cat <<EOF
+
+[1m!! IMPORTANT !![m
+
+In order to start using minit,
+you have to uncomment some entries on
+your [1m/etc/init/launch-services.boot[m
+
+These depend on which getty you are
+using, and whether you are using a
+system supervisor or not.
+
+NOTE: If you are currently booted with
+      busybox-init you can poweroff/reboot 
+      by running 
+
+        busybox-init poweroff
+        busybox-init reboot
+
+EOF

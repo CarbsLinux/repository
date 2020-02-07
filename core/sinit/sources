@@ -1,6 +1,6 @@
 https://dl.suckless.org/sinit/sinit-1.0.tar.gz sinit
 https://github.com/kisslinux/init/archive/0.4.tar.gz init
-files/config.h
+files/config.h sinit
 files/reboot
 files/poweroff
 files/sinit-launch-services.boot

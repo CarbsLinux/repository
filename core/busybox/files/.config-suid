@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
-# Busybox version: 1.31.0
-# Wed Sep 18 12:37:29 2019
+# Busybox version: 1.31.1
+# Mon Feb 17 14:27:32 2020
 #
 CONFIG_HAVE_DOT_CONFIG=y
 
@@ -12,10 +12,10 @@ CONFIG_HAVE_DOT_CONFIG=y
 # CONFIG_EXTRA_COMPAT is not set
 # CONFIG_FEDORA_COMPAT is not set
 # CONFIG_INCLUDE_SUSv2 is not set
-# CONFIG_LONG_OPTS is not set
-# CONFIG_SHOW_USAGE is not set
-# CONFIG_FEATURE_VERBOSE_USAGE is not set
-# CONFIG_FEATURE_COMPRESS_USAGE is not set
+CONFIG_LONG_OPTS=y
+CONFIG_SHOW_USAGE=y
+CONFIG_FEATURE_VERBOSE_USAGE=y
+CONFIG_FEATURE_COMPRESS_USAGE=y
 # CONFIG_LFS is not set
 # CONFIG_PAM is not set
 # CONFIG_FEATURE_DEVPTS is not set
@@ -42,7 +42,7 @@ CONFIG_PLATFORM_LINUX=y
 # Build Options
 #
 CONFIG_STATIC=y
-CONFIG_PIE=y
+# CONFIG_PIE is not set
 # CONFIG_NOMMU is not set
 # CONFIG_BUILD_LIBBUSYBOX is not set
 # CONFIG_FEATURE_LIBBUSYBOX_STATIC is not set

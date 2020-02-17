@@ -11,4 +11,11 @@
 	--disable-nls
 
 make
+
+# These require gettext to build but
+# there is no way to disable gettext
+# in gcr, so a little hack goes here
+
+touch ui/gcr-prompter.desktop ui/gcr-viewer.desktop
+
 make DESTDIR="$1" install

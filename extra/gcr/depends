@@ -1,4 +1,4 @@
-p11-kit
 glib
-libtasn1
 libgcrypt
+libtasn1
+p11-kit

@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --sbindir=/usr/bin \
+    --enable-static=yes \
+    --disable-nls \
+    --disable-gpg-test \
+    --disable-gpgconf-test
+make
+make DESTDIR="$1" install

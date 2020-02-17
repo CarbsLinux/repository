@@ -3,5 +3,4 @@ https://github.com/kisslinux/init/archive/0.4.tar.gz init
 files/config.h sinit
 files/reboot
 files/poweroff
-files/sinit-launch-services.boot
 files/sinit.post.shutdown

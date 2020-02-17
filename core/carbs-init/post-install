@@ -1,7 +1,18 @@
 #!/bin/sh
 
 cat <<EOF
+!! VERY IMPORTANT !!
+    
+    Carbs-init now comes with /etc/init/getty.boot
+    and /etc/init/runit.boot
 
-NOTE: You can configure init from /etc/init/rc.conf
+    This change is to keep init systems interchangable.
+    If you are installing this package as a new package
+    (not an update) you can safely ignore the rest of
+    the message. But if you are updating, this update
+    requires a manual intervention. 
+
+    Please check the news section at https://carbslinux.org
+    before you do a reboot
 
 EOF

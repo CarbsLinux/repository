@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cat <<EOF
+!! IMPORTANT !!
+
+    In order to use runit-init you need
+    to comment the command in 
+    /etc/init/runit.boot
+
+EOF

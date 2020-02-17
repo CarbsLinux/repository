@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --without-docs \
+    --without-api-docs \
+    --without-ruby || :
+
+make
+make DESTDIR="$1" install

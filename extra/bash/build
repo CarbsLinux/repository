@@ -14,3 +14,5 @@ export MAKEFLAGS="TERMCAP_LIB=/usr/lib/libncursesw.a $MAKEFLAGS"
 
 make
 make DESTDIR="$1" install
+
+ln -s bash "$1/usr/bin/sh"

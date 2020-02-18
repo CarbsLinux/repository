@@ -24,3 +24,5 @@ make
 make DESTDIR="$1" install
 
 install -Dm 644 zprofile "$1/etc/zprofile"
+
+ln -sfv zsh "$1/usr/bin/sh"

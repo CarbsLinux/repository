@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
 make
-make PREFIX="$1/usr" install
+make PREFIX="$1/usr" INSTALL_MAN="$1/usr/share/man" INSTALL_DIR="$1/usr/bin" install

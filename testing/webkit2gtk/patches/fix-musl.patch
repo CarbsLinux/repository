@@ -1,0 +1,100 @@
+Author: Cem Keylan <cem@ckyln.com>
+Subject: Fix Building WebKitGTK-2.28.0 on Musl Libc
+Date: 2020-03-13 13:53
+--- webkitgtk-2.28.0/Source/JavaScriptCore/runtime/MachineContext.h
++++ webkitgtk-2.28.0-patch/Source/JavaScriptCore/runtime/MachineContext.h
+@@ -196,7 +196,7 @@
+ #error Unknown Architecture
+ #endif
+ 
+-#elif OS(FUCHSIA) || defined(__GLIBC__) || defined(__BIONIC__)
++#elif OS(FUCHSIA) || defined(__linux__)
+ 
+ #if CPU(X86)
+     return reinterpret_cast<void*&>((uintptr_t&) machineContext.gregs[REG_ESP]);
+@@ -347,7 +347,7 @@
+ #error Unknown Architecture
+ #endif
+ 
+-#elif OS(FUCHSIA) || defined(__GLIBC__) || defined(__BIONIC__)
++#elif OS(FUCHSIA) || defined(__linux__)
+ 
+ // The following sequence depends on glibc's sys/ucontext.h.
+ #if CPU(X86)
+@@ -498,7 +498,7 @@
+ #error Unknown Architecture
+ #endif
+ 
+-#elif OS(FUCHSIA) || defined(__GLIBC__) || defined(__BIONIC__)
++#elif OS(FUCHSIA) || defined(__linux__)
+ 
+ // The following sequence depends on glibc's sys/ucontext.h.
+ #if CPU(X86)
+@@ -656,7 +656,7 @@
+ #error Unknown Architecture
+ #endif
+ 
+-#elif OS(FUCHSIA) || defined(__GLIBC__) || defined(__BIONIC__)
++#elif OS(FUCHSIA) || defined(__linux__)
+ 
+ // The following sequence depends on glibc's sys/ucontext.h.
+ #if CPU(X86)
+@@ -773,7 +773,7 @@
+ #error Unknown Architecture
+ #endif
+ 
+-#elif OS(FUCHSIA) || defined(__GLIBC__) || defined(__BIONIC__)
++#elif OS(FUCHSIA) || defined(__linux__)
+ 
+ // The following sequence depends on glibc's sys/ucontext.h.
+ #if CPU(X86)
+--- webkitgtk-2.28.0/Source/JavaScriptCore/runtime/OptionsList.h
++++ webkitgtk-2.28.0-patch/Source/JavaScriptCore/runtime/OptionsList.h
+@@ -43,6 +43,16 @@
+ constexpr bool enableWebAssemblyStreamingApi = false;
+ #endif
+ 
++#if defined(__GLIBC__)
++constexpr unsigned jscMaxPerThreadStack = 4 * MB;
++constexpr unsigned jscSoftReservedZoneSize = 128 * KB;
++constexpr unsigned jscReservedZoneSize = 64 * KB;
++#else
++constexpr unsigned jscMaxPerThreadStack = 80 * KB;
++constexpr unsigned jscSoftReservedZoneSize = 32 * KB;
++constexpr unsigned jscReservedZoneSize = 16 * KB;
++#endif
++
+ // How do JSC VM options work?
+ // ===========================
+ // The FOR_EACH_JSC_OPTION() macro below defines a list of all JSC options in use,
+--- webkitgtk-2.28.0/Source/WTF/wtf/PlatformHave.h
++++ webkitgtk-2.28.0-patch/Source/WTF/wtf/PlatformHave.h
+@@ -222,7 +222,7 @@
+ #define HAVE_HOSTED_CORE_ANIMATION 1
+ #endif
+ 
+-#if OS(DARWIN) || OS(FUCHSIA) || ((OS(FREEBSD) || defined(__GLIBC__) || defined(__BIONIC__)) && (CPU(X86) || CPU(X86_64) || CPU(ARM) || CPU(ARM64) || CPU(MIPS)))
++#if OS(DARWIN) || OS(FUCHSIA) || ((OS(FREEBSD) || defined(__linux__)) && (CPU(X86) || CPU(X86_64) || CPU(ARM) || CPU(ARM64) || CPU(MIPS)))
+ #define HAVE_MACHINE_CONTEXT 1
+ #endif
+ 
+--- webkitgtk-2.28.0/Source/WebCore/xml/XPathGrammar.cpp
++++ webkitgtk-2.28.0-patch/Source/WebCore/xml/XPathGrammar.cpp
+@@ -966,7 +966,7 @@
+ #if YYERROR_VERBOSE
+ 
+ # ifndef yystrlen
+-#  if defined __GLIBC__ && defined _STRING_H
++#  if defined __linux__ && defined _STRING_H
+ #   define yystrlen strlen
+ #  else
+ /* Return the length of YYSTR.  */
+@@ -989,7 +989,7 @@
+ # endif
+ 
+ # ifndef yystpcpy
+-#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
++#  if defined __linux__ && defined _STRING_H && defined _GNU_SOURCE
+ #   define yystpcpy stpcpy
+ #  else
+ /* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in

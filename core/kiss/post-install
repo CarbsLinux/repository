@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+cat <<EOF
+[1mNOTE:
+ 
+ [1;33mkiss [mand [1;33mkiss-utils[m packages have
+ been merged. You can remove kiss-utils if you have
+ it, and reinstall this package to use the upstream 
+ contrib programs.
+
+EOF

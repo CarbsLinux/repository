@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
-install -D kiss         "$1/usr/bin/kiss"
-install -D kiss_path.sh "$1/etc/profile.d/kiss_path.sh"
-install -D kiss.1       "$1/usr/share/man/man1/kiss.1"
+mv kiss-chbuild contrib
+
+install -Dm755 kiss         "$1/usr/bin/kiss"
+install -Dm755 kiss_path.sh "$1/etc/profile.d/kiss_path.sh"
+install -Dm644 kiss.1       "$1/usr/share/man/man1/kiss.1"
+
+install -Dm755 -t "$1/usr/bin" contrib/*

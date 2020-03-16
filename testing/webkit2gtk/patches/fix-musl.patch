@@ -1,8 +1,5 @@
-Author: Cem Keylan <cem@ckyln.com>
-Subject: Fix Building WebKitGTK-2.28.0 on Musl Libc
-Date: 2020-03-13 13:53
---- webkitgtk-2.28.0/Source/JavaScriptCore/runtime/MachineContext.h
-+++ webkitgtk-2.28.0-patch/Source/JavaScriptCore/runtime/MachineContext.h
+--- a/Source/JavaScriptCore/runtime/MachineContext.h
++++ b/Source/JavaScriptCore/runtime/MachineContext.h
 @@ -196,7 +196,7 @@
  #error Unknown Architecture
  #endif
@@ -48,8 +45,8 @@ Date: 2020-03-13 13:53
  
  // The following sequence depends on glibc's sys/ucontext.h.
  #if CPU(X86)
---- webkitgtk-2.28.0/Source/JavaScriptCore/runtime/OptionsList.h
-+++ webkitgtk-2.28.0-patch/Source/JavaScriptCore/runtime/OptionsList.h
+--- a/Source/JavaScriptCore/runtime/OptionsList.h
++++ b/Source/JavaScriptCore/runtime/OptionsList.h
 @@ -43,6 +43,16 @@
  constexpr bool enableWebAssemblyStreamingApi = false;
  #endif
@@ -67,8 +64,28 @@ Date: 2020-03-13 13:53
  // How do JSC VM options work?
  // ===========================
  // The FOR_EACH_JSC_OPTION() macro below defines a list of all JSC options in use,
---- webkitgtk-2.28.0/Source/WTF/wtf/PlatformHave.h
-+++ webkitgtk-2.28.0-patch/Source/WTF/wtf/PlatformHave.h
+--- a/Source/ThirdParty/ANGLE/src/compiler/preprocessor/preprocessor_tab_autogen.cpp
++++ b/Source/ThirdParty/ANGLE/src/compiler/preprocessor/preprocessor_tab_autogen.cpp
+@@ -728,7 +728,7 @@
+ #if YYERROR_VERBOSE
+ 
+ #    ifndef yystrlen
+-#        if defined __GLIBC__ && defined _STRING_H
++#        if defined __linux__ && defined _STRING_H
+ #            define yystrlen strlen
+ #        else
+ /* Return the length of YYSTR.  */
+@@ -743,7 +743,7 @@
+ #    endif
+ 
+ #    ifndef yystpcpy
+-#        if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
++#        if defined __linux__ && defined _STRING_H && defined _GNU_SOURCE
+ #            define yystpcpy stpcpy
+ #        else
+ /* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
+--- a/Source/WTF/wtf/PlatformHave.h
++++ b/Source/WTF/wtf/PlatformHave.h
 @@ -222,7 +222,7 @@
  #define HAVE_HOSTED_CORE_ANIMATION 1
  #endif
@@ -78,8 +95,8 @@ Date: 2020-03-13 13:53
  #define HAVE_MACHINE_CONTEXT 1
  #endif
  
---- webkitgtk-2.28.0/Source/WebCore/xml/XPathGrammar.cpp
-+++ webkitgtk-2.28.0-patch/Source/WebCore/xml/XPathGrammar.cpp
+--- a/Source/WebCore/xml/XPathGrammar.cpp
++++ b/Source/WebCore/xml/XPathGrammar.cpp
 @@ -966,7 +966,7 @@
  #if YYERROR_VERBOSE
  

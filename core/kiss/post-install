@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 cat <<EOF
+
 [1mNOTE:
  
  [1;33mkiss [mand [1;33mkiss-utils[m packages have

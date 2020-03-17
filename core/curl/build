@@ -12,7 +12,10 @@
     --disable-ares \
     --without-libidn \
     --without-librtmp \
-    --with-pic
+    --without-icu \
+    --without-libpsl \
+    --with-pic \
+    --with-ca-fallback
 
-make
+make curl_LDFLAGS=-all-static
 make DESTDIR="$1" install

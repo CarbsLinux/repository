@@ -3,6 +3,7 @@ files/.config
 files/.config-suid
 files/acpid.run
 files/crond.run
+files/inittab
 files/ntpd.run
 files/syslogd.run
 files/ntp.conf

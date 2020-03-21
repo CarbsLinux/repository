@@ -43,3 +43,6 @@ ln -s /run/runit/supervise.acpid   "$1/etc/sv/acpid/supervise"
 
 # Install ntp config
 install -Dm644 ntp.conf "$1/etc/ntp.conf"
+
+# Install inittab
+install -Dm644 inittab "$1/etc/inittab"

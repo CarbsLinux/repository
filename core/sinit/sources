@@ -1,6 +1,4 @@
-git+git://git.suckless.org/sinit#v1.1 sinit
-https://github.com/kisslinux/init/archive/0.4.tar.gz init
-files/config.h sinit
+git+git://git.suckless.org/sinit#v1.1
+files/config.h
 files/reboot
 files/poweroff
-files/sinit.post.shutdown

@@ -8,3 +8,7 @@
 
 make
 make DESTDIR="$1" install
+
+# Get rid of sbin
+mv "$1/usr/sbin/alsactl" "$1/usr/sbin/alsa-info.sh" "$1/usr/bin"
+rm -rf "$1/usr/sbin"

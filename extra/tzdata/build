@@ -5,6 +5,10 @@ pkg_dir=$1
 make CC="${CC:-gcc}"
 make DESTDIR="$1" install
 
+# Get rid of the sbin directory
+mv "$1/usr/sbin/zic" "$1/usr/bin/zic"
+rm -rf "$1/usr/sbin"
+
 set -- africa asia australasia europe northamerica southamerica
 
 ./zic -d "$pkg_dir/usr/share/zoneinfo" "$@"

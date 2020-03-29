@@ -7,6 +7,7 @@ cat > configure.local <<EOF
 PREFIX=/usr
 MANDIR=/usr/share/man
 LIBDIR=/usr/lib
+SBINDIR=/usr/bin
 CC="${CC:-gcc}"
 CFLAGS="$CFLAGS"
 MANPATH_DEFAULT=/usr/share/man

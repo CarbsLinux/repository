@@ -17,3 +17,9 @@
 
 make
 make DESTDIR="$1" install
+
+# For some reason util-linux installs
+# to the sbindir even when we tell it
+# not to.
+mv "$1/usr/sbin/"* "$1/usr/bin"
+rm -rf "$1/usr/sbin"

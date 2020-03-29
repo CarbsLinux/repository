@@ -2,6 +2,9 @@
 
 cd source
 
-./configure --prefix=/usr
+./configure \
+    --prefix=/usr \
+    --sbindir=/usr/bin
+
 make
 make DESTDIR="$1" install

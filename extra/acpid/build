@@ -6,5 +6,9 @@ make
 make DESTDIR="$1" install
 mkdir -p "$1/etc/acpi/events"
 
+# Install runit service.
 install -Dm755 run "$1/etc/sv/acpid/run"
 ln -s /run/runit/supervise.acpid "$1/etc/sv/acpid/supervise"
+
+# Install sysmgr service.
+install -Dm755 run "$1/etc/sysmgr/acpid"

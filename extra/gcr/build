@@ -1,21 +1,14 @@
 #!/bin/sh -e
 
-./configure \
-	--prefix=/usr \
-	--sysconfdir=/etc \
-	--disable-scheams-compile \
-	--disable-update-mime \
-	--disable-introspection \
-	--disable-update-icon-cache \
-	--disable-gir \
-	--disable-nls
+export DESTDIR="$1"
 
-make
+mkdir gcr-build
+cd gcr-build
 
-# These require gettext to build but
-# there is no way to disable gettext
-# in gcr, so a little hack goes here
+meson \
+    --prefix=/usr \
+    -Dintrospection=false \
+    -Dgtk_doc=false ..
 
-touch ui/gcr-prompter.desktop ui/gcr-viewer.desktop
-
-make DESTDIR="$1" install
+ninja
+ninja install

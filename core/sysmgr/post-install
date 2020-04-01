@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+cat <<EOF
+[1mIMPORTANT:[m
+
+  In order to enable sysmgr you need to
+  uncomment the line on '/etc/init/sysmgr.boot'
+  and '/etc/init/sysmgr.pre.shutdown'
+
+  You can do this [1mas root[m by doing,
+      [1msed -i 's/# //' /etc/init/sysmgr.boot /etc/init/sysmgr.pre.shutdown[m
+
+  Carbs packages now come with sysmgr services by default,
+  but didn't have a release bump to avoid a rebuild just to
+  get sysmgr services. You can manually copy all your sysmgr
+  services with the following command.
+
+      [1mmkdir -p /etc/sysmgr
+      for service in /etc/sv/* ; do
+          cp $service/run /etc/sysmgr/${service##*/}
+      done[m
+
+  You can then copy all the services you run in /var/service to
+  /var/sysmgr by doing,
+
+      [1mfor service in /var/service/* ; do
+          ln -sv /etc/sysmgr/${service##*/} /var/sysmgr
+      done[m
+
+EOF

@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --disable-vlock \
+    --disable-nls \
+    --enable-shared=no \
+    --disable-tests
+
+make
+make DESTDIR="$1" install

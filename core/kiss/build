@@ -1,12 +1,4 @@
 #!/bin/sh -e
 
-# Add symbolic link support to kiss
-sed -i 's/\[ -d "$path2" ]/[ -d "$path2" ] || [ -L "$path2 ]//'
-
-mv kiss-chbuild contrib
-
-install -Dm755 kiss         "$1/usr/bin/kiss"
 install -Dm755 kiss_path.sh "$1/etc/profile.d/kiss_path.sh"
-install -Dm644 kiss.1       "$1/usr/share/man/man1/kiss.1"
-
-install -Dm755 -t "$1/usr/bin" contrib/*
+make PREFIX=/usr DESTDIR="$1" install

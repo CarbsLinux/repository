@@ -2,6 +2,10 @@
 
 cat <<EOF
 
+[1mNEWS:[m Carbs Linux now uses its own fork of [1;33mkiss[m.
+      You can visit <https://github.com/carbslinux/kiss>
+      to inspect the changes.
+
 [1mNOTE:
  
  [1;33mkiss [mand [1;33mkiss-utils[m packages have

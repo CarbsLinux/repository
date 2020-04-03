@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# Add symbolic link support to kiss
+sed -i 's/\[ -d "$path2" ]/[ -d "$path2" ] || [ -L "$path2 ]//'
+
 mv kiss-chbuild contrib
 
 install -Dm755 kiss         "$1/usr/bin/kiss"

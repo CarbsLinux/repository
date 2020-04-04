@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-patch -p1 < better-makefile.patch
-make
-make DESTDIR="$1" PREFIX=/usr install

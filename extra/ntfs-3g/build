@@ -10,4 +10,6 @@ make DESTDIR="$1" install
 install -Dm755 "$1/bin/"* -t "$1/usr/bin"
 install -Dm755 "$1/sbin/"* -t "$1/usr/bin"
 
+# KISS will always assign a $1 value
+# shellcheck disable=2115
 rm -r "$1/bin" "$1/sbin"

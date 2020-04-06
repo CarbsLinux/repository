@@ -17,14 +17,14 @@ cat <<EOF
 
       [1mmkdir -p /etc/sysmgr
       for service in /etc/sv/* ; do
-          cp $service/run /etc/sysmgr/${service##*/}
+          cp \$service/run /etc/sysmgr/\${service##*/}
       done[m
 
   You can then copy all the services you run in /var/service to
   /var/sysmgr by doing,
 
       [1mfor service in /var/service/* ; do
-          ln -sv /etc/sysmgr/${service##*/} /var/sysmgr
+          ln -sv /etc/sysmgr/\${service##*/} /var/sysmgr
       done[m
 
 EOF

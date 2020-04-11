@@ -1,13 +1,15 @@
 #!/bin/sh -e
 
+export DESTDIR="$1"
 export LDFLAGS="-Wl,-z,lazy"
 
-autoreconf -i
-
-./configure \
+meson \
     --prefix=/usr \
-    --libexecdir=/usr/lib \
-    --with-default-dri=3
+    --libexecdir=/usr/libexec \
+    -Ddefault-dri=3 \
+    -Dxvmc=false \
+    -Dvalgrind=false \
+    . build
 
-make
-make DESTDIR="$1" install
+ninja -C build
+ninja -C build install

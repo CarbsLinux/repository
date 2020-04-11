@@ -1,10 +1,7 @@
-autoconf make
-automake make
-eudev
 libXScrnSaver
 libXcursor
 libXinerama
 libXrandr
-libdrm
-libpciaccess
-libtool make
+libXtst
+meson make
+xorg-server

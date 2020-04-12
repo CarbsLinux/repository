@@ -2,3 +2,13 @@
 
 make CFLAGS="$CFLAGS -static" ubase-box
 make DESTDIR="$1" PREFIX=/usr ubase-box-install
+
+# stat in ubase is not a good option at the time
+# being. It has almost none of the options stat
+# is used for.
+unlink "$1/usr/bin/stat"
+
+# You cannot execute commands with the ubase
+# implementation of su, which might break kiss
+# if the user doesn't have sudo or doas installed.
+unlink "$1/usr/bin/su"

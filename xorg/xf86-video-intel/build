@@ -1,11 +1,12 @@
 #!/bin/sh -e
 
 export DESTDIR="$1"
-export LDFLAGS="-Wl,-z,lazy"
+export LDFLAGS="$LDFLAGS -Wl,-z,lazy"
+export CFLAGS="$CFLAGS -fcommon"
 
 meson \
     --prefix=/usr \
-    --libexecdir=/usr/libexec \
+    --libexecdir=/usr/lib \
     -Ddefault-dri=3 \
     -Dxvmc=false \
     -Dvalgrind=false \

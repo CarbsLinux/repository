@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+for patch in *.patch; do
+    patch -p1 < "$patch"
+done
+
 # Build and install regular busybox.
 # This excludes utilities which require 'suid' to function.
 make CC="${CC:-gcc}"

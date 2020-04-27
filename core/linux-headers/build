@@ -1,3 +1,7 @@
 #!/bin/sh -e
 
-make headers_install INSTALL_HDR_PATH="$1/usr"
+make headers
+
+# This is used to install headers without an
+# rsync dependency.
+find usr/include -name '*.h' -exec install -Dm644 "{}" "$1/{}" \;

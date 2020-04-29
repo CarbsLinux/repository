@@ -1,10 +1,16 @@
 #!/bin/sh -e
 
-echo "\
-NOTE: Keymaps are copied to /usr/share/bkeymaps.
+cat <<EOF
 
-NOTE: You should pipe the keymaps to loadkmap in 
-NOTE: order to load them.
+[1;36mNOTE[m
 
-NOTE: example usage:
-NOTE:      loadkmap < /usr/share/bkeymaps/us/us.bmap"
+  Keymaps are copied to [1;4m/usr/share/bkeymaps[m.
+
+  You should pipe the keymaps to loadkmap in
+  order to load them
+
+[1;36mEXAMPLE[m
+
+    loadkmap < /usr/share/bkeymaps/us/us.bmap
+
+EOF

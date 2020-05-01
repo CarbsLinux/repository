@@ -1,7 +1,3 @@
-#!/bin/sh
-
-cat <<EOF
-
 NOTE: You must be a part of the [1minput[m group
       for libinput to work.
 
@@ -13,5 +9,3 @@ NOTE: This groups based permissions model may not
 -> addgroup USER input
 
 NOTE: You also need [1mxf86-input-libinput[m.
-
-EOF

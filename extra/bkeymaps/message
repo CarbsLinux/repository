@@ -1,7 +1,3 @@
-#!/bin/sh -e
-
-cat <<EOF
-
 [1;36mNOTE[m
 
   Keymaps are copied to [1;4m/usr/share/bkeymaps[m.
@@ -12,5 +8,3 @@ cat <<EOF
 [1;36mEXAMPLE[m
 
     loadkmap < /usr/share/bkeymaps/us/us.bmap
-
-EOF

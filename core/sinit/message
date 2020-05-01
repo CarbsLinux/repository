@@ -1,7 +1,3 @@
-#!/bin/sh -e
-
-cat <<EOF
-
 !! IMPORTANT !!
 
 To start using sinit, edit
@@ -22,5 +18,3 @@ NOTE: If swapping from busybox init on a
       sinit's poweroff/reboot utilities 
       can't be of use until it is actually 
       running.
-
-EOF

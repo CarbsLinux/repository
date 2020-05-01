@@ -1,0 +1,5 @@
+[1mNOTE:[m
+
+    In order to use "locate" command without 
+    root priviliges add yourself to the '[1mmlocate[m'
+    group.

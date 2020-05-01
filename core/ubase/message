@@ -1,0 +1,5 @@
+NOTE: Carbs Linux init by default uses 
+      busybox getty, rather than ubase getty
+      (which has a different argument scheme).
+      You can change the getty command from
+      \`/etc/init/sinit-launch-services.boot\`

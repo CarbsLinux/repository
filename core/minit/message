@@ -1,7 +1,3 @@
-#!/bin/sh
-
-cat <<EOF
-
 [1m!! IMPORTANT !![m
 
 In order to start using minit,
@@ -18,5 +14,3 @@ NOTE: If you are currently booted with
 
         busybox-init poweroff
         busybox-init reboot
-
-EOF

@@ -1,6 +1,3 @@
-#!/bin/sh -e
-
-cat <<EOF
 [1mIMPORTANT:[m
 
   In order to enable sysmgr you need to
@@ -26,5 +23,3 @@ cat <<EOF
       [1mfor service in /var/service/* ; do
           ln -sv /etc/sysmgr/\${service##*/} /var/sysmgr
       done[m
-
-EOF

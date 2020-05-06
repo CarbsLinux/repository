@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-make headers
-
-# This is used to install headers without an
-# rsync dependency.
-find usr/include -name '*.h' -exec install -Dm644 "{}" "$1/{}" \;
+# Switched back to the rsync installation method
+# as it is back to core, and sbase find causes a
+# faulty manifest generation.
+make headers_install INSTALL_HDR_PATH="$1/usr"

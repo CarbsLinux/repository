@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+make
+install -Dm755 vi "$1/usr/bin/vi"
+ln -sf vi "$1/usr/bin/ex"
+
+# Add this as a vim alternative
+ln -sf vi "$1/usr/bin/vim"

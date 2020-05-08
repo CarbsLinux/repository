@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib \
+    --sbindir=/usr/bin \
+    --disable-systemd \
+    --without-python \
+    --without-perl \
+    --without-rcdir \
+    --with-components=libcups
+
+make
+make DESTDIR="$1" install

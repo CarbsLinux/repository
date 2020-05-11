@@ -1,0 +1,4 @@
+#!/bin/sh
+[ "$1" ] || { printf 'usage: %s <command>\n' "${0##*/}"; exit 0;}
+IFS=:; for path in $PATH; do [ -x "$path/$1" ] && { printf '%s\n' "$path/$1"; exit 0;}; done
+exit 1

@@ -3,4 +3,4 @@ fontconfig
 freetype-harfbuzz
 fribidi
 pkgconf make
-yasm    make
+nasm    make

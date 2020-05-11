@@ -2,5 +2,5 @@ expat
 fontconfig
 freetype-harfbuzz
 fribidi
-pkgconf make
 nasm    make
+pkgconf make

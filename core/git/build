@@ -26,6 +26,6 @@ EOF
 make
 make DESTDIR="$1" install
 
-install -Dm644 -t "$1/usr/share/man/man1" man1/*.1
-install -Dm644 -t "$1/usr/share/man/man5" man5/*.5
-install -Dm644 -t "$1/usr/share/man/man7" man7/*.7
+for man in man1/*.1 man5/*.5 man7/*.7; do
+    install -Dm644 "$man" "$1/usr/share/man/$man"
+done

@@ -1,11 +1,11 @@
 #!/bin/sh -e
 
-read -r ver _ < version
+read -r ver _ < "${0%/*}/version"
 
 go run build.go -no-upgrade -version "v$ver" build
 
 install -Dm755 syncthing "$1/usr/bin/syncthing"
 
-install -Dm644 man/*.1 -t "$1/usr/share/man/man1"
-install -Dm644 man/*.5 -t "$1/usr/share/man/man5"
-install -Dm644 man/*.7 -t "$1/usr/share/man/man7"
+for manpage in man/*.1 man/*.5 man/*.7; do
+    install -Dm644 "$manpage" "$1/usr/share/man/man${manpage##*.}/${manpage##*/}"
+done

@@ -1,4 +1,5 @@
 #!/bin/sh -e
 
 make DESTDIR="$1" PREFIX=/usr install
-install -Dm644 -t "$1/etc/init" sysmgr.boot sysmgr.pre.shutdown
+install -Dm644 sysmgr.boot "$1/etc/init/sysmgr.boot"
+install -Dm644 sysmgr.pre.shutdown "$1/etc/init/sysmgr.pre.shutdown"

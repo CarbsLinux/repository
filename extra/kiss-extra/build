@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+for bin in kiss-*; do
+    install -Dm755 "$bin" "$1/usr/bin/$bin"
+done

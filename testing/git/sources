@@ -1,0 +1,9 @@
+https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.26.2.tar.xz
+https://www.kernel.org/pub/software/scm/git/git-manpages-2.26.2.tar.xz
+#
+# This is garbage. Why?
+https://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Net-SMTP-SSL-1.04.tar.gz ssl
+https://www.cpan.org/authors/id/G/GB/GBARR/Authen-SASL-2.16.tar.gz sasl
+https://cpan.metacpan.org/authors/id/C/CH/CHRISN/Net-SSLeay-1.88.tar.gz ssleay
+https://cpan.metacpan.org/authors/id/O/OA/OALDERS/URI-1.76.tar.gz uri
+https://www.cpan.org/authors/id/S/SU/SULLR/IO-Socket-SSL-2.066.tar.gz socket-ssl

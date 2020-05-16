@@ -1,0 +1,67 @@
+#!/bin/sh -e
+# Git build with git-send-email perl garbage enabled :c
+
+(
+    cd ssleay
+    PERL_MM_USE_DEFAULT=1 perl Makefile.PL INSTALLDIRS=vendor
+    make
+    make DESTDIR="$1" install
+)
+
+(
+    cd uri
+    perl Makefile.PL INSTALLDIRS=vendor
+    make
+    make DESTDIR="$1" install
+)
+
+(
+    cd socket-ssl
+    yes | perl Makefile.PL INSTALLDIRS=vendor
+    make
+    make DESTDIR="$1" install
+)
+
+(
+    cd sasl
+    PERL_USE_UNSAFE_INC=1 \
+    PERL_MM_USE_DEFAULT=1 perl Makefile.PL INSTALLDIRS=vendor
+    make
+    make pure_install DESTDIR="$1"
+)
+
+(
+    cd ssl
+    perl Makefile.PL INSTALLDIRS=vendor
+    make
+    make DESTDIR="$1" install
+    find "$1" \( -name '.packlist' -o -name '*.pod' \) -exec rm -rf {} +
+)
+
+export CFLAGS="$CFLAGS -fPIC"
+
+cat > config.mak <<EOF
+NO_GETTEXT=YesPlease
+NO_SVN_TESTS=YesPlease
+NO_TCLTK=YesPlease
+NO_EXPAT=YesPlease
+NO_NSEC=YesPlease
+NO_PYTHON=YesPlease
+PERL=YesPlease
+NO_SVN_TESTS=YesPlease
+NO_SYS_POLL_H=1
+NO_CROSS_DIRECTORY_HARDLINKS=1
+NO_INSTALL_HARDLINKS=1
+EOF
+
+./configure \
+    --prefix=/usr \
+    ac_cv_snprintf_returns_bogus=no \
+    ac_cv_fread_reads_directories=yes
+
+make
+make DESTDIR="$1" install
+
+for man in man1/*.1 man5/*.5 man7/*.7; do
+    install -Dm644 "$man" "$1/usr/share/man/$man"
+done

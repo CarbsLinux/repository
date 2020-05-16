@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+make
+
+install -Dm755 build/brssl "$1/usr/bin/brssl"
+install -Dm644 build/libbearssl.a "$1/usr/lib/libbearssl.a"
+install -Dm644 build/libbearssl.so "$1/usr/lib/libbearssl.so"
+
+mv inc "$1/usr/include"

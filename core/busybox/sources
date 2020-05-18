@@ -12,3 +12,6 @@ patches/modprobe-kernel-version.patch
 patches/adduser-no-setgid.patch
 patches/install-fix-chown.patch
 patches/print-unicode.patch
+patches/1-date-64-prefix.patch
+patches/2-time-64-prefix.patch
+patches/3-syscall-gettime.patch

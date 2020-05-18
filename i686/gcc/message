@@ -1,0 +1,11 @@
+[1;31mCRITICAL[m[1m
+
+A bug in GCC 10.1.0 causes kernels built with GCC 10 to
+kernel panic in the second boot stage. This issue can be
+resolved by applying the following patch.
+
+https://dl.carbslinux.org/distfiles/linux-gcc-10-bootfix.patch
+
+You can also visit https://carbslinux.org for a link to the
+patch.
+[m

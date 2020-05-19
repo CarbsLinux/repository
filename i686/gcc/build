@@ -39,6 +39,7 @@ export libat_cv_have_ifunc=no
     --enable-tls \
     --enable-languages=c,c++ \
     --build=i686-pc-linux-musl \
+    --disable-libssp \
     --disable-bootstrap
 
 make

@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Busybox version: 1.31.1
-# Mon Feb 17 14:27:32 2020
+# Tue May 19 03:10:53 2020
 #
 CONFIG_HAVE_DOT_CONFIG=y
 
@@ -16,7 +16,7 @@ CONFIG_LONG_OPTS=y
 CONFIG_SHOW_USAGE=y
 CONFIG_FEATURE_VERBOSE_USAGE=y
 CONFIG_FEATURE_COMPRESS_USAGE=y
-# CONFIG_LFS is not set
+CONFIG_LFS=y
 # CONFIG_PAM is not set
 # CONFIG_FEATURE_DEVPTS is not set
 # CONFIG_FEATURE_UTMP is not set
@@ -790,7 +790,7 @@ CONFIG_FEATURE_LESS_MAXLINES=0
 # CONFIG_NANDDUMP is not set
 # CONFIG_PARTPROBE is not set
 # CONFIG_RAIDAUTORUN is not set
-# CONFIG_READAHEAD is not set
+CONFIG_READAHEAD=y
 # CONFIG_RFKILL is not set
 # CONFIG_RUNLEVEL is not set
 # CONFIG_RX is not set

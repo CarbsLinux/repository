@@ -12,7 +12,8 @@ export PATH=$PATH:$PWD
     --prefix=/usr \
     --build=i686-pc-linux-musl \
     --host=i686-pc-linux-musl \
-    --enable-targets=i686-pep \
+    --enable-targets=x86_64-pep \
+    --enable-64-bit-bfd \
     --disable-multilib \
     --disable-werror \
     --disable-gdb \

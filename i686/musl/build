@@ -8,7 +8,8 @@ make
 make DESTDIR="$1" install
 
 mkdir -p "$1/usr/bin"
-ln -s /usr/lib/ld-musl-i686.so.1 "$1/usr/bin/ldd"
+ln -s libc.so "$1/usr/lib/libc.musl-x86.so"
+ln -s /usr/lib/ld-musl-i386.so.1 "$1/usr/bin/ldd"
 
 # Install BSD compatibility headers.
 install -Dm 755 cdefs.h "$1/usr/include/sys/cdefs.h"
@@ -16,4 +17,8 @@ install -Dm 755 queue.h "$1/usr/include/sys/queue.h"
 install -Dm 755 tree.h  "$1/usr/include/sys/tree.h"
 
 # Install getconf.
-cc getconf.c -o "$1/usr/bin/getconf"
+"${CC:-cc}" getconf.c -o "$1/usr/bin/getconf"
+
+# Install libssp_nonshared.a
+"${CC:-cc}" -c __stack_chk_fail_local.c -o __stack_chk_fail_local.o
+ar r "$1/usr/lib/libssp_nonshared.a"       __stack_chk_fail_local.o

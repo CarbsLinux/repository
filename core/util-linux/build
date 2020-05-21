@@ -22,4 +22,4 @@ make DESTDIR="$1" install
 # to the sbindir even when we tell it
 # not to.
 mv "$1/usr/sbin/"* "$1/usr/bin"
-rm -rf "$1/usr/sbin"
+rmdir "$1/usr/sbin"

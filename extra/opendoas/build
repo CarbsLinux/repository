@@ -1,7 +1,8 @@
 #!/bin/sh -e
 
 # shellcheck disable=SC2016
-sed -i '/chown ${BINOWN}:${BINGRP}/d' bsd.prog.mk
+sed '/chown ${BINOWN}:${BINGRP}/d' bsd.prog.mk > _
+cat _ > bsd.prog.mk; rm -f _
 
 ./configure \
     --enable-static \

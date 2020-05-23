@@ -2,5 +2,6 @@
 
 # iw manpage is extremely small, 
 # we don't need to compress it.
-sed 's@\(iw\.8\)\.gz@\1@' -i Makefile
+sed 's@\(iw\.8\)\.gz@\1@' Makefile > _
+cat _ > Makefile; rm -f _
 make DESTDIR="$1" PREFIX="/usr" SBINDIR="/usr/bin" install

@@ -26,7 +26,7 @@ make
 make -j1 DESTDIR="$1" base-install lib-install
 
 # Make binaries writable.
-chmod -v u+w "$1/usr/bin/"*
+chmod u+w "$1/usr/bin/"*
 
 # Remove all development files.
 rm -rf "$1/usr/include" \

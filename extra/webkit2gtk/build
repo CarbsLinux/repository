@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
+sed_i() {
+    for file; do :; done
+    sed "$@" > _
+    cat _ > "$file"; rm -f _
+}
+
 # Enable streaming related options if gstreamer
 # is installed.
 kiss l gst-plugins-base && streaming=ON
@@ -11,9 +17,9 @@ kiss l openjpeg2 && jpeg=ON
 patch -p1 < fix-musl.patch
 
 # Remove gettext requirement.
-sed -i 's/ngettext/printf/g' Tools/MiniBrowser/gtk/BrowserDownloadsBar.c
-sed -i '/po_files \*\.po/d'  Source/WebCore/platform/gtk/po/CMakeLists.txt
-sed -i '/^GETTEXT_C/d'       Source/WebCore/platform/gtk/po/CMakeLists.txt
+sed_i 's/ngettext/printf/g' Tools/MiniBrowser/gtk/BrowserDownloadsBar.c
+sed_i '/po_files \*\.po/d'  Source/WebCore/platform/gtk/po/CMakeLists.txt
+sed_i '/^GETTEXT_C/d'       Source/WebCore/platform/gtk/po/CMakeLists.txt
 
 export DESTDIR="$1"
 

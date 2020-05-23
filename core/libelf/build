@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-sed -i 's/-I/-isystem /g' libelf.pc.in
+sed 's/-I/-isystem /g' libelf.pc.in > _
+cat _ > libelf.pc.in; rm -f _
 
 ./configure \
     --prefix=/usr \

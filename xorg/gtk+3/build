@@ -1,10 +1,16 @@
 #!/bin/sh -e
 
+sed_i() {
+    for file; do :; done
+    sed "$@" > _
+    cat _ > "$file"; rm -f _
+}
+
 # Remove 'atk-bridge' dependency which removes the 'dbus' dependency.
-sed -i 's/ATK_PACKAGES="atk atk-bridge-2.0"/ATK_PACKAGES="atk"/' \
+sed_i 's/ATK_PACKAGES="atk atk-bridge-2.0"/ATK_PACKAGES="atk"/' \
     configure
 
-sed -i '/<atk-bridge.h>/d;/atk_bridge_adaptor_init/d' \
+sed_i '/<atk-bridge.h>/d;/atk_bridge_adaptor_init/d' \
     gtk/a11y/gtkaccessibility.c
 
 ./configure \

@@ -1,8 +1,14 @@
 #!/bin/sh -e
 
+sed_i() {
+    for file; do :; done
+    sed "$@" >_
+    cat _ > "$file"; rm -f _
+}
+
 # Disable building 'cairo-sphinx'.
-sed -i "s/BUILD_SPHINX_TRUE=/BUILD_SPHINX_TRUE='#'/"   configure
-sed -i "s/BUILD_SPHINX_FALSE='#'/BUILD_SPHINX_FALSE=/" configure
+sed_i "s/BUILD_SPHINX_TRUE=/BUILD_SPHINX_TRUE='#'/"   configure
+sed_i "s/BUILD_SPHINX_FALSE='#'/BUILD_SPHINX_FALSE=/" configure
 
 ./configure \
     --prefix=/usr \

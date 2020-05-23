@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
+sed_i() {
+    for file; do :; done
+    sed "$@" > _
+    cat _ > "$file"; rm -f _
+}
+
 read -r version _ < "${0%/*}/version"
 
 for patch in ./*.patch ; do
@@ -11,10 +17,10 @@ cd "runit-$version"
 (
     cd src
     
-    sed 's@sbin/runit@usr/bin/runit@g' -i runit.h
+    sed_i 's@sbin/runit@usr/bin/runit@g' runit.h
     printf '%s -D_GNU_SOURCE -static\n' "${CC-cc}" "$CFLAGS" > conf-cc
     printf '%s %s -static -Wl,-z -Wl,noexecstack\n' "${CC-cc}" "$CFLAGS" > conf-ld
-    sed -i 's:^char \*varservice ="/service/";$:char \*varservice ="/var/service/";:' sv.c
+    sed_i 's:^char \*varservice ="/service/";$:char \*varservice ="/var/service/";:' sv.c
     
     make
     

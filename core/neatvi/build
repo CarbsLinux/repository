@@ -1,5 +1,5 @@
 #!/bin/sh -e
 
-make
+make LDFLAGS="$LDFLAGS -static"
 install -Dm755 vi "$1/usr/bin/vi"
 ln -sf vi "$1/usr/bin/ex"

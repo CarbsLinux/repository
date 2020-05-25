@@ -1,5 +1,23 @@
 #!/bin/sh -e
 
+# Temporarily install python-mako to build mesa
+(
+    cd mako
+
+    python3 setup.py build
+    python3 setup.py install \
+        --prefix=/usr \
+        --root="$PWD/dist"
+
+)
+
+read -r _ pyver <<-EOF
+$(python3 --version)
+EOF
+
+PYTHONPATH="$PWD/mako/dist/usr/lib/python${pyver%.*}/site-packages:$(python -c "import sys; print(':'.join(sys.path))")"
+
+export PYTHONPATH
 export DESTDIR="$1"
 export CFLAGS="-DGLX_X86_READONLY_TEXT $CFLAGS"
 

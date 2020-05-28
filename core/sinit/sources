@@ -1,4 +1,4 @@
-git+git://git.suckless.org/sinit#v1.1
+https://dl.carbslinux.org/distfiles/sinit-1.1.tar.gz
 files/config.h
 files/reboot
 files/poweroff

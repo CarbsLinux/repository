@@ -1,5 +1,21 @@
 #!/bin/sh -e
 
+# Set the variable sys_arch so that we can change the
+# build procedure depending on the host arch. Currently,
+# we are only supporting i686 and x86_64.
+sys_arch="$(uname -m)"
+
+kinstall_t() {
+    # install -Dm* -t alternative
+    # usage: kinstall_t 755 /usr/bin file file2 file3
+    mod=$1 dir=$2; mkdir -p "$dir"
+    shift 2
+    for file; do
+        cp "$file" "$dir"
+        chmod "$mod" "$dir/$file"
+    done
+}
+
 ./configure \
     --prefix=/usr \
     --syslibdir=/usr/lib
@@ -8,12 +24,25 @@ make
 make DESTDIR="$1" install
 
 mkdir -p "$1/usr/bin"
-ln -s /usr/lib/ld-musl-x86_64.so.1 "$1/usr/bin/ldd"
+
+case "$sys_arch" in
+    x86_64) ln -s /usr/lib/ld-musl-x86_64.so.1 "$1/usr/bin/ldd" ;;
+    i*86)
+        ln -s libc.so                  "$1/usr/lib/libc.musl-x86.so"
+        ln -s ../lib/ld-musl-i386.so.1 "$1/usr/bin/ldd"
+    ;;
+esac
 
 # Install BSD compatibility headers.
-install -Dm 755 cdefs.h "$1/usr/include/sys/cdefs.h"
-install -Dm 755 queue.h "$1/usr/include/sys/queue.h"
-install -Dm 755 tree.h  "$1/usr/include/sys/tree.h"
+kinstall_t 755 "$1/usr/include/sys" cdefs.h queue.h tree.h
 
 # Install getconf.
-cc getconf.c -o "$1/usr/bin/getconf"
+"${CC:=cc}" getconf.c -o "$1/usr/bin/getconf"
+
+case $sys_arch in i*86)
+    "$CC" -c __stack_chk_fail_local.c -o __stack_chk_fail_local.o
+    ar r "$1/usr/lib/libssp_nonshared.a" __stack-chk_fail_local.o
+esac
+
+# Install getent
+kinstall_t 755 "$1/usr/bin" getent

@@ -1,0 +1,107 @@
+#!/bin/sh
+# POSIX sh variant for getent.
+#
+# This is similar to NetBSD's C implementation for getent
+# but without support for enumeration. There is simply no
+# specification for getent. I have simply made functions
+# for databases I have found to be common with the Glibc
+# implementation and NetBSD implementation. So, enumeration
+# is not supported. I am not sure why that is even a feature.
+#
+# Glibc implementation basically 'cat's a formatted output
+# for everything if no arguments are given. NetBSD only does
+# that for passwd and group. I will be sticking with NetBSD
+# here.
+#
+#
+# Copyright (c) 2020 Cem Keylan
+#
+# Permission is hereby granted, free of charge, to any
+# person obtaining a copy of this software and associated
+# documentation files (the "Software"), to deal in the
+# Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute,
+# sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so,
+# subject to the following conditions:
+# 
+# The above copyright notice and this permission notice
+# shall be included in all copies or substantial portions
+# of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+# KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+# WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+# PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+# OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+# OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+out() { printf '%s\n' "$@" ;}
+usage() {
+    out "usage: ${0##*/} [database] [key ...]" \
+        "       database may be one of:" \
+        "             ethers group hosts networks passwd"
+    exit "${1:-0}"
+}
+
+# We will be using this for all databases, so that we can
+# remove comments and empty lines. Removing lines make it
+# faster to parse the lines.
+rm_comment() { sed 's/#.*//g;/^$/d' "$@" ;}
+
+hosts() {
+    while read -r ip canon aliases; do
+        case "$1" in "$ip"|"$canon")
+            printf '%-16s %s %s\n' "$ip" "$canon" "$aliases"
+            return 0
+        esac
+    done
+}
+
+passwd() {
+    while read -r line; do
+        # The specification only checks for user name and UID.
+        case "$line" in "$1:"*|*:*:$1:*:*:*:*)
+            printf '%s\n' "$line"; return 0
+        esac
+    done
+}
+
+group() {
+    while read -r line; do
+        # The specification only checks for group name and GID.
+        case "$line" in "$1:"*|*:*:"$1":*)
+            printf '%s\n' "$line"; return 0
+        esac
+    done
+}
+
+ethers() {
+    while read -r mac host; do
+        [ "$1" ] && case "$1" in "$mac"|"$host")
+            printf '%-16s %s\n' "$mac" "$host"
+            return 0
+        esac
+    done
+}
+
+networks() {
+    while read -r alias ip; do
+        case "$1" in "$alias"|"$ip")
+            printf '%-16s %s\n' "$alias" "$ip"
+            return 0
+        esac
+    done
+}
+
+
+[ "$1" ] || usage
+database=$1; shift
+case "$database" in
+    passwd|group) [ "$1" ] || rm_comment "/etc/$database" ;;
+    ethers|networks|hosts) ;;
+    *) out "error: Unknown database '$database'"; usage 1 ;;
+esac
+for key do rm_comment "/etc/$database" | "$database" "$key"; done

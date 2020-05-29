@@ -4,3 +4,4 @@ files/queue.h
 files/tree.h
 files/getconf.c
 files/getent
+files/__stack_chk_fail_local.c

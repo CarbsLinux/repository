@@ -12,7 +12,7 @@ sed_i() {
 cp gcc/gmp/configfsf.guess gcc/gmp/config.guess
 cp gcc/gmp/configfsf.sub   gcc/gmp/config.sub
 
-if [ "${sys_arch#1*86}" ]; then
+if [ "${sys_arch#i*86}" ]; then
     # Do not create lib64 directories
     sed_i '/m64=/s/lib64/lib/' gcc/gcc/config/i386/t-linux64
     sed_i 's/lib64/lib/'       gcc/gcc/config/i386/linux64.h

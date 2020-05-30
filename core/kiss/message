@@ -1,0 +1,5 @@
+[1mIMPORTANT:[m
+
+[1mi686 users[m, i686 repository has been removed and merged
+with the base. You will need to remove the repository
+manually from your KISS_PATH.

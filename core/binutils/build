@@ -1,5 +1,14 @@
 #!/bin/sh -e
 
+# Architecture specific build options
+case ${3:-$(uname -m)} in
+    i*86)  archopts="--build=i686-pc-linux-musl \
+                     --host=i686-pc-linux-musl \
+                     --enable-64-bit-bfd" ;;
+    x86_64) archopts="--build=x86_64-pc-linux-musl \
+                      --host=x86_64-pc-linux-musl"
+esac
+
 cat > makeinfo <<EOF
 #!/bin/sh
 printf 'makeinfo (GNU texinfo) 5.2\n'
@@ -8,10 +17,11 @@ EOF
 chmod +x makeinfo
 export PATH=$PATH:$PWD
 
+# Word splitting is intentional here.
+# shellcheck disable=2086
 ./configure \
     --prefix=/usr \
-    --build=x86_64-pc-linux-musl \
-    --host=x86_64-pc-linux-musl \
+    $archopts \
     --enable-targets=x86_64-pep \
     --disable-multilib \
     --disable-werror \

@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+patch -p1 < fix-common-header.patch
+
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \

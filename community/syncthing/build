@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-read -r ver _ < "${0%/*}/version"
-
-go run build.go -no-upgrade -version "v$ver" build
+go run build.go -no-upgrade -version "v$2" build
 
 install -Dm755 syncthing "$1/usr/bin/syncthing"
 

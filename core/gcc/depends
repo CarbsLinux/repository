@@ -1,4 +1,4 @@
 binutils
-bison  make
+byacc  make
 flex   make
 zlib

@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --program-transform='s/^/b/'
+
+make
+make DESTDIR="$1" install
+
+ln -s byacc "$1/usr/bin/yacc"

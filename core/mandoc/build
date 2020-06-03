@@ -17,6 +17,7 @@ LIBDIR=/usr/lib
 SBINDIR=/usr/bin
 CC="${CC:-gcc}"
 CFLAGS="$CFLAGS"
+LDFLAGS="$LDFLAGS -static"
 MANPATH_DEFAULT=/usr/share/man
 LN="ln -sf"
 EOF

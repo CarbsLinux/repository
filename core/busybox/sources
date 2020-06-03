@@ -4,6 +4,8 @@ files/.config-suid
 files/acpid.run
 files/crond.run
 files/inittab
+files/mdev.conf
+files/mdev.run
 files/ntpd.run
 files/syslogd.run
 files/ntp.conf

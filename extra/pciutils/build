@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+mk() {
+    make \
+        CC="${CC:-cc}" \
+        OPT="$CFLAGS -fPIC" \
+        ZLIB=yes \
+        PREFIX=/usr \
+        SBINDIR=/usr/bin \
+        SHAREDIR=/usr/share/hwdata \
+        LDFLAGS="$LDFLAGS -static" \
+        "$@"
+}
+
+mk
+mk DESTDIR="$1" install install-lib

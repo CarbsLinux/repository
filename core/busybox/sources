@@ -9,6 +9,7 @@ files/mdev.run
 files/ntpd.run
 files/syslogd.run
 files/ntp.conf
+files/udhcpc.script
 patches/fsck-resolve-uuid.patch
 patches/modprobe-kernel-version.patch
 patches/adduser-no-setgid.patch

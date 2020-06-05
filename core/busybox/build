@@ -52,3 +52,6 @@ done
 kinstall 644 ntp.conf  "$1/etc/ntp.conf"
 kinstall 644 inittab   "$1/etc/inittab"
 kinstall 644 mdev.conf "$1/etc/mdev.conf"
+
+# Install udhcpc configuration script.
+kinstall 755 udhcpc.script "$1/etc/udhcpc"

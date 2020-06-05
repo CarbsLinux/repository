@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+export LDFLAGS="$LDFLAGS -static"
+
+make
+
+install -Dm755 signify   "$1/usr/bin/signify"
+install -Dm644 signify.1 "$1/usr/share/man/man1/signify.1"

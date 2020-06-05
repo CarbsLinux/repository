@@ -4,7 +4,8 @@
     --prefix=/usr \
     --sysconfdir=/etc \
     --mandir=/usr/share/man \
-    --localstatedir=/var
+    --localstatedir=/var \
+    --enable-static
 
 make
 make DESTDIR="$1" install

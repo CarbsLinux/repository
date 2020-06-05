@@ -1,5 +1,5 @@
-libgpg-error
-libgcrypt
-libksba
 libassuan
+libgcrypt
+libgpg-error
+libksba
 npth

@@ -2,11 +2,15 @@
 
 patch -p1 < fix-common-header.patch
 
+export CFLAGS="$CFLAGS -fPIC"
+export LDFLAGS="$LDFLAGS -static"
+
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \
     --sysconfdir=/etc \
-    --rundir=/run
+    --rundir=/run \
+    --without-udev
 
 make
 make DESTDIR="$1" install

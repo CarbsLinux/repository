@@ -38,7 +38,7 @@
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-out() { printf '%s\n' "$@" ;}
+out() { printf '%s\n' "$@" >&2 ;}
 usage() {
     out "usage: ${0##*/} [database] [key ...]" \
         "       database may be one of:" \

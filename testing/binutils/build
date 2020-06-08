@@ -1,0 +1,71 @@
+#!/bin/sh -e
+
+export LDFLAGS="$LDFLAGS -static"
+export CCLD="${CC:-cc} -all-static"
+
+# Architecture specific build options
+case ${3:-$(uname -m)} in
+    i*86)  archopts="--build=i686-pc-linux-musl \
+                     --host=i686-pc-linux-musl \
+                     --enable-64-bit-bfd" ;;
+    x86_64) archopts="--build=x86_64-pc-linux-musl \
+                      --host=x86_64-pc-linux-musl"
+esac
+
+cat > makeinfo <<EOF
+#!/bin/sh
+printf 'makeinfo (GNU texinfo) 5.2\n'
+EOF
+
+chmod +x makeinfo
+export PATH=$PATH:$PWD
+
+# Word splitting is intentional here.
+# shellcheck disable=2086
+./configure \
+    --prefix=/usr \
+    $archopts \
+    --enable-targets=x86_64-pep \
+    --disable-multilib \
+    --disable-shared \
+    --disable-werror \
+    --enable-gold \
+    --disable-gdb \
+    --disable-nls \
+    --disable-readline \
+    --disable-gprof \
+    --disable-plugins \
+    --with-mmap \
+    --with-static-standard-libraries \
+    --with-system-zlib
+
+# Linking binutils statically is HARD. configure script
+# and the main Makefile straight up ignores our flags.
+#
+# I would have never thought that linking binutils
+# statically would lead to a size reduction, but
+# it gets 2MB smaller (25 to 23MB).
+make configure-bfd
+make configure-ld
+make configure-libctf
+
+make -C libiberty CCLD="$CCLD"
+make -C bfd       CCLD="$CCLD"
+make -C libctf    CCLD="$CCLD"
+make -C ld        CCLD="$CCLD"
+
+make configure-gold
+make -C gold CCLD="$CCLD"
+
+make configure-opcodes
+make -C opcodes  CCLD="$CCLD"
+
+make configure-binutils
+make -C binutils CCLD="$CCLD"
+
+make configure-gas
+make -C gas      CCLD="$CCLD"
+
+for dir in libiberty bfd libctf ld gold opcodes binutils gas; do
+    make -C "$dir" DESTDIR="$1" install
+done

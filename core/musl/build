@@ -37,7 +37,7 @@ esac
 kinstall_t 755 "$1/usr/include/sys" cdefs.h queue.h tree.h
 
 # Install getconf.
-"${CC:=cc}" getconf.c -o "$1/usr/bin/getconf"
+"${CC:=cc}" --static getconf.c -o "$1/usr/bin/getconf"
 
 case $sys_arch in i*86)
     "$CC" -c __stack_chk_fail_local.c -o __stack_chk_fail_local.o

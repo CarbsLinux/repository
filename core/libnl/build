@@ -3,7 +3,7 @@
 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
-    --disable-static
+    --disable-shared
 
-make
+make LDFLAGS="$LDFLAGS -static" CCLD="${CC:-cc} -all-static"
 make DESTDIR="$1" install

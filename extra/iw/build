@@ -4,4 +4,4 @@
 # we don't need to compress it.
 sed 's@\(iw\.8\)\.gz@\1@' Makefile > _
 cat _ > Makefile; rm -f _
-make DESTDIR="$1" PREFIX="/usr" SBINDIR="/usr/bin" install
+make DESTDIR="$1" LDFLAGS="$LDFLAGS -static" PREFIX="/usr" SBINDIR="/usr/bin" install

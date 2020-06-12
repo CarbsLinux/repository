@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+for patch in *.patch; do
+    patch -p1 < "$patch"
+done
+
 kinstall() {
     mkdir -p "${3%/*}"; cp "$2" "$3"
     chmod "$1" "$3"

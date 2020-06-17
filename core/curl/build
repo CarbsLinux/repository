@@ -16,6 +16,7 @@
     --without-libpsl \
     --with-pic \
     --with-bearssl \
+    --with-ca-bundle=/etc/certificates/cert.pem \
     --without-ssl
 
 make curl_LDFLAGS=-all-static

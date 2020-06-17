@@ -15,6 +15,7 @@ make
 # shellcheck disable=2086
 "${CC:-cc}" \
     -static $CFLAGS \
+    -I ./inc \
     -include tools/brssl.h \
     tools/*.c \
     build/libbearssl.a \

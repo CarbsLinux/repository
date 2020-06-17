@@ -1,0 +1,3 @@
+#!/bin/sh
+
+"$KISS_ROOT/etc/certificates/update-certdata.sh"

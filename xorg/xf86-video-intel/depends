@@ -4,4 +4,4 @@ libXinerama
 libXrandr
 libXtst
 meson make
-xorg-server
+xorg-server make

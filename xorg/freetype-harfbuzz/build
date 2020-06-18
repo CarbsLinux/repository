@@ -19,6 +19,7 @@ build_harfbuzz() (
     ./configure \
         --prefix=/usr \
         --with-glib=yes \
+        --enable-static \
         --with-icu=no
 
     make

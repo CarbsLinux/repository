@@ -4,7 +4,7 @@
 
 DEST="$KISS_ROOT/etc/certificates"
 
-[ -d "$DEST"]  || mkdir -p "$DEST"
+[ -d "$DEST" ]  || mkdir -p "$DEST"
 
 [ -w "$DEST" ] || {
     printf '%s\n' "${0##*/}: root required to update CA certificates." >&2

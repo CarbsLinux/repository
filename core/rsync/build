@@ -10,6 +10,11 @@ export CFLAGS="-static $CFLAGS"
 ./configure \
     --prefix=/usr \
     --with-included-popt \
+    --disable-xxhash \
+    --disable-lz4 \
+    --disable-zstd \
+    --disable-openssl \
+    --disable-simd \
     --without-included-zlib
 
 make

@@ -1,13 +1,11 @@
 #!/bin/sh -e
 
-# The order here matters.
-patch -p1 < b98ba8921010d03f46704a476c69861515deb1ca.patch
-patch -p1 < c3c553db85ff10890209d0fe48fb4856ad68e4e0.patch
-patch -p1 < 0dad6d78a7fb5f6c5fb4a1d646040539db6cf865.patch
-patch -p1 < fdb803402fb32fa6d020bac57a40c7efe4aabb7d.patch
-patch -p1 < 4e04afc2df9bbc26e5ab524b53a6f4f1e61d7c9e.patch
+export LDFLAGS="$LDFLAGS -static"
 
-# Avoid repeating ourselves.
+for patch in *.patch; do
+    patch -p1 < "$patch"
+done
+
 mk() {
     make \
         libdir=/usr/lib/ \
@@ -17,5 +15,28 @@ mk() {
         "$@"
 }
 
-mk
-mk DESTDIR="$1" install
+(
+    cd src
+
+    # Build static targets.
+    mk libefiboot.a libefivar.a efivar-static efiboot.pc efivar.pc
+
+    # Install the binary.
+    install -Dm755 efivar-static "$1/usr/bin/efivar"
+    
+    # Install libraries.
+    install -Dm644 libefiboot.a  "$1/usr/lib/libefiboot.a"
+    install -Dm644 libefivar.a   "$1/usr/lib/libefivar.a"
+    
+    # Install pkgconf files.
+    install -Dm644 efiboot.pc    "$1/usr/lib/pkgconfig/efiboot.pc"
+    install -Dm644 efivar.pc     "$1/usr/lib/pkgconfig/efivar.pc"
+    
+    # Install headers.
+    find include -type f | while read -r header; do
+        install -Dm644 "$header" "$1/usr/$header"
+    done
+)
+
+
+mk -C docs DESTDIR="$1" install

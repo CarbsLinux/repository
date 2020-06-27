@@ -9,3 +9,4 @@ libdrm
 libxcb
 libxshmfence
 mesa
+meson make

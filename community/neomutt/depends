@@ -1,5 +1,5 @@
-cyrus-sasl
-libressl
-lua
-ncurses
-zlib
+cyrus-sasl make
+libressl   make
+lua        make
+ncurses    make
+zlib       make

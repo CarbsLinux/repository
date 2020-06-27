@@ -1,13 +1,13 @@
 #!/bin/sh -e
 
+export LDFLAGS="$LDFLAGS -static -lsasl2 -ldl -lresolv"
+
 ./configure \
 	--prefix=/usr \
 	--ssl \
 	--disable-doc \
 	--disable-idn \
 	--disable-nls \
-        --zlib \
-	--lua --sasl
 
 make
 make DESTDIR="$1" install

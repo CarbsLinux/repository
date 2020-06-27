@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+make MYCFLAGS="$CFLAGS -fPIC" \
+     MYLDFLAGS="$LDFLAGS -static" \
+     posix
+
+make INSTALL_TOP="$1/usr" \
+     INSTALL_MAN="$1/usr/share/man/man1" \
+     INSTALL_DATA="cp -d" \
+     install
+
+mkdir -p "$1/usr/lib/pkgconfig"
+cat <<EOF> "$1/usr/lib/pkgconfig/lua.pc"
+V=${2%.*}
+R=$2
+
+prefix=/usr
+INSTALL_BIN=\${prefix}/bin
+INSTALL_INC=\${prefix}/include
+INSTALL_LIB=\${prefix}/lib
+INSTALL_MAN=\${prefix}/man/man1
+INSTALL_LMOD=\${prefix}/share/lua/\${V}
+INSTALL_CMOD=\${prefix}/lib/lua/\${V}
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include
+
+Name: Lua
+Description: An Extensible Extension Language
+Version: \${R}
+Requires: 
+Libs: -L\${libdir} -llua -lm
+Cflags: -I\${includedir}
+EOF

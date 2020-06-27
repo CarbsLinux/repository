@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --sbindir=/usr/bin \
+    --enable-static
+
+make
+make DESTDIR="$1" install

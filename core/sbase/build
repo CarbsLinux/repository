@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-make CC="${CC:-cc} -static"
-make PREFIX=/usr DESTDIR="$1" install
+make LDFLAGS="$LDFLAGS -static" PREFIX=/usr DESTDIR="$1" sbase-box-install
 
-rm -f "$1/usr/bin/tar"
-rm -f "$1/usr/bin/sed"
+unlink "$1/usr/bin/tar"
+unlink "$1/usr/bin/sed"

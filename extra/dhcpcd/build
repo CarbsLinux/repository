@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < fix-common-header.patch
-
 export CFLAGS="$CFLAGS -fPIC"
 export LDFLAGS="$LDFLAGS -static"
 

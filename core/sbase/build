@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-make LDFLAGS="$LDFLAGS -static" PREFIX=/usr DESTDIR="$1" sbase-box-install
+make LDFLAGS="$LDFLAGS -static" sbase-box
+make PREFIX=/usr DESTDIR="$1"   sbase-box-install
 
 unlink "$1/usr/bin/tar"
 unlink "$1/usr/bin/sed"

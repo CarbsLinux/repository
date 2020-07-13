@@ -3,6 +3,7 @@
 ./configure \
     --prefix=/usr \
     --disable-nls \
+    --disable-rpath \
     --enable-static \
     --disable-shared
 

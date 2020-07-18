@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+export LDFLAGS="$LDFLAGS -static"
+
+./configure \
+    --prefix=/usr
+
+make
+make DESTDIR="$1" install
+
+cp "$1/usr/bin/grep" "$1/usr/bin/ggrep"

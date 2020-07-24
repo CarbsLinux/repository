@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+export CPT_ROOT=$KISS_ROOT
+kiss b cpt && kiss i cpt || exit 1
+
+# Make sure we don't have /var/db/cpt already
+if [ -d "$KISS_ROOT/var/db/cpt" ]; then
+    out "It seems like you already have /var/db/cpt, it might be dangerous to continue." \
+        "Proceed? [Ctrl+C to cancel]"
+    read -r _
+    mv "$KISS_ROOT/var/db/kiss/"* "$KISS_ROOT/var/db/cpt"
+else
+    mv "$KISS_ROOT/var/db/kiss" "$KISS_ROOT/var/db/cpt"
+fi
+
+set +f
+sed -i 's|^/var/db/kiss/|/var/db/cpt/|' /var/db/cpt/installed/*/manifest
+
+CPT_PATH=$(echo "$KISS_PATH" | sed 's|/var/db/kiss/|/var/db/cpt/|g')
+export CPT_PATH
+cpt-remove kiss

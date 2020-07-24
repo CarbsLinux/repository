@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+install -Dm755 cpt_path.sh "$1/etc/profile.d/cpt_path.sh"
+make PREFIX=/usr DESTDIR="$1" install

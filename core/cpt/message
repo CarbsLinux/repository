@@ -1,0 +1,7 @@
+[1;31mIMPORTANT[m
+
+  kiss has been replaced with cpt (Carbs Packaging Tools). You will
+  have to rename your kiss-related variables from KISS-* to CPT-*.
+  Even though usage more or less the same with kiss, you may want to
+  check the manual pages (each tool has its own).
+

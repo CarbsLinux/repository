@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-mkdir -p "$1/usr/bin"
-
-find . -type f -name kiss-\* -exec mv {} "$1/usr/bin" \;

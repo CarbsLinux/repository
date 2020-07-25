@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+mkdir -p "$1/usr/bin"
+
+find . -type f -name cpt-\* -exec mv {} "$1/usr/bin" \;

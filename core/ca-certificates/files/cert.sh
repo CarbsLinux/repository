@@ -2,7 +2,7 @@
 #
 # update-certdata
 
-DEST="$KISS_ROOT/etc/certificates"
+DEST="$CPT_ROOT/etc/certificates"
 
 [ -d "$DEST" ]  || mkdir -p "$DEST"
 

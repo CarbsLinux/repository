@@ -15,12 +15,15 @@ build_freetype() (
 
 build_harfbuzz() (
     export DESTDIR="$1"
+    export CFLAGS="$CFLAGS -I$PWD/freetype/include"
+    export LIBS="-L$1/usr/lib -lfreetype"
     cd harfbuzz
+
 
     meson \
         --prefix=/usr \
         -Dglib=enabled \
-        -Ddefault_library=static \
+        -Ddefault_library=both \
         -Dicu=disabled \
         -Dbenchmark=disabled \
         . output
@@ -39,6 +42,6 @@ build_harfbuzz "$1"
 
 # Point Freetype to the Harfbuzz files.
 export HARFBUZZ_CFLAGS="-I$PWD/harfbuzz/src"
-export HARFBUZZ_LIBS="-L$PWD/harfbuzz/src/.libs -lharfbuzz"
+export HARFBUZZ_LIBS="-L$1/usr/lib -lharfbuzz"
 
 build_freetype "$1" yes

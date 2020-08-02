@@ -8,11 +8,11 @@ sed_i() {
 
 # Enable streaming related options if gstreamer
 # is installed.
-kiss l gst-plugins-base && streaming=ON
+cpt-list gst-plugins-base && streaming=ON
 
 # Enable the use of openjpeg if the package is
 # installed.
-kiss l openjpeg2 && jpeg=ON
+cpt-list openjpeg2 && jpeg=ON
 
 patch -p1 < fix-musl.patch
 

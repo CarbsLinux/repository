@@ -1,11 +1,23 @@
 #!/bin/sh -e
 
-sed 's/-I/-isystem /g' libelf.pc.in > _
-cat _ > libelf.pc.in; rm -f _
+patch -p1 < musl-decls.patch
+
+# Build sometimes forces -Werror.
+export CFLAGS="$CFLAGS -Wno-error"
+
+# Disable configure error for missing argp.
+sed -i 's/as_fn_error.*libargp/: "/g' configure
+
+# Don't compile two unrelated C files which require argp.
+sed -i 's/color.*printversion../#/g' lib/Makefile.in
 
 ./configure \
     --prefix=/usr \
-    --enable-nls=auto
+    --disable-symbol-versioning \
+    --disable-debuginfod \
+    --disable-nls
 
-make
-make prefix="$1/usr" install
+# Skip the default make target and build only what we need.
+make -C lib
+make -C libelf
+make -C libelf DESTDIR="$1" install

@@ -2,7 +2,7 @@
 
 # Use cmake to build cmake if installed.
 # This leads to a much faster build.
-if kiss l cmake; then
+if cpt-list cmake; then
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_INSTALL_LIBDIR=/usr/lib \

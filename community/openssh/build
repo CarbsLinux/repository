@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # Adds optional libedit support
-kiss l libedit >/dev/null 2>&1 &&
+cpt-list libedit >/dev/null 2>&1 &&
     libedit="--with-libedit"
 
 ./configure \

@@ -9,6 +9,6 @@ make DESTDIR="$1" PREFIX=/usr ubase-box-install
 unlink "$1/usr/bin/stat"
 
 # You cannot execute commands with the ubase
-# implementation of su, which might break kiss
+# implementation of su, which might break cpt
 # if the user doesn't have sudo or doas installed.
 unlink "$1/usr/bin/su"

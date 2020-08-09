@@ -1,3 +1,4 @@
+eudev
 libevdev
 linux-headers make
 meson         make

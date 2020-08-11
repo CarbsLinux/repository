@@ -11,4 +11,4 @@ cat _ > bsd.prog.mk; rm -f _
 make
 make DESTDIR="$1" install
 
-install -D doas.conf "$1/etc/doas.conf"
+install -Dm640 doas.conf "$1/etc/doas.conf"

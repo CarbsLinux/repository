@@ -8,7 +8,7 @@ export CC="${CC:-cc}"
 export GOARCH=amd64
 export GO_LDFLAGS="-w -s"
 
-[ -f "$KISS_ROOT/var/db/kiss/installed/go/manifest" ] || {
+[ -f "$CPT_ROOT/var/db/cpt/installed/go/manifest" ] || {
     export GOROOT=$PWD/go1.4-bootstrap
     export GOROOT_FINAL=$PWD/lib/go-bootstrap
 
@@ -23,7 +23,7 @@ export GO_LDFLAGS="-w -s"
 
 export GOROOT_FINAL=/usr/lib/go
 
-if [ -f "$KISS_ROOT/var/db/kiss/go/manifest" ]; then
+if [ -f "$CPT_ROOT/var/db/cpt/go/manifest" ]; then
     export GOROOT_BOOTSTRAP=/usr/lib/go
 else
     export GOROOT_BOOTSTRAP=$PWD/lib/go-bootstrap

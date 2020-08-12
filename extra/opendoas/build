@@ -6,6 +6,7 @@ cat _ > bsd.prog.mk; rm -f _
 
 ./configure \
     --enable-static \
+    --with-timestamp \
     --without-pam
 
 make

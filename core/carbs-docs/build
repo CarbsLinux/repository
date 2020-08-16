@@ -1,4 +1,5 @@
 #!/bin/sh -e
 
-mkdir -p "$1/usr/share/carbslinux"
-mv ./* "$1/usr/share/carbslinux"
+find . -type f -name '*.txt' | while read -r file; do
+    install -Dm644 "$file" "$1/usr/share/docs/carbslinux/$file"
+done

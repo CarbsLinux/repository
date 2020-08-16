@@ -14,6 +14,8 @@ NO_CROSS_DIRECTORY_HARDLINKS=1
 NO_INSTALL_HARDLINKS=1
 EOF
 
+export LDFLAGS="$LDFLAGS -static"
+
 ./configure \
     --prefix=/usr \
     --with-curl \
@@ -25,4 +27,20 @@ make DESTDIR="$1" install
 
 for man in man1/*.1 man5/*.5 man7/*.7; do
     install -Dm644 "$man" "$1/usr/share/man/$man"
+done
+
+
+# Build and install remote-http helper. This doesn't happen by default when
+# building static git.
+export CFLAGS="$CFLAGS -D_XOPEN_SOURCE=600 -I$PWD -I$PWD/compat/regex -I$PWD/xdiff -include config.h"
+for obj in http http-walker; do
+    # shellcheck disable=2086
+    "${CC:=cc}" $CFLAGS -c "$obj.c"
+done
+
+# shellcheck disable=2086
+"$CC" -static $CFLAGS -o "$1/usr/libexec/git-core/git-remote-http" remote-curl.c http.o http-walker.o libgit.a common-main.o xdiff/lib.a $(pkg-config --static --libs zlib libcurl)
+
+for remote in https ftp ftps; do
+    ln -sf git-remote-http "$1/usr/libexec/git-core/git-remote-$remote"
 done

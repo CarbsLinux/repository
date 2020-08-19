@@ -12,6 +12,7 @@ find . -type f -name meson.build -exec \
 
 meson \
     --prefix=/usr \
+    -Ddefault_library=both \
     -Dman=false \
     -Dfam=false \
     . build

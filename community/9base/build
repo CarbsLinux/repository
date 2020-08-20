@@ -2,5 +2,7 @@
 
 export CFLAGS="$CFLAGS -fcommon"
 
+patch -p1 < etc-rcmain.patch
+
 make PREFIX=/usr
 make PREFIX=/usr DESTDIR="$1" install

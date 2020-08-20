@@ -1,1 +1,2 @@
 git+https://git.suckless.org/9base
+patches/etc-rcmain.patch

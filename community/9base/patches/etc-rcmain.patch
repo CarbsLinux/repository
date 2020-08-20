@@ -1,0 +1,37 @@
+Let's put rcmain to the /etc directory instead of /usr/etc.
+diff --git a/rc/Makefile b/rc/Makefile
+index a6ed53b..9486968 100644
+--- a/rc/Makefile
++++ b/rc/Makefile
+@@ -32,14 +32,14 @@ install: ${TARG}
+ 	@mkdir -p ${DESTDIR}${MANPREFIX}/man1
+ 	@cp -f ${MANFILES} ${DESTDIR}${MANPREFIX}/man1
+ 	@chmod 444 ${DESTDIR}${MANPREFIX}/man1/${MANFILES}
+-	@mkdir -p ${DESTDIR}${PREFIX}/etc
+-	@cp -f rcmain ${DESTDIR}${PREFIX}/etc
+-	@chmod 755 ${DESTDIR}${PREFIX}/etc/rcmain
++	@mkdir -p ${DESTDIR}/etc
++	@cp -f rcmain ${DESTDIR}/etc
++	@chmod 755 ${DESTDIR}/etc/rcmain
+ 
+ uninstall:
+ 	rm -f ${DESTDIR}${PREFIX}/bin/${TARG}
+ 	rm -f ${DESTDIR}${MANPREFIX}/man1/${MANFILES}
+-	rm -f ${DESTDIR}${PREFIX}/etc/rcmain
++	rm -f ${DESTDIR}/etc/rcmain
+ 
+ .c.o:
+ 	@echo CC $*.c
+diff --git a/rc/plan9ish.c b/rc/plan9ish.c
+index 269d124..1ec7a88 100644
+--- a/rc/plan9ish.c
++++ b/rc/plan9ish.c
+@@ -27,7 +27,7 @@ char *syssigname[]={
+ char*
+ Rcmain(void)
+ {
+-	return unsharp("#9/etc/rcmain");
++	return unsharp("/etc/rcmain");
+ }
+ 
+ char Fdprefix[]="/dev/fd/";

@@ -1,0 +1,33 @@
+#!/bin/sh -e
+
+for patch in *.patch; do
+    patch -p1 < "$patch"
+done
+
+# Change the location of rcmain to the /etc directory.
+sed -i 's|/lib/rcmain|/etc/rcmain|;s|PREFIX||' unix.c
+
+mkdir -p "$1/usr/bin"
+"${CC:-cc}" -o "$1/usr/bin/rc" \
+    $CFLAGS -static \
+    code.c \
+    exec.c \
+    getflags.c \
+    glob.c \
+    here.c \
+    io.c \
+    lex.c \
+    pcmd.c \
+    pfnc.c \
+    simple.c \
+    subr.c \
+    trap.c \
+    tree.c \
+    var.c \
+    y.tab.c \
+    unix.c \
+    havefork.c \
+    prompt-null.c
+
+install -Dm644 rc.1        "$1/usr/share/man/man1/rc.1"
+install -Dm644 rcmain.unix "$1/etc/rcmain"

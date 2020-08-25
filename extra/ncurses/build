@@ -28,6 +28,5 @@ done
 printf '%s\n' "INPUT(-lncursesw)" > "$1/usr/lib/libcursesw.so"
 ln -s libncurses.so "$1/usr/lib/libcurses.so"
 
-# These conflict with busybox's.
-rm -f "$1/usr/bin/clear"
-rm -f "$1/usr/bin/reset"
+# Copy pkgconfig.
+ln -s ncursesw.pc "$1/usr/lib/pkgconfig/ncurses.pc"

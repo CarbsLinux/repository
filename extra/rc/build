@@ -7,9 +7,20 @@ done
 # Change the location of rcmain to the /etc directory.
 sed -i 's|/lib/rcmain|/etc/rcmain|;s|PREFIX||' unix.c
 
+# If readline is available, build with it.
+if cpt-list readline >/dev/null 2>&1; then
+    readline=readline LIBS="$LIBS $(pkg-config --static --libs readline)"
+else
+    readline=null
+fi
+
 mkdir -p "$1/usr/bin"
+
+# Since CFLAGS and LIBS need to be seperated, there are no double quotes.
+# shellcheck disable=2086
 "${CC:-cc}" -o "$1/usr/bin/rc" \
     $CFLAGS -static \
+    -D_XOPEN_SOURCE=500 \
     code.c \
     exec.c \
     getflags.c \
@@ -27,7 +38,7 @@ mkdir -p "$1/usr/bin"
     y.tab.c \
     unix.c \
     havefork.c \
-    prompt-null.c
+    "prompt-$readline.c" $LIBS
 
 install -Dm644 rc.1        "$1/usr/share/man/man1/rc.1"
 install -Dm644 rcmain.unix "$1/etc/rcmain"

@@ -2,7 +2,7 @@
 
 make \
     prefix=/usr \
-    CC="${CC:-gcc} $CFLAGS $CXXFLAGS" \
+    CC="${CC:-gcc} $CFLAGS $CXXFLAGS -static" \
     -f unix/Makefile generic
 
 make \

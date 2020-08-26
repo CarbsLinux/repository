@@ -1,8 +1,20 @@
 #!/bin/sh -e
 
 ./configure \
-    --without-debug \
-    --prefix=/usr
+    --prefix=/usr \
+    --without-debug
 
 make
 make DESTDIR="$1" install
+
+# Compile the static library. Due to a bug in libtool/alsa-lib you cannot
+# compile static and shared libraries together.
+
+make clean
+
+./configure \
+    --enable-static=yes \
+    --enable-shared=no
+
+make
+install -Dm644 src/.libs/libasound.a "$1/usr/lib/libasound.a"

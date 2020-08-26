@@ -22,7 +22,6 @@ export CFLAGS="$CFLAGS -I$PWD/libsha1/tmp/usr/include"
 export LIBSHA1_CFLAGS="-L$PWD/libsha1/tmp/usr/lib -I$PWD/libsha1/tmp/usr/include"
 export LIBSHA1_LIBS="$PWD/libsha1/tmp/usr/lib/libsha1.a"
 
-
 ./configure \
     --prefix=/usr \
     --localstatedir=/var \

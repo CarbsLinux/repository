@@ -12,7 +12,6 @@ sed_i "s/BUILD_SPHINX_FALSE='#'/BUILD_SPHINX_FALSE=/" configure
 
 ./configure \
     --prefix=/usr \
-    --disable-static \
     --enable-tee \
     --enable-gl \
     --enable-egl \

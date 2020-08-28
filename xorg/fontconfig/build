@@ -4,6 +4,7 @@
     --prefix=/usr \
     --localstatedir=/var \
     --sysconfdir=/etc \
+    --enable-static \
     --with-xmldir=/etc/fonts
 
 make

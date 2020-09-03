@@ -1,0 +1,7 @@
+[1mIMPORTANT[m
+
+You no longer need the [1mca-certificates[m package and may safely remove
+it. It is no longer in the repositories. You can run the following command:
+
+    [1m$ cpt-remove ca-certificates[m
+

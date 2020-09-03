@@ -3,7 +3,6 @@
 cat > config.mak <<EOF
 NO_GETTEXT=YesPlease
 NO_SVN_TESTS=YesPlease
-NO_OPENSSL=YesPlease
 NO_TCLTK=YesPlease
 NO_EXPAT=YesPlease
 NO_NSEC=YesPlease
@@ -32,6 +31,7 @@ done
 
 # Build and install remote-http helper. This doesn't happen by default when
 # building static git.
+set -x
 export CFLAGS="$CFLAGS -D_XOPEN_SOURCE=600 -I$PWD -I$PWD/compat/regex -I$PWD/xdiff -include config.h"
 for obj in http http-walker; do
     # shellcheck disable=2086

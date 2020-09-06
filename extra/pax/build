@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-sed -i '1i#include <sys/types.h>' pax.h
+sed -i '1i#include <sys/types.h>' pax.h compat.h
 
 TARGET_OS=Linux \
 CC="${CC:-cc}" \

@@ -3,6 +3,7 @@
 ./configure \
     --prefix=/usr \
     --enable-shared \
+    --enable-static \
     --disable-rpath
 
 make

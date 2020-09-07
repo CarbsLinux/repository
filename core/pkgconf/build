@@ -4,7 +4,7 @@
     --prefix=/usr \
     --sysconfdir=/etc
 
-make LDFLAGS="$LDFLAGS -static" CCLD="${CC:-cc} -all-static"
+make CCLD="${CC:-cc} -all-static"
 make DESTDIR="$1" install
 
 ln -s pkgconf "$1/usr/bin/pkg-config"

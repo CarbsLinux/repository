@@ -38,7 +38,7 @@ for obj in http http-walker; do
     "${CC:=cc}" $CFLAGS -c "$obj.c"
 done
 
-# shellcheck disable=2086
+# shellcheck disable=2086,2046
 "$CC" -static $CFLAGS -o "$1/usr/libexec/git-core/git-remote-http" remote-curl.c http.o http-walker.o libgit.a common-main.o xdiff/lib.a $(pkg-config --static --libs zlib libcurl)
 
 for remote in https ftp ftps; do

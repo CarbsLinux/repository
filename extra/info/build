@@ -1,0 +1,15 @@
+#!/bin/sh -e
+# Standalone build for info that doesn't depend on Perl. Only the info page
+# viewer.
+
+export LDFLAGS="$LDFLAGS -static"
+export PERL=/bin/true
+
+./configure \
+    --disable-nls \
+    --disable-rpath
+
+make -C gnulib/lib
+make -C info
+
+install -Dm755 info/ginfo "$1/usr/bin/info"

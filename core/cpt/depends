@@ -1,3 +1,2 @@
 curl
 rsync
-shellcheck-bin test

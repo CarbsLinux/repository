@@ -14,7 +14,7 @@ cpt-list gst-plugins-base && streaming=ON
 # installed.
 cpt-list openjpeg2 && jpeg=ON
 
-busybox patch -p1 < fix-musl.patch
+patch -p1 < fix-musl.patch
 
 # Remove gettext requirement.
 sed_i 's/ngettext/printf/g' Tools/MiniBrowser/gtk/BrowserDownloadsBar.c

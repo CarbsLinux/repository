@@ -11,5 +11,7 @@ export PERL=/bin/true
 
 make -C gnulib/lib
 make -C info
+make -C install-info
 
-install -Dm755 info/ginfo "$1/usr/bin/info"
+install -Dm755 info/ginfo                 "$1/usr/bin/info"
+install -Dm755 install-info/ginstall-info "$1/usr/bin/install-info"

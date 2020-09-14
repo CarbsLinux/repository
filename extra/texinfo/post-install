@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find /usr/share/info -type f ! -name dir -exec install-info {} /usr/share/info/dir \;

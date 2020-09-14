@@ -1,4 +1,8 @@
 #!/bin/sh -e
 
+export GOPATH=$PWD/gopath
+trap "go clean -modcache" EXIT INT
+go mod vendor
+
 go build
 install -Dm755 lf "$1/usr/bin/lf"

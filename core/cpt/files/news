@@ -1,0 +1,4 @@
+#!/bin/sh -e
+# Read news and announcements from Carbs Linux
+
+curl -sfL https://carbslinux.org/news.txt | ${PAGER:-less}

@@ -1,6 +1,5 @@
 #!/bin/sh -e
 
-make DESTDIR="$1" install
+patch -p1 < respawn-fix.patch
 
-# Fix shebang
-sed -i '1s|/bin/sh -e|/bin/sh|' "$1/usr/bin/respawn"
+make DESTDIR="$1" install

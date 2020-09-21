@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+# We use a custom Makefile, instead of running ./configure
+make
+make DESTDIR="$1" install

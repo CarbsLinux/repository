@@ -6,13 +6,14 @@ sed_i() {
     cat _ > "$file"; rm -f _
 }
 
-# Enable streaming related options if gstreamer
-# is installed.
-cpt-list gst-plugins-base && streaming=ON
+# Enable streaming related options if gstreamer is installed.
+cpt-list gst-plugins-base >/dev/null 2>&1 && streaming=ON
 
-# Enable the use of openjpeg if the package is
-# installed.
-cpt-list openjpeg2 && jpeg=ON
+# Enable the use of openjpeg if the package is installed.
+cpt-list openjpeg2 >/dev/null 2>&1 && jpeg=ON
+
+# Enable webcrypto if libtasn1 is installed.
+cpt-list libtasn1 >/dev/null 2>&1 && libtasn=ON
 
 patch -p1 < fix-musl.patch
 
@@ -48,7 +49,7 @@ cmake -B build \
     -DUSE_OPENJPEG=${jpeg:-OFF} \
     -DUSE_WOFF2=OFF \
     -DUSE_WPE_RENDERER=OFF \
-    -DENABLE_WEB_CRYPTO=OFF \
+    -DENABLE_WEB_CRYPTO=${libtasn:-OFF} \
     -DENABLE_MEDIASOURCE=${streaming:-OFF} \
     -Wno-dev
 

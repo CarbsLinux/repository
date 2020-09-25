@@ -1,2 +1,2 @@
-https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.3p1.tar.gz
+https://github.com/oasislinux/openssh/archive/7e9f1c87501d3abf13893a346633e3208d0abcd0.tar.gz
 files/sshd.run

@@ -1,2 +1,3 @@
-bearssl make
-zlib    make
+autoconf make
+bearssl  make
+zlib     make

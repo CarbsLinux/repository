@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+make -f unix/Makefile test

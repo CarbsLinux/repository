@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -D_FILE_OFFSET_BITS=64 -DWILD_STOP_AT_DIR -DLARGE_FILE_SUPPORT -DUNICODE_SUPPORT -DUNICODE_WCHAR -DUTF8_MAYBE_NATIVE -DNO_LCHMOD -LDDATE_FORMAT=DF_YMD -DUSE_BZIP2 -DNATIVE"
+
+make -f unix/Makefile LOCAL_UNZIP="$CFLAGS" prefix=/usr LF2="" CC="${CC:-cc}" CFLAGS="$CFLAGS" LFLAGS1=-static D_USE_BZ2=-DUSE_BZIP2 L_BZ2=-lbz2 unzips
+
+make -f unix/Makefile prefix="$1/usr" MANDIR="$1/usr/share/man/man1" INSTALL_PROGRAM="install" install

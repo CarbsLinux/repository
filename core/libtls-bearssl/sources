@@ -1,1 +1,2 @@
 https://git.sr.ht/~mcf/libtls-bearssl/refs/0.2/libtls-bearssl-0.2.tar.gz
+patches/shared-lib.patch

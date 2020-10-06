@@ -1,4 +1,6 @@
 #!/bin/sh -e
 
 make PREFIX=/usr DESTDIR="$1" install
-install -Dm755 news "$1/usr/bin/cpt-news"
+
+install -Dm644 cpt-base "$1/etc/cpt-base"
+install -Dm755 news     "$1/usr/bin/cpt-news"

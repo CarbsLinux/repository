@@ -13,10 +13,15 @@ cd "runit-$2"
     
     make
     
-    install -Dm755 -t "$1/usr/bin/" chpst runit runit-init runsv runsvchdir runsvdir sv svlogd utmpset
+    for bin in chpst runit runit-init runsv runsvchdir runsvdir sv svlogd \
+        utmpset ../../poweroff ../../reboot; do
+        install -Dm755 "$bin" "$1/usr/bin/${bin}"
+    done
 )
 
-install -Dm644 -t "$1/usr/share/man/man8" man/*
+for manpage in man/*; do
+    install -Dm644 "$manpage" "$1/usr/share/man/man8/${manpage##*/}"
+done
 
 mkdir -p "$1/var/service" "$1/etc/runit"
 ln -s runit-init "$1/usr/bin/init"
@@ -24,4 +29,3 @@ ln -s /usr/lib/init/rc.boot "$1/etc/runit/1"
 ln -s /usr/lib/init/rc.shutdown "$1/etc/runit/3"
 
 install -Dm755 ../2 "$1/etc/runit/2"
-install -Dm755 -t "$1/usr/bin" ../poweroff ../reboot

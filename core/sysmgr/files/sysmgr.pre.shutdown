@@ -1,1 +1,0 @@
-# for service in /var/sysmgr/* ; do [ -r "$service" ] && { svctl stop "${service##*/}" ; svctl kill "${service##*/}" ;} ; done

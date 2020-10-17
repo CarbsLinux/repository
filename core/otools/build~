@@ -2,7 +2,7 @@
 
 :> testfile
 less -F -T testfile testfile 2>/dev/null && echo CFLAGS += -DHAVE_LESS_T >> config.mk
-rm -f testfile
+rm testfile
 
-make
+make LDFLAGS=''
 make PREFIX=/usr DESTDIR="$1" install

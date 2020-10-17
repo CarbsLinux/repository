@@ -1,4 +1,8 @@
 #!/bin/sh -e
 
+:> testfile
+less -F -T testfile testfile 2>/dev/null && echo CFLAGS += -DHAVE_LESS_T >> config.mk
+rm testfile
+
 make
 make PREFIX=/usr DESTDIR="$1" install

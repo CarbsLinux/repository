@@ -1,1 +1,2 @@
-zlib
+cmake make
+zstd  make

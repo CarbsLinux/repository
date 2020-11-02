@@ -1,10 +1,12 @@
 #!/bin/sh -e
 
-make
-make install
+export GOPATH=$PWD/gopath
+trap "go clean -modcache" EXIT INT
+go mod vendor
 
-mkdir -p "$1/usr/bin"
+make FZF_VERSION="$2" FZF_REVISION="${2##*.}"
+make FZF_VERSION="$2" FZF_REVISION="${2##*.}" install
+
+mkdir -p "$1/usr/bin" "$1/usr/share"
 cp bin/* "$1/usr/bin/"
-
-mkdir "$1/usr/share"
 cp -r man "$1/usr/share/man"

@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+export GOPATH=$PWD/gopath
+trap "go clean -modcache" EXIT INT
+go mod vendor
+
 go run build.go -no-upgrade -version "v$2" build
 
 install -Dm755 syncthing "$1/usr/bin/syncthing"

@@ -2,12 +2,15 @@
 
 export DESTDIR="$1"
 
+[ "$CPT_TEST" ] && test=enabled
+
 for plugin in libav good bad ugly; do (
     cd "$plugin"
 
     meson \
         --prefix=/usr \
         -Dexample=false \
+        -Dtests=${test:-disabled} \
         -Dqt5=disabled \
         . output
 

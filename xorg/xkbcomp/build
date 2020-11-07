@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+export LDFLAGS="$LDFLAGS -static"
+export PKG_CONFIG="pkgconf --static"
+
 ./configure \
     --prefix=/usr
 

@@ -6,7 +6,7 @@ meson \
     --prefix=/usr \
     -Dgir=false \
     -Dgtk_doc=false \
-    -Dintrospection=false \
+    -Dintrospection=disabled \
     . build
 
 ninja -C build

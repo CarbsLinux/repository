@@ -1,6 +1,6 @@
 #!/bin/sh
 
-grep '\.la$' "$CPT_ROOT/var/db/cpt/installed/"*/manifest || exit 0
+grep -q '\.la$' "$CPT_ROOT/var/db/cpt/installed/"*/manifest || exit 0
 
 find "$CPT_ROOT/usr/lib" \
     ! -type d \

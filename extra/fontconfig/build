@@ -5,6 +5,7 @@
     --localstatedir=/var \
     --sysconfdir=/etc \
     --enable-static \
+    --disable-docs \
     --with-xmldir=/etc/fonts
 
 make

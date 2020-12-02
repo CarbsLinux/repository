@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --mandir=/usr/share/man \
+    --disable-nls \
+    --without-magick-plus-plus \
+    --without-perl \
+    --without-xml
+
+make
+make DESTDIR="$1" install

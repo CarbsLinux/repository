@@ -1,0 +1,7 @@
+binutils
+byacc  make
+flex   make
+gmp
+libmpc
+mpfr
+zlib

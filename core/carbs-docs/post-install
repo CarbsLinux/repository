@@ -1,0 +1,4 @@
+#!/bin/sh
+
+command -v install-info >/dev/null &&
+    install-info $CPT_ROOT/usr/share/info/carbslinux.info $CPT_ROOT/usr/share/info/dir

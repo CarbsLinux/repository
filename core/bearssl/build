@@ -11,7 +11,7 @@ kinstall() {
 
 [ "$CPT_CROSS_TRIPLET" ] && CC=$CPT_CROSS_TRIPLET-cc AR=$CPT_CROSS_TRIPLET-ar
 
-make "CC=${CC:=cc}" "AR=${AR:=ar}" LD=$CC
+make "CC=${CC:=cc}" "AR=${AR:=ar}" LD=$CC LDDLL=$CC
 
 # Build static binary for bearssl, word splitting on CFLAGS is intentional.
 # shellcheck disable=2086

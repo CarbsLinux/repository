@@ -7,8 +7,7 @@ cat _ > Makefile.in; rm -f _
 
 export CFLAGS="-static $CFLAGS"
 
-./configure \
-    --prefix=/usr \
+cpt-configure \
     --with-included-popt \
     --disable-xxhash \
     --disable-lz4 \

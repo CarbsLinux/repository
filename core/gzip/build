@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 [ "$CPT_CROSS_TRIPLET" ] &&
-    CC="$CPT_CROSS_TRIPLET-cc -L$CPT_ROOT/usr/lib -isystem -isystem $CPT_ROOT/usr/include"
+    CC="$CPT_CROSS_TRIPLET-cc -L$CPT_ROOT/usr/lib -isystem $CPT_ROOT/usr/include"
 make CC="${CC:-cc} -static"
 
 install -Dm755 pigz   "$1/usr/bin/pigz"

@@ -1,9 +1,14 @@
 #!/bin/sh -e
 
-[ "$CPT_CROSS_TRIPLET" ] && CC=$CPT_CROSS_TRIPLET-cc
+[ "$CPT_CROSS_TRIPLET" ] &&
+    CC=$CPT_CROSS_TRIPLET-cc AR=$CPT_CROSS_TRIPLET-ar RANLIB=$CPT_CROSS_TRIPLET-ranlib
 
-make CC="${CC:=cc} $CFLAGS -fPIC $LDFLAGS" LD=$CC -f Makefile-libbz2_so
-make CC="$CC       $CFLAGS -fPIC $LDFLAGS -static" LD=$CC bzip2 bzip2recover libbz2.a
+LD=${CC:=cc}
+CC="$CC $CFLAGS -fPIC $LDFLAGS"
+
+make CC="$CC" LD="$LD" -f Makefile-libbz2_so
+make CC="$CC" AR="${AR:-ar}" RANLIB="${RANLIB:-ranlib}" LD="$LD" \
+    bzip2 bzip2recover libbz2.a
 
 for bin in bzip2 bzdiff bzgrep bzip2recover bzmore; do
     install -Dm755 "$bin" "$1/usr/bin/$bin"

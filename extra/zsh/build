@@ -2,10 +2,8 @@
 
 {
     printf "functions='Completion/*comp* "
-    for comp in Base Linux Unix X Zsh; do
-        printf "Completion/%s/*/* " "$comp"
-    done
-    printf "'\\n"
+    printf 'Completion/%s/*/* ' Base Linux Unix X Zsh
+    printf \''\n'
 } >> Src/Zle/complete.mdd
 
 rm -f Completion/Linux/Command/_pkgtool

@@ -1,2 +1,2 @@
-https://git.carbslinux.org/archive/cpt/cpt-5.1.1.tar.gz
+git+git://git.carbslinux.org/cpt@helpers
 files/news

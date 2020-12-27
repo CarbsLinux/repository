@@ -18,6 +18,8 @@ kinstall_t() {
 
 patch -p0 < CVE-2020-28928.patch
 
+[ "$CPT_CROSS_TRIPLET" ] && CC=$CPT_CROSS_TRIPLET-cc AR=$CPT_CROSS_TRIPLET-ar
+
 cpt-configure
 
 make
@@ -41,7 +43,7 @@ kinstall_t 755 "$1/usr/include/sys" cdefs.h queue.h tree.h
 
 case $sys_arch in i*86)
     "$CC" -c __stack_chk_fail_local.c -o __stack_chk_fail_local.o
-    ar r "$1/usr/lib/libssp_nonshared.a" __stack_chk_fail_local.o
+    "$AR" r "$1/usr/lib/libssp_nonshared.a" __stack_chk_fail_local.o
 esac
 
 # Install getent

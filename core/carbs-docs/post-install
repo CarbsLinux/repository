@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
-command -v install-info >/dev/null &&
-    install-info $CPT_ROOT/usr/share/info/carbslinux.info $CPT_ROOT/usr/share/info/dir
+command -v install-info >/dev/null || exit 0
+install-info "$CPT_ROOT/usr/share/info/carbslinux.info" "$CPT_ROOT/usr/share/info/dir"

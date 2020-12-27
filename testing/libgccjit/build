@@ -63,10 +63,10 @@ make
 make DESTDIR="$1" -C gcc install
 
 # Remove unnecessary gcc files.
-rm -rf "$1/usr/bin" \
-       "$1/usr/lib/gcc" \
-       "$1/usr/libexec" \
-       "$1/usr/share/man"
+rm -rf "${1:?}/usr/bin" \
+       "${1:?}/usr/lib/gcc" \
+       "${1:?}/usr/libexec" \
+       "${1:?}/usr/share/man"
 
 # Remove info pages other than libgccjit
 find "$1/usr/share/info" -type f ! -name libgccjit.info -exec rm -f {} +

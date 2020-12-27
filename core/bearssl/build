@@ -9,6 +9,8 @@ kinstall() {
     chmod "$1" "$3"
 }
 
+[ "$CPT_CROSS_TRIPLET" ] && CC=$CPT_CROSS_TRIPLET-cc AR=$CPT_CROSS_TRIPLET
+
 make "CC=${CC:=cc}" "AR=${AR:=ar}" LD=$CC
 
 # Build static binary for bearssl, word splitting on CFLAGS is intentional.

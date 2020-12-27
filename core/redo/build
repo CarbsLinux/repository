@@ -1,9 +1,12 @@
 #!/bin/sh -e
 
-"${CC:=cc}" -Os -Wall -Wextra -Wwrite-strings -c -o redo.o redo.c
-"$CC" -static -o redo redo.c
+[ "$CPT_CROSS_TRIPLET" ] && CC=$CPT_CROSS_TRIPLET-cc
 
-for file in redo redo-sources redo-targets; do
+mkdir -p "$1/usr/bin"
+
+"${CC:=cc}" -static -Os -Wall -Wextra -Wwrite-strings -o "$1/usr/bin/redo" redo.c
+
+for file in redo-sources redo-targets; do
     install -Dm755 "$file" "$1/usr/bin/$file"
 done
 

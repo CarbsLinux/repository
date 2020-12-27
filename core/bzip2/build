@@ -1,10 +1,12 @@
 #!/bin/sh -e
 
-make CC="${CC:-cc} $CFLAGS -fPIC $LDFLAGS" -f Makefile-libbz2_so
-make CC="${CC:-cc} $CFLAGS -fPIC $LDFLAGS" bzip2recover libbz2.a
+[ "$CPT_CROSS_TARGET" ] && CC=$CPT_CROSS_TARGET-cc
 
-for bin in bzip2-shared bzdiff bzgrep bzip2recover bzmore; do
-    install -Dm755 "$bin" "$1/usr/bin/${bin%%-shared}"
+make CC="${CC:-cc} $CFLAGS -fPIC $LDFLAGS" -f Makefile-libbz2_so
+make CC="${CC:-cc} $CFLAGS -fPIC $LDFLAGS -static" bzip2 bzip2recover libbz2.a
+
+for bin in bzip2 bzdiff bzgrep bzip2recover bzmore; do
+    install -Dm755 "$bin" "$1/usr/bin/$bin"
 done
 
 install -Dm755 libbz2.so.1.0.8 "$1/usr/lib/libbz2.so.1.0.8"

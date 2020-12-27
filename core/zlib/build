@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+[ "$CPT_CROSS_TRIPLET" ] && CC=$CPT_CROSS_TRIPLET-cc
+export CC
+
 ./configure \
     --prefix=/usr \
     --libdir=/usr/lib \

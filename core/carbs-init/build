@@ -2,4 +2,6 @@
 
 patch -p1 < respawn-fix.patch
 
-make DESTDIR="$1" install
+[ "$CPT_CROSS_TRIPLET" ] && CC=$CPT_CROSS_TRIPLET-cc
+
+make CC="${CC:-cc}" DESTDIR="$1" install

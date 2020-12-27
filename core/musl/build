@@ -18,9 +18,7 @@ kinstall_t() {
 
 patch -p0 < CVE-2020-28928.patch
 
-./configure \
-    --prefix=/usr \
-    --syslibdir=/usr/lib
+cpt-configure
 
 make
 make DESTDIR="$1" install

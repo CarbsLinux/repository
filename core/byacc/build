@@ -2,8 +2,7 @@
 
 export LDFLAGS="$LDFLAGS -static"
 
-./configure \
-    --prefix=/usr \
+cpt-configure \
     --program-transform='s/^/b/'
 
 make

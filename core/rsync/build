@@ -10,6 +10,7 @@ export CFLAGS="-static $CFLAGS"
 cpt-configure \
     --with-included-popt \
     --disable-xxhash \
+    --disable-asm \
     --disable-lz4 \
     --disable-zstd \
     --disable-openssl \

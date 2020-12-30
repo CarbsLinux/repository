@@ -2,6 +2,8 @@
 
 sed -i '/^\#include.*openssl.*\.h/d' git-compat-util.h
 
+[ "$CPT_CROSS_TRIPLET" ] && CC=$CPT_CROSS_TRIPLET-cc
+
 cat > config.mak <<EOF
 NO_GETTEXT=YesPlease
 NO_SVN_TESTS=YesPlease
@@ -18,8 +20,7 @@ EOF
 
 export LDFLAGS="$LDFLAGS -static"
 
-./configure \
-    --prefix=/usr \
+cpt-configure \
     --with-curl \
     ac_cv_snprintf_returns_bogus=no \
     ac_cv_fread_reads_directories=yes

@@ -2,9 +2,7 @@
 
 export LDFLAGS="$LDFLAGS -static"
 
-./configure \
-    --prefix=/usr \
-    --sysconfdir=/etc
+cpt-configure
 
 make
 make DESTDIR="$1" install

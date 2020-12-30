@@ -2,8 +2,7 @@
 
 export LDFLAGS="$LDFLAGS -static"
 
-./configure \
-    --prefix=/usr \
+cpt-configure \
     --disable-nls \
     --without-guile \
     "$(cpt l --check make -- '' --disable-dependency-tracking)"

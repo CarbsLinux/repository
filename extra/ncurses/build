@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --mandir=/usr/share/man \
+cpt-configure \
     --enable-pc-files \
     --disable-rpath-hack \
     --with-pkg-config-libdir=/usr/lib/pkgconfig \

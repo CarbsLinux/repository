@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --sysconfdir=/etc
+[ "$CPT_CROSS_TRIPLET" ] && CC=$CPT_CROSS_TRIPLET-cc
+
+cpt-configure
 
 make CCLD="${CC:-cc} -all-static"
 make DESTDIR="$1" install

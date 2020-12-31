@@ -1,10 +1,5 @@
 #!/bin/sh -e
 
-# Set the variable sys_arch so that we can change the
-# build procedure depending on the host arch. Currently,
-# we are only supporting i686 and x86_64.
-sys_arch="${3:-$(uname -m)}"
-
 kinstall_t() {
     # install -Dm* -t alternative
     # usage: kinstall_t 755 /usr/bin file file2 file3
@@ -28,16 +23,9 @@ make DESTDIR="$1" install
 
 mkdir -p "$1/usr/bin"
 
-case "${CPT_CROSS_TRIPLET:-$sys_arch}" in
-    x86_64*)
-        ln -sf libc.so                   "$1/usr/lib/ld-musl-x86_64.so.1"
-        ln -s ../lib/ld-musl-x86_64.so.1 "$1/usr/bin/ldd" ;;
-    i?86*)
-        ln -sf libc.so                 "$1/usr/lib/ld-musl-i686.so.1"
-        ln -s libc.so                  "$1/usr/lib/libc.musl-x86.so"
-        ln -s ../lib/ld-musl-i386.so.1 "$1/usr/bin/ldd"
-    ;;
-esac
+ARCH=$(sed -n '/^ARCH =/s/.* //p' config.mak)
+ln -sf libc.so                     "$1/usr/lib/ld-musl-$ARCH.so.1"
+ln -s  "../lib/ld-musl-$ARCH.so.1" "$1/usr/bin/ldd"
 
 # Install BSD compatibility headers.
 kinstall_t 755 "$1/usr/include/sys" cdefs.h queue.h tree.h

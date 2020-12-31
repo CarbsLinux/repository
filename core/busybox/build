@@ -11,7 +11,7 @@ for patch in *.patch; do
 done
 
 if [ "$CPT_CROSS_TRIPLET" ]; then
-    mk() { make ARCH=${CPT_CROSS_TRIPLET%%-*} CROSS_COMPILE=$CPT_CROSS_TRIPLET- "$@" ;}
+    mk() { make "ARCH=${CPT_CROSS_TRIPLET%%-*}" "CROSS_COMPILE=$CPT_CROSS_TRIPLET-" "$@" ;}
 else
     mk() { make "$@" ;}
 fi

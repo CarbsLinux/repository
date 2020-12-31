@@ -4,7 +4,7 @@
                             AR=$CPT_CROSS_TRIPLET-ar \
                             RANLIB=$CPT_CROSS_TRIPLET-ranlib
 
-: ${CC:=cc} ${AR:=ar} ${RANLIB:=ranlib}
+: "${CC:=cc}" "${AR:=ar}" "${RANLIB:=ranlib}"
 
 make CC=$CC AR=$AR RANLIB=$RANLIB LDFLAGS="$LDFLAGS -static" sbase-box
 make PREFIX=/usr DESTDIR="$1" sbase-box-install

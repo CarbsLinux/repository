@@ -3,9 +3,6 @@
 # We bypass the build system entirely as it has
 # a mandatory dependency on gettext.
 
-# Grab the package version.
-read -r version _ < "${0%/*}/version"
-
 mkdir -p "$1/usr/share/mime/packages" \
          "$1/usr/share/pkgconfig" \
          "$1/usr/bin"
@@ -15,7 +12,7 @@ sed -e 's/_comment/comment/g' data/freedesktop.org.xml.in \
     > "$1/usr/share/mime/packages/freedesktop.org.xml"
 
 # Replace markers in the file.
-sed -e 's|@prefix@|/usr|' -e "s|@VERSION@|$version|" shared-mime-info.pc.in \
+sed -e 's|@prefix@|/usr|' -e "s|@VERSION@|$2|" shared-mime-info.pc.in \
     > "$1/usr/share/pkgconfig/shared-mime-info.pc"
 
 # Define our own config.h statically.
@@ -37,12 +34,12 @@ cat << EOF > src/config.h
 #define PACKAGE "shared-mime-info"
 #define PACKAGE_BUGREPORT ""
 #define PACKAGE_NAME "shared-mime-info"
-#define PACKAGE_STRING "shared-mime-info $version"
+#define PACKAGE_STRING "shared-mime-info $2"
 #define PACKAGE_TARNAME "shared-mime-info"
 #define PACKAGE_URL ""
-#define PACKAGE_VERSION "$version"
+#define PACKAGE_VERSION "$2"
 #define STDC_HEADERS 1
-#define VERSION "$version"
+#define VERSION "$2"
 EOF
 
 # Fix config.h include.

@@ -7,7 +7,10 @@
     --without-xml2 \
     --without-expat
 
-make
+# Link binaries statically
+make bsdtar_LDFLAGS=-all-static \
+     bsdcat_LDFLAGS=-all-static \
+     bsdcpio_LDFLAGS=-all-static
 make DESTDIR="$1" install
 
 ln -s bsdcat  "$1/usr/bin/cat"

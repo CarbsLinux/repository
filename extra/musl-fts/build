@@ -1,22 +1,4 @@
 #!/bin/sh -e
-# We don't want autotools just to build this tiny little library.
-# We'll do it ourselves.
-#
-# All word splitting is intentional.
-# shellcheck disable=2086
 
-export CFLAGS="$CFLAGS -DHAVE_CONFIG_H -I."
-mkdir -p "$1/usr/lib"
-
-set -x
-
-"${CC:=cc}" $CFLAGS -c -o fts.o fts.c
-"$CC" -shared -fPIC -DPIC fts.o $CFLAGS -Wl,-soname -Wl,libfts.so.0 -o "$1/usr/lib/libfts.so.0.0.0"
-ar cru "$1/usr/lib/libfts.a" fts.o
-ranlib "$1/usr/lib/libfts.a"
-
-ln -s libfts.so.0.0.0 "$1/usr/lib/libfts.so.0"
-ln -s libfts.so.0     "$1/usr/lib/libfts.so"
-
-install -Dm644 fts.h       "$1/usr/include/fts.h"
-install -Dm644 musl-fts.pc "$1/usr/lib/pkgconfig/musl-fts.pc"
+make
+make DESTDIR="$1" PREFIX=/usr install

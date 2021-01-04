@@ -1,0 +1,25 @@
+# This file defines the base packages of the system. You can add or remove
+# package names in order to redefine the base. This file will be used by
+# cpt-orphans and cpt-reset. If this file doesn't exist on /etc/cpt-base, both
+# of the tools will assume that there is no defined base, so use with caution.
+baselayout
+binutils
+byacc
+busybox
+bzip2
+ca-certificates
+curl
+flex
+gcc
+git
+rsync
+gzip
+cpt
+bearssl
+linux-headers
+m4
+make
+musl
+pkgconf
+xz
+zlib

@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+patch -p1 < fix-inline.patch
+
+./configure \
+    --prefix=/usr
+
+make
+install -Dm644 libargp.a "$1/usr/lib/libargp.a"
+install -Dm644 argp.h    "$1/usr/include/argp.h"

@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+onig=no
+cpt l oniguruma >/dev/null 2>&1 && onig=yes
+
+./configure \
+    --prefix=/usr \
+    --disable-maintainer-mode \
+    --with-oniguruma="$onig" \
+    --enable-all-static
+
+make
+make DESTDIR="$1" install

@@ -16,8 +16,6 @@ kinstall_t() {
     done
 }
 
-patch -p0 < CVE-2020-28928.patch
-
 ./configure \
     --prefix=/usr \
     --syslibdir=/usr/lib

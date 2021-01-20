@@ -1,8 +1,7 @@
-https://www.musl-libc.org/releases/musl-1.2.1.tar.gz
+https://www.musl-libc.org/releases/musl-1.2.2.tar.gz
 files/cdefs.h
 files/queue.h
 files/tree.h
 files/getconf.c
 files/getent
 files/__stack_chk_fail_local.c
-patches/CVE-2020-28928.patch

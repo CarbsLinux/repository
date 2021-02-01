@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+autoreconf -fi
+
+./configure \
+    --prefix=/usr \
+    --disable-shared
+
+make LDFLAGS="-all-static"
+make DESTDIR="$1" install

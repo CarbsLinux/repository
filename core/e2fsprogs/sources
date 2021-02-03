@@ -1,1 +1,2 @@
-https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.45.6/e2fsprogs-1.45.6.tar.xz
+https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.46.0/e2fsprogs-1.46.0.tar.xz
+patches/fix-musl.patch

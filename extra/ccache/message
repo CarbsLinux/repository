@@ -1,5 +1,6 @@
 [1mNOTE:[m
 
-  To enable 'ccache' add this to your '.shellrc' or '.profile'.
+To enable 'ccache' add this to your '.shellrc' or '.profile'.
 
-      $ export PATH=/usr/lib/ccache/bin:$PATH
+    export PATH=/usr/lib/ccache/bin:$PATH
+

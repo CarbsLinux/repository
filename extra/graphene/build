@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+meson \
+    --prefix=/usr \
+    -Ddefault_library=both \
+    -Darm_neon=false \
+    -Dgtk_doc=false \
+    -Dintrospection=false \
+    -Dinstalled_tests=false \
+    -Dtests=false \
+    . output
+
+ninja -C output
+ninja -C output install

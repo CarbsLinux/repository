@@ -18,9 +18,12 @@ meson \
     -Dwin32-backend=false \
     -Dintrospection=disabled \
     -Dmedia-gstreamer=disabled \
+    -Dsassc=disabled \
+    -Dprint-cups=disabled \
     -Ddemos=false \
     -Dbuild-tests=false \
     -Dbuild-examples=false \
+    -Dvulkan=disabled \
     . output
 
 ninja -C output

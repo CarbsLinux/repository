@@ -1,12 +1,12 @@
 #!/bin/sh -e
 
 export DESTDIR="$1"
-mkdir build && cd build
 
-cmake \
+cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=Release \
-    ..
+    -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+    -DBUILD_SHARED_LIBS=OFF \
+    -DCMAKE_BUILD_TYPE=Release
 
-cmake --build .
-cmake --install .
+cmake --build   build
+cmake --install build

@@ -13,6 +13,8 @@ sed_i 's/ATK_PACKAGES="atk atk-bridge-2.0"/ATK_PACKAGES="atk"/' \
 sed_i '/<atk-bridge.h>/d;/atk_bridge_adaptor_init/d' \
     gtk/a11y/gtkaccessibility.c
 
+cpt l wayland >/dev/null 2>&1 && wayland=--enable-wayland-backend
+
 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
@@ -24,6 +26,7 @@ sed_i '/<atk-bridge.h>/d;/atk_bridge_adaptor_init/d' \
     --enable-xcomposite \
     --enable-xdamage \
     --enable-x11-backend \
+    "$wayland" \
     --enable-debug=no \
     --disable-schemas-compile \
     --disable-cups \

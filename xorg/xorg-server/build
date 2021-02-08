@@ -27,7 +27,6 @@ export LIBSHA1_LIBS="$PWD/libsha1/tmp/usr/lib/libsha1.a"
     --localstatedir=/var \
     --disable-shared \
     --disable-systemd-logind \
-    --disable-xwayland \
     --disable-unit-tests \
     --enable-glx \
     --enable-dri \

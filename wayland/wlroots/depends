@@ -1,0 +1,13 @@
+eudev
+libX11
+libdrm
+libinput
+libxcb
+libxkbcommon
+mesa
+meson make
+pixman
+wayland
+wayland-protocols make
+xcb-util-wm
+xkeyboard-config

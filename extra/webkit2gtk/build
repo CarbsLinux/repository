@@ -59,6 +59,7 @@ cmake -B build \
     -DUSE_WPE_RENDERER=OFF \
     -DENABLE_WEB_CRYPTO=${libtasn:-OFF} \
     -DENABLE_MEDIASOURCE=${streaming:-OFF} \
+    -DENABLE_WAYLAND_TARGET=OFF \
     -Wno-dev
 
 cmake --build   build

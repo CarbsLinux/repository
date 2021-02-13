@@ -7,7 +7,7 @@ meson \
     -Ddefault_library=both \
     -Darm_neon=false \
     -Dgtk_doc=false \
-    -Dintrospection=false \
+    -Dintrospection=disabled \
     -Dinstalled_tests=false \
     -Dtests=false \
     . output

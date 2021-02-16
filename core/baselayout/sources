@@ -1,4 +1,5 @@
 files/crypttab
+files/install-sv
 files/fstab
 files/group
 files/host.conf

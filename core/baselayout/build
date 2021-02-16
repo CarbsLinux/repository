@@ -70,4 +70,6 @@ kinstall_t 644 "$1/etc" fstab group host.conf hosts issue keymap os-release \
                         passwd profile securetty shells mime.types
 kinstall_t 600 "$1/etc" crypttab shadow
 
+kinstall_t 755 "$1/usr/bin" install-sv
+
 ln -s /proc/self/mounts "$1/etc/mtab"

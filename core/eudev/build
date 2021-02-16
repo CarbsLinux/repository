@@ -15,9 +15,4 @@ kinstall() {
 make
 make DESTDIR="$1" install
 
-# Install runit service.
-kinstall 755 "$1/etc/sv/udevd/run" udevd.run
-ln -s /run/runit/supervise.udevd "$1/etc/sv/udevd/supervise"
-
-# Install sysmgr service.
-kinstall 755 "$1/etc/sysmgr/udevd" udevd.run
+DESTDIR=$1 install-sv udevd.run

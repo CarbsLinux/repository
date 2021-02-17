@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+mkdir -p "$CPT_ROOT/var/lib/dbus" "$CPT_ROOT/etc/dbus-1/session.d"
+
+chr() {
+    # Run in chroot if CPT_ROOT variable exists
+    if [ "$CPT_ROOT" ]; then
+        chroot "$CPT_ROOT" "$@"
+    else
+        "$@"
+    fi
+}
+
+grep -q ^dbus: "$CPT_ROOT/etc/passwd" || {
+    chr addgroup -g 22 -S dbus
+    chr adduser  -u 22 -S -H -G dbus dbus
+}
+chown root:dbus "$CPT_ROOT/usr/libexec/dbus-daemon-launch-helper"
+chmod 4750      "$CPT_ROOT/usr/libexec/dbus-daemon-launch-helper"
+chr /usr/bin/dbus-uuidgen --ensure || :

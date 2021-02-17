@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+xorg=--without-x
+cpt l libX11 libSM libICE >/dev/null 2>&1 && xorg=--with-x
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --enable-user-session \
+    --disable-asserts \
+    --with-dbus-user=dbus \
+    --with-system-socket=/run/dbus/system_bus_socket \
+    --with-system-pid-file=/run/dus/pid \
+    --with-console-auth-dir=/run/console \
+    "$xorg" \
+    --disable-systemd \
+    --disable-doxygen-docs
+
+make
+make DESTDIR="$1" install
+
+DESTDIR=$1 install-sv dbus.run

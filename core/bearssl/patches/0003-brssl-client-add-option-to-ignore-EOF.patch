@@ -1,0 +1,114 @@
+From 694cf4248db1664936ce43e33db0b4c5dc35bad7 Mon Sep 17 00:00:00 2001
+From: Cem Keylan <cem@ckyln.com>
+Date: Wed, 17 Feb 2021 22:39:35 +0300
+Subject: [PATCH] brssl client: add option to ignore EOF.
+
+I have added a -igneof option to the bearssl client, so that I can
+patch busybox to use bearssl instead of openssl. I did not add the
+option to the server, because I have personally never used it, and
+don't have a use case.
+---
+ tools/brssl.h  |  1 +
+ tools/client.c |  9 ++++++++-
+ tools/sslio.c  | 10 +++++++---
+ 3 files changed, 16 insertions(+), 4 deletions(-)
+
+diff --git a/tools/brssl.h b/tools/brssl.h
+index a23ba00..15876eb 100644
+--- a/tools/brssl.h
++++ b/tools/brssl.h
+@@ -514,6 +514,7 @@ int run_ssl_engine(br_ssl_engine_context *eng,
+ 
+ #define RUN_ENGINE_VERBOSE     0x0001  /* enable verbose messages */
+ #define RUN_ENGINE_TRACE       0x0002  /* hex dump of records */
++#define RUN_ENGINE_IGNEOF      0x0004  /* do not exit after EOF */
+ 
+ /*
+  * Do the "client" command. Returned value is 0 on success, -1 on failure.
+diff --git a/tools/client.c b/tools/client.c
+index 9838857..3388b09 100644
+--- a/tools/client.c
++++ b/tools/client.c
+@@ -467,6 +467,8 @@ usage_client(void)
+ 	fprintf(stderr,
+ "   -trace          activate extra debug messages (dump of all packets)\n");
+ 	fprintf(stderr,
++"   -igneof         do not exit after stdin is closed\n");
++	fprintf(stderr,
+ "   -sni name       use this specific name for SNI\n");
+ 	fprintf(stderr,
+ "   -nosni          do not send any SNI\n");
+@@ -511,6 +513,7 @@ do_client(int argc, char *argv[])
+ 	int retcode;
+ 	int verbose;
+ 	int trace;
++	int igneof;
+ 	int i, bidi;
+ 	const char *server_name;
+ 	char *host;
+@@ -543,6 +546,7 @@ do_client(int argc, char *argv[])
+ 	retcode = 0;
+ 	verbose = 1;
+ 	trace = 0;
++	igneof = 0;
+ 	server_name = NULL;
+ 	host = NULL;
+ 	port = NULL;
+@@ -584,6 +588,8 @@ do_client(int argc, char *argv[])
+ 			verbose = 0;
+ 		} else if (eqstr(arg, "-trace")) {
+ 			trace = 1;
++		} else if (eqstr(arg, "-igneof")) {
++			igneof = 1;
+ 		} else if (eqstr(arg, "-sni")) {
+ 			if (++ i >= argc) {
+ 				fprintf(stderr,
+@@ -1077,7 +1083,8 @@ do_client(int argc, char *argv[])
+ 	 */
+ 	if (run_ssl_engine(&cc.eng, fd,
+ 		(verbose ? RUN_ENGINE_VERBOSE : 0)
+-		| (trace ? RUN_ENGINE_TRACE : 0)) != 0)
++		| (trace ? RUN_ENGINE_TRACE : 0)
++		| (igneof ? RUN_ENGINE_IGNEOF : 0)) != 0)
+ 	{
+ 		goto client_exit_error;
+ 	} else {
+diff --git a/tools/sslio.c b/tools/sslio.c
+index ef7dd3f..fc6e0f0 100644
+--- a/tools/sslio.c
++++ b/tools/sslio.c
+@@ -250,6 +250,7 @@ run_ssl_engine(br_ssl_engine_context *cc, unsigned long fd, unsigned flags)
+ 	int retcode;
+ 	int verbose;
+ 	int trace;
++	int igneof;
+ #ifdef _WIN32
+ 	WSAEVENT fd_event;
+ 	int can_send, can_recv;
+@@ -261,6 +262,7 @@ run_ssl_engine(br_ssl_engine_context *cc, unsigned long fd, unsigned flags)
+ 	retcode = 0;
+ 	verbose = (flags & RUN_ENGINE_VERBOSE) != 0;
+ 	trace = (flags & RUN_ENGINE_TRACE) != 0;
++	igneof = (flags & RUN_ENGINE_IGNEOF) != 0;
+ 
+ 	/*
+ 	 * Print algorithm details.
+@@ -730,10 +732,12 @@ run_ssl_engine(br_ssl_engine_context *cc, unsigned long fd, unsigned flags)
+ 			rlen = read(0, buf, len);
+ #endif
+ 			if (rlen <= 0) {
+-				if (verbose) {
+-					fprintf(stderr, "stdin closed...\n");
++				if (!igneof) {
++					if (verbose) {
++						fprintf(stderr, "stdin closed...\n");
++					}
++					br_ssl_engine_close(cc);
+ 				}
+-				br_ssl_engine_close(cc);
+ 			} else if (!run_command(cc, buf, rlen)) {
+ 				br_ssl_engine_sendapp_ack(cc, rlen);
+ 			}
+-- 
+2.30.1
+

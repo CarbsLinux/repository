@@ -3,6 +3,8 @@
 export DESTDIR="$1"
 
 mk() { 
+    # No, I actually want to get the output, shellcheck, thank you very much.
+    # shellcheck disable=2181
     make \
         PREFIX=/usr \
         MANDIR=/usr/share \

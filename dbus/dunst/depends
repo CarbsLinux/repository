@@ -1,0 +1,12 @@
+cairo
+dbus
+freetype-harfbuzz
+gdk-pixbuf
+glib
+libX11
+libXScrnSaver
+libXext
+libXinerama
+libXrandr
+libnotify
+pango

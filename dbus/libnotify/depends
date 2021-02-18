@@ -1,0 +1,4 @@
+dbus
+gdk-pixbuf
+glib
+meson make

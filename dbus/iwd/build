@@ -16,10 +16,10 @@ done
     PKG_CONFIG="pkgconf --static"
 
 # Don't use systemd as the default name resolver.
-sed -i 's|method_name = "systemd"|method_name = "resolvconf"' src/resolve.c
+sed -i 's|method_name = "systemd"|method_name = "resolvconf"|' src/resolve.c
 
 # Update the manual page to reflect upon the change.
-sed -i '/If not specified/s/systemd/resolvconf' src/iwd.config.5
+sed -i '/If not specified/s/systemd/resolvconf/' src/iwd.config.5
 
 
 make LDFLAGS=-all-static

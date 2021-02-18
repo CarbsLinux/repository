@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+for patch in *.patch; do
+    patch -p1 < "$patch"
+done
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --libexecdir=/usr/bin \
+    --localstatedir=/var \
+    --disable-systemd-service \
+    --enable-pie \
+    --enable-dbus-policy \
+    --enable-wired \
+    PKG_CONFIG="pkgconf --static"
+
+# Don't use systemd as the default name resolver.
+sed -i 's|method_name = "systemd"|method_name = "resolvconf"' src/resolve.c
+
+# Update the manual page to reflect upon the change.
+sed -i '/If not specified/s/systemd/resolvconf' src/iwd.config.5
+
+
+make LDFLAGS=-all-static
+make DESTDIR="$1" install
+
+for sv in iwd ead; do
+    install -Dm755 "$sv.run" "$1/etc/sysmgr/$sv"
+done

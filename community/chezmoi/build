@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+export GOPATH=$PWD/gopath
+trap "go clean -modcache" EXIT INT
+go mod vendor
+
+CGO_ENABLED=0 go build -ldflags="-X 'main.version=$2'"
+install -Dm755 chezmoi "$1/usr/bin/chezmoi"

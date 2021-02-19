@@ -25,6 +25,4 @@ sed -i '/If not specified/s/systemd/resolvconf/' src/iwd.config.5
 make LDFLAGS=-all-static
 make DESTDIR="$1" install
 
-for sv in iwd ead; do
-    install -Dm755 "$sv.run" "$1/etc/sysmgr/$sv"
-done
+install-sv iwd.run ead.run

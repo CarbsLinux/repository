@@ -14,3 +14,6 @@ meson \
 
 ninja -C build
 ninja -C build install
+
+# Remove policy kit files.
+rm -rf "$1/usr/share/polkit-1"

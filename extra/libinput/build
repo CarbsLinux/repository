@@ -6,6 +6,7 @@ meson \
     --prefix=/usr \
     --sysconfdir=/etc \
     --mandir=/usr/share/man \
+    --default-library=both \
     -Ddebug-gui=false \
     -Ddocumentation=false \
     -Dtests=false \

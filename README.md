@@ -8,10 +8,11 @@ the repositories.
 
 * [Carbs Linux Homepage](https://carbslinux.org)
 * [User Manual](https://carbslinux.org/docs.html)
-* [Package Manager](https://github.com/CarbsLinux/cpt)
+* [Package Manager](https://git.sr.ht/~carbslinux/cpt)
 * [Repology Packaging Status](https://repology.org/repository/carbs)
 
 
+[Installation Manual]: https://carbslinux.org/install.html
 
 Information on the repository
 -----------------------------
@@ -47,6 +48,14 @@ All the commits on this repository are signed by using my key ([cem@ckyln.com]).
 My GnuPG key can be found at the end of this file.
 
 [cem@ckyln.com]: (mailto:cem@ckyln.com)
+
+
+Reporting Issues
+----------------
+
+Issues should be reported to
+[~carbslinux/devel@lists.sr.ht](mailto:~carbslinux/devel@lists.sr.ht)
+or by submitting a ticket on <https://todo.sr.ht/~carbslinux/carbslinux>.
 
 GnuPG public key
 ----------------

@@ -26,15 +26,21 @@ previously in the base.
 
 All the package repositories have their own purpose:
 
-| Repository  | Purpose                                                                               |
-|-------------|---------------------------------------------------------------------------------------|
-| `core`      | packages that provide "core" functionality.                                           |
-| `extra`     | stable packages that are not necessary, but considered part of the base distribution. |
-| `community` | package repository open for all PRs/patches.                                          |
-| `testing`   | unstable packages.                                                                    |
-| `xorg`      | packages for building the X11 display server and friends.                             |
-| `wayland`   | packages for building wayland. (not yet stable)                                       |
-| `dbus`      | IRC conversation starter / dbus and packages with hard dependencies.                  |
+- `core`:
+  packages that provide "core" functionality.
+- `extra`:
+  stable packages that are not necessary, but considered part of the base
+  distribution.
+- `community`:
+  package repository open for all PRs/patches.
+- `testing`:
+  unstable packages
+- `xorg`:
+  packages for building the X11 display server and friends.
+- `wayland`:
+  packages for building wayland. (not yet stable)
+- `dbus`:
+  IRC conversation starter / dbus and packages with hard dependencies.
 
 
 Enabling repository signing

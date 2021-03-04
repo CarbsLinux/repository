@@ -1,0 +1,6 @@
+image: alpine/edge
+packages:
+  - shellcheck
+tasks:
+  - test: |
+      make -C repository test

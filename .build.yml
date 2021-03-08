@@ -4,3 +4,7 @@ packages:
 tasks:
   - test: |
       make -C repository test
+triggers:
+  - action: email
+    condition: failure
+    to: cem@carbslinux.org

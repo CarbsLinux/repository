@@ -1,4 +1,4 @@
-https://github.com/CarbsLinux/busybox/archive/v1.33.0.tar.gz
+https://git.carbslinux.org/forks/busybox/snapshot/busybox-1.33.0.tar.gz
 files/.config
 files/.config-suid
 files/acpid.run

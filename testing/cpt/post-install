@@ -1,0 +1,13 @@
+#!/bin/sh
+
+grep -q '\.la$' "$CPT_ROOT/var/db/cpt/installed/"*/manifest || exit 0
+
+find "$CPT_ROOT/usr/lib" \
+    ! -type d \
+    -name '*.la' \
+    -exec rm -f -- {} +
+
+find "$CPT_ROOT/var/db/cpt/installed" \
+    ! -type d \
+    -name manifest \
+    -exec sed -i '/.*\.la$/d' {} +

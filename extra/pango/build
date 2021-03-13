@@ -2,6 +2,10 @@
 
 export DESTDIR="$1"
 
+# Avoid cloning gidocgen
+sed '/gidocgen_dep/,/)$/d' meson.build > meson.build.tmp
+mv meson.build.tmp meson.build
+
 meson \
     --prefix=/usr \
     -Dgir=false \

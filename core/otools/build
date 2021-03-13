@@ -1,8 +1,5 @@
 #!/bin/sh -e
 
-:> testfile
-less -F -T testfile testfile 2>/dev/null && echo CFLAGS += -DHAVE_LESS_T >> config.mk
-rm -f testfile
-
-make
+FTS=0; cpt l musl-fts && FTS=1
+make LDFLAGS=-static FTS="$FTS"
 make PREFIX=/usr DESTDIR="$1" install

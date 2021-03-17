@@ -26,6 +26,7 @@ build_harfbuzz() (
     meson \
         --prefix=/usr \
         -Dglib=enabled \
+        -Dcairo=disabled \
         -Dfreetype=enabled \
         -Ddefault_library=both \
         -Dicu=disabled \

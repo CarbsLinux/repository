@@ -1,0 +1,44 @@
+busybox wget calls OpenSSL-specific options for higher security. It IS a
+bummer that libressl does not support these, but we are patching busybox for
+the time being.
+--- busybox/networking/wget.c.orig	2021-03-18 17:26:14.456704013 +0300
++++ busybox/networking/wget.c	2021-03-18 17:26:18.400719891 +0300
+@@ -670,8 +670,7 @@
+ 	pid = xvfork();
+ 	if (pid == 0) {
+ 		/* Child */
+-		char *argv[13];
+-		char **argp;
++		char *argv[9];
+ 
+ 		close(sp[0]);
+ 		xmove_fd(sp[1], 0);
+@@ -694,25 +693,13 @@
+ 		 * TLS server_name (SNI) field are FQDNs (DNS hostnames).
+ 		 * IPv4 and IPv6 addresses, port numbers are not allowed.
+ 		 */
+-		argp = &argv[5];
+ 		if (!is_ip_address(servername)) {
+-			*argp++ = (char*)"-servername"; //[5]
+-			*argp++ = (char*)servername;    //[6]
++			argv[5] = (char*)"-servername";
++			argv[6] = (char*)servername;
+ 		}
+ 		if (!(option_mask32 & WGET_OPT_NO_CHECK_CERT)) {
+-			/* Abort on bad server certificate */
+-			*argp++ = (char*)"-verify";              //[7]
+-			*argp++ = (char*)"100";                  //[8]
+-			*argp++ = (char*)"-verify_return_error"; //[9]
+-			if (!is_ip_address(servername)) {
+-				*argp++ = (char*)"-verify_hostname"; //[10]
+-				*argp++ = (char*)servername;         //[11]
+-			} else {
+-				*argp++ = (char*)"-verify_ip"; //[10]
+-				*argp++ = (char*)host;         //[11]
+-			}
++			argv[7] = (char*)"-verify_return_error";
+ 		}
+-		//[12] (or earlier) is NULL terminator
+ 
+ 		BB_EXECVP(argv[0], argv);
+ 		xmove_fd(3, 2);

@@ -5,10 +5,7 @@ cpt-list libedit >/dev/null 2>&1 &&
     libedit="--with-libedit" && LIBS="$(pkgconf --static --libs libedit)"
 
 export LIBS
-
 export LDFLAGS="$LDFLAGS -static"
-
-autoreconf -fi
 
 ./configure \
     --prefix=/usr \

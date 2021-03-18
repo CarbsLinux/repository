@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --static
+
+make
+make DESTDIR="$1" install
+
+install -Dm644 fossil.1 "$1/usr/share/man/man1/fossil.1"

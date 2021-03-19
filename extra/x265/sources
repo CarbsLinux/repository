@@ -1,1 +1,3 @@
-https://bitbucket.org/multicoreware/x265/downloads/x265_3.4.tar.gz
+# You can't download the tarball from certain locations.
+# https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.5.tar.gz
+https://dl.carbslinux.org/distfiles/x265/x265_3.5.tar.gz

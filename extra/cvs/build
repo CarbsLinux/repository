@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+export LDFLAGS="$LDFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --infodir=/usr/share/info \
+    --mandir=/usr/share/man \
+    --with-editor=/usr/bin/vi \
+    --with-external-zlib
+
+make
+make -j1 DESTDIR="$1" install
+
+# Remove unsupported/untested cvs junk
+rm -r "$1/usr/share/cvs"

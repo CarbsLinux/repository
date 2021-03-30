@@ -29,6 +29,14 @@ python3 bin/git_sha1_gen.py --output include/git_sha1.h
 platforms=x11
 cpt l wayland-protocols >/dev/null 2>&1 && platforms=$platforms,wayland
 
+# Fix broken radeon object links
+(
+    cd src/mesa/drivers/dri/r200
+    find . -type l | while read -r link; do
+        ln -sf "$PWD/../radeon/$link" "$link"
+    done
+)
+
 meson \
     --prefix=/usr \
     --sysconfdir=/etc \
@@ -36,6 +44,7 @@ meson \
     --localstatedir=/var \
     --buildtype=release \
     -Dplatforms="$platforms" \
+    -Dzstd=false \
     . output
 
 ninja -C output

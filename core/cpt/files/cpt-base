@@ -7,7 +7,6 @@ binutils
 byacc
 busybox
 bzip2
-ca-certificates
 curl
 flex
 gcc
@@ -15,7 +14,7 @@ git
 rsync
 gzip
 cpt
-bearssl
+libressl
 linux-headers
 m4
 make

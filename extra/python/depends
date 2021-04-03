@@ -1,6 +1,6 @@
 bzip2
 expat
 libffi
-libressl
+libressl make
 sqlite
 zlib

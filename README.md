@@ -43,6 +43,22 @@ All the package repositories have their own purpose:
   IRC conversation starter / dbus and packages with hard dependencies.
 
 
+Latest Release Key
+------------------
+
+Distribution releases are signed with signify, and the keys can be found on
+<https://dl.carbslinux.org/keys>. Since the keys are small, and this git
+repository also tracks my GnuPG signature, this README also provides the
+latest signify public key used to sign releases.
+
+- `carbslinux-2021.04.pub`
+
+```
+untrusted comment: Carbs Linux 2021-04-06 release public key public key
+RWTBBPDVQ+aHB00By+Vn9xRBcyJi2TrvT35528yrWHh2Ux/KsnSx9aP7
+```
+
+
 Enabling repository signing
 ---------------------------
 

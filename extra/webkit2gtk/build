@@ -6,9 +6,6 @@ sed_i() {
     cat _ > "$file"; rm -f _
 }
 
-# Enable streaming related options if gstreamer is installed.
-cpt-list gst-plugins-base >/dev/null 2>&1 && streaming=ON
-
 # Enable the use of openjpeg if the package is installed.
 cpt-list openjpeg2 >/dev/null 2>&1 && jpeg=ON
 
@@ -16,6 +13,7 @@ cpt-list openjpeg2 >/dev/null 2>&1 && jpeg=ON
 cpt-list libtasn1 >/dev/null 2>&1 && libtasn=ON
 
 patch -p1 < fix-musl.patch
+patch -p1 < icu-69.patch
 
 # Remove gettext requirement.
 sed_i 's/ngettext/printf/g' Tools/MiniBrowser/gtk/BrowserDownloadsBar.c
@@ -26,14 +24,14 @@ sed_i '/^GETTEXT_C/d'       Source/WebCore/platform/gtk/po/CMakeLists.txt
 sed -i '/LC_ALL/d'       Source/JavaScriptCore/jsc.cpp
 sed -i '/WTFLogAlways/d' Source/JavaScriptCore/jsc.cpp
 
-# Fix the latest icu build.
-printf 'add_compile_definitions("U_DEFINE_FALSE_AND_TRUE=1")\n' \
-    >> Source/WTF/wtf/CMakeLists.txt
-
 export DESTDIR="$1"
 
+# Webkit's CMake configuration forces color output using clang-specific flags
+# when using Ninja as the CMAKE_GENERATOR. We should disable them.
+sed_i s,-fcolor-diagnostics,, Source/cmake/WebKitCompilerFlags.cmake
+
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE=MinSizeRel \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DLIB_INSTALL_DIR=/usr/lib \
     -DPORT=GTK \
@@ -42,14 +40,9 @@ cmake -B build \
     -DENABLE_SAMPLING_PROFILER=OFF \
     -DENABLE_GEOLOCATION=OFF \
     -DENABLE_GLES2=ON \
-    -DENABLE_INTL=OFF \
     -DENABLE_INTROSPECTION=OFF \
     -DENABLE_MINIBROWSER=OFF \
-    -DENABLE_OPENGL=OFF \
     -DENABLE_SPELLCHECK=OFF \
-    -DENABLE_VIDEO=${streaming:-OFF} \
-    -DENABLE_WEBGL=OFF \
-    -DENABLE_WEB_AUDIO=${streaming:-OFF} \
     -DUSE_LIBHYPHEN=OFF \
     -DUSE_LIBNOTIFY=OFF \
     -DUSE_LIBSECRET=OFF \
@@ -58,8 +51,8 @@ cmake -B build \
     -DUSE_WOFF2=OFF \
     -DUSE_WPE_RENDERER=OFF \
     -DENABLE_WEB_CRYPTO=${libtasn:-OFF} \
-    -DENABLE_MEDIASOURCE=${streaming:-OFF} \
     -DENABLE_WAYLAND_TARGET=OFF \
+    -DENABLE_GAMEPAD=OFF \
     -Wno-dev
 
 cmake --build   build

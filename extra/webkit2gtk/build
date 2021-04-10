@@ -31,7 +31,7 @@ export DESTDIR="$1"
 sed_i s,-fcolor-diagnostics,, Source/cmake/WebKitCompilerFlags.cmake
 
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=MinSizeRel \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DLIB_INSTALL_DIR=/usr/lib \
     -DPORT=GTK \

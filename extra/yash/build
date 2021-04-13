@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+export LDFLAGS="$LDFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --enable-help \
+    --enable-history \
+    --disable-nls \
+    --disable-printf \
+    --enable-socket \
+    --enable-lineedit
+
+make
+make DESTDIR="$1" install

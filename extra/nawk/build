@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+make CFLAGS="$CFLAGS -static"
+install -Dm755 "a.out" "$1/usr/bin/nawk"
+ln -s /usr/bin/nawk "$1/usr/bin/awk"
+
+install -Dm644 "awk.1" "$1/usr/share/man/man1/nawk.1"
+ln -s nawk.1 "$1/usr/share/man/man1/awk.1"

@@ -1,1 +1,0 @@
-case "$1" in poweroff) /bin/kill -s USR2 1 ;; reboot) /bin/kill -s QUIT 1 ;; esac

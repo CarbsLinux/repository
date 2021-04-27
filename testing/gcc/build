@@ -1,0 +1,83 @@
+#!/bin/sh -e
+
+sys_arch=${3:-$(uname -m)}
+
+sed_i() {
+    for file; do :; done
+    sed "$@" > _
+    cat _ > "$file"; rm -f _
+}
+
+# Make sure gmp is built with generic options.
+cp gcc/gmp/configfsf.guess gcc/gmp/config.guess
+cp gcc/gmp/configfsf.sub   gcc/gmp/config.sub
+
+if [ "${sys_arch#i*86}" ]; then
+    # Do not create lib64 directories
+    sed_i '/m64=/s/lib64/lib/' gcc/gcc/config/i386/t-linux64
+    sed_i 's/lib64/lib/'       gcc/gcc/config/i386/linux64.h
+else
+    # Apply libssp patch for i686.
+    (cd gcc; patch -Np1 < ../musl-libssp.patch)
+fi
+
+case "$sys_arch" in
+    i*86)   archopts="--build=i686-pc-linux-musl \
+                      --disable-libssp" ;;
+    x86_64) archopts="--build=x86_64-pc-linux-musl"
+esac
+
+# Build must happen outside of gcc source.
+mkdir -p gcc-build
+cd gcc-build
+
+export libat_cv_have_ifunc=no
+
+../gcc/configure \
+    --prefix=/usr \
+    --disable-multilib \
+    --disable-symvers \
+    --disable-libmpx \
+    --disable-libmudflap \
+    --disable-libsanitizer \
+    --disable-werror \
+    --disable-fixed-point \
+    --disable-libstdcxx-pch \
+    --disable-nls \
+    --without-included-gettext \
+    --enable-checking=release \
+    --mandir=/usr/share/man \
+    --infodir=/usr/share/info \
+    --with-system-zlib \
+    --enable-__cxa_atexit \
+    --enable-default-pie \
+    --enable-default-ssp \
+    --enable-shared \
+    --enable-threads \
+    --enable-tls \
+    --enable-languages=c,c++ \
+    $archopts \
+    --disable-bootstrap
+
+make
+make DESTDIR="$1" install
+
+# Save 35MB.
+find "$1" -name libgtkpeer.a  -exec rm -f {} +
+find "$1" -name libgjsmalsa.a -exec rm -f {} +
+find "$1" -name libgij.a      -exec rm -f {} +
+
+# Some legacy programs will expect cc
+ln -s gcc "$1/usr/bin/cc"
+
+# POSIX compliance.
+install -Dm755 ../c99 "$1/usr/bin/c99"
+
+# Symlink for LTO.
+{
+    mkdir -p "$1/usr/lib/bfd-plugins"
+
+    ln -s "/usr/libexec/gcc/$sys_arch-pc-linux-musl/$2/liblto_plugin.so" \
+        "$1/usr/lib/bfd-plugins/liblto_plugin.so"
+}
+

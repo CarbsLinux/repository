@@ -29,3 +29,6 @@ else
     make
     make DESTDIR="$1" install
 fi
+
+# This isn't the actual documentation
+rm -r "$1/usr/doc"

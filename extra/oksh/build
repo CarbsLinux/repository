@@ -2,7 +2,8 @@
 
 ./configure \
     --prefix=/usr \
-    --enable-static
+    --enable-static \
+    --enable-sh
 
-make
-make DESTDIR="$1" install
+make PROG=ksh
+make PROG=ksh DESTDIR="$1" install

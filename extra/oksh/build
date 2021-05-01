@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
-# We use a custom Makefile, instead of running ./configure
+./configure \
+    --prefix=/usr \
+    --enable-static
+
 make
 make DESTDIR="$1" install

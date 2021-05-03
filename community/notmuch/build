@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+BASHCMD=$(command -v bash) || BASHCMD=sh
+export BASHCMD
+
 ./configure \
     --prefix=/usr \
     --without-docs \

@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-BASHCMD=$(command -v bash) || BASHCMD=sh
+BASHCMD=$(command -v bash || command -v sh)
 export BASHCMD
 
 ./configure \

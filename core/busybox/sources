@@ -1,4 +1,4 @@
-https://busybox.net/downloads/busybox-1.33.0.tar.bz2
+https://busybox.net/downloads/busybox-1.33.1.tar.bz2
 files/.config
 files/.config-suid
 files/acpid.run
@@ -10,9 +10,9 @@ files/ntpd.run
 files/syslogd.run
 files/ntp.conf
 files/udhcpc.script
-patches/fsck-resolve-uuid.patch
-patches/modprobe-kernel-version.patch
-patches/adduser-no-setgid.patch
-patches/install-fix-chown.patch
-patches/print-unicode.patch
-patches/libressl.patch
+patches/fsck-resolve-uuid.patch        patches
+patches/modprobe-kernel-version.patch  patches
+patches/adduser-no-setgid.patch        patches
+patches/install-fix-chown.patch        patches
+patches/print-unicode.patch            patches
+patches/libressl.patch                 patches

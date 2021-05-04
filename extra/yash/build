@@ -2,6 +2,8 @@
 
 export LDFLAGS="$LDFLAGS -static"
 
+patch -p1 < neatvi-completion.patch
+
 ./configure \
     --prefix=/usr \
     --enable-help \

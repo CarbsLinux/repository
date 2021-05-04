@@ -1,0 +1,42 @@
+# Completion script for the "doas" command.
+function completion/doas {
+
+	typeset OPTIONS ARGOPT PREFIX
+	OPTIONS=( #>#
+	"C:; specify the config file to parse and check its contents"
+	"L; Clear any persisted authorizations from previous invocations"
+	"n; Non interactive mode, fail if doas would prompt for password"
+	"s; run \$SHELL"
+	"u:; specify the user to change to"
+	) #<#
+
+	command -f completion//parseoptions
+	case $ARGOPT in
+	(-)
+		command -f completion//completeoptions
+		;;
+	(C)
+		complete -P "$PREFIX" -f
+		;;
+	(u)
+		complete -P "$PREFIX" -u
+		;;
+	('')
+		typeset i=2 edit=false
+		while [ $i -le ${WORDS[#]} ]; do
+			case ${WORDS[i]} in
+				(--) break;;
+				(-e) edit=true;;
+			esac
+			i=$((i+1))
+		done
+		if $edit; then
+			complete -P "$PREFIX" -f
+		else
+			command -f completion//getoperands
+			command -f completion//reexecute
+		fi
+		;;
+	esac
+
+}

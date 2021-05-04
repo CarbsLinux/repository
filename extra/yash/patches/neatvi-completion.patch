@@ -1,0 +1,15 @@
+Neatvi doesn't support parsing flags and it will open the editor immediately,
+so we don't actually want this check performed.
+--- yash-orig/share/completion/ex	2020-12-10 16:40:05.000000000 +0300
++++ yash/share/completion/ex	2021-05-04 22:12:17.299050403 +0300
+@@ -6,10 +6,6 @@
+ 
+ function completion/ex {
+ 
+-	case $("${WORDS[1]}" --version 2>/dev/null) in (VIM*)
+-		command -f completion//reexecute vim
+-		return
+-	esac
+ 	typeset type="$(uname 2>/dev/null)"
+ 
+ 	typeset OPTIONS POSIXOPTIONS ADDOPTIONS ARGOPT PREFIX

@@ -15,3 +15,9 @@ make
 make DESTDIR="$1" install
 
 ln -s bash "$1/usr/bin/sh"
+
+# Remove bash C header files. I couldn't find an actual example of how these
+# can be useful to someone. If you can think of one, and do need it, send me a
+# mail and I will think about adding them back if it makes sense to me.
+# Otherwise, you can remove this part through a hook or a fork.
+rm -rf "$1/usr/include"

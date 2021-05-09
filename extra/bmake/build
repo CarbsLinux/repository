@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+export LDFLAGS="$LDFLAGS -static"
+
+sed -i '1s,:,#!/bin/sh,' install-sh
+sed -i 's/op_test() {/& return 0;/' boot-strap
+
+./boot-strap --prefix=/usr op=build
+./boot-strap --prefix=/usr --install-destdir="$1" op=install
+
+install -Dm644 bmake.1 "$1/usr/share/man/man1/bmake.1"

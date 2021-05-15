@@ -1,6 +1,7 @@
 bzip2
 expat
 glib
+gobject-introspection
 libX11
 libXau
 libXdamage

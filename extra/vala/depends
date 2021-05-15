@@ -1,0 +1,4 @@
+bison make
+flex make
+glib
+libffi

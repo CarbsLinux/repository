@@ -1,6 +1,7 @@
 atk
 fribidi
 gdk-pixbuf
+gobject-introspection
 libXcomposite
 libXcursor
 libXdamage

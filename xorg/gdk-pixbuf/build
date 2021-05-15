@@ -6,7 +6,7 @@ meson \
     --prefix=/usr \
     --sysconfdir=/etc \
     --mandir=/usr/share/man \
-    -Dgir=false \
+    -Dgir=true \
     -Djasper=false \
     -Dpng=true \
     -Ddocs=false \

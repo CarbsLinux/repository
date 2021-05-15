@@ -1,0 +1,7 @@
+cairo
+json-c
+meson make
+pcre
+wayland
+wayland-protocols make
+wlroots

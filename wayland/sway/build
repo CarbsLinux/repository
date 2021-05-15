@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+meson \
+    --prefix=/usr \
+    -Dgdk-pixbuf=enabled \
+    -Dxwayland=enabled \
+    . output
+
+ninja -C output
+ninja -C output install

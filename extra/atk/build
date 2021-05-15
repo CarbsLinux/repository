@@ -8,7 +8,7 @@ meson \
     --mandir=/usr/share/man \
     -Ddefault_library=both \
     -Ddocs=false \
-    -Dintrospection=false \
+    -Dintrospection=true \
     . output
 
 ninja -C output

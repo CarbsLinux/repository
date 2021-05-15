@@ -3,6 +3,7 @@ fontconfig
 freetype-harfbuzz
 fribidi
 glib
+gobject-introspection
 libXft
 libXrender
 meson      make

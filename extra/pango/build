@@ -8,7 +8,7 @@ mv meson.build.tmp meson.build
 
 meson \
     --prefix=/usr \
-    -Dgir=false \
+    -Dgir=true \
     -Dgtk_doc=false \
     -Dintrospection=disabled \
     . build

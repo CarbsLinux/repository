@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+export DESTDIR=$1
+
+meson \
+    --prefix=/usr \
+    --buildtype=release \
+    -Dexamples=disabled \
+    -Dbuiltin=enabled \
+    . output
+
+ninja -C output
+ninja -C output install
+
+install-sv seatd.run

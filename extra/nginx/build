@@ -1,0 +1,41 @@
+#!/bin/sh -e
+
+cfgdir=/etc/nginx
+tmpdir=/var/tmp/nginx
+
+./configure \
+    --prefix=/etc/nginx \
+    --sbin-path=/usr/bin/nginx \
+    --conf-path=$cfgdir/nginx.conf \
+    --modules-path=/usr/share/nginx/modules \
+    --pid-path=/run/nginx.pid \
+    --lock-path=/var/lock/nginx.lock \
+    --error-log-path=/var/log/nginx/error.log \
+    --http-log-path=/var/log/nginx/access.log \
+    --http-client-body-temp-path=$tmpdir \
+    --user=nginx --group=nginx \
+    --with-stream \
+    --with-stream_ssl_module \
+    --with-stream_realip_module \
+    --with-stream_ssl_preread_module \
+    --with-pcre-jit \
+    --with-http_ssl_module \
+    --with-http_dav_module \
+    --with-http_gzip_static_module \
+    --with-http_v2_module \
+    --with-http_gunzip_module \
+    --with-http_sub_module \
+    --with-http_stub_status_module \
+    --http-uwsgi-temp-path=${tmpdir}/uwsgi \
+    --http-scgi-temp-path=${tmpdir}/scgi \
+    --http-fastcgi-temp-path=${tmpdir}/fastcgi \
+    --http-proxy-temp-path=${tmpdir}/proxy \
+    --http-client-body-temp-path=${tmpdir}/client-body
+
+make
+make DESTDIR="$1" install
+
+# Don't actually install this directory into the package.
+rm -r "$1/run"
+
+install -Dm644 man/nginx.8 "$1/usr/share/man/man8/nginx.8"

@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+# Modify Makefile to make it POSIX
+sed -i '/^\.for/,/^\.endfor/d' Makefile
+
+./configure \
+    PREFIX=/usr \
+    SBINDIR=/usr/bin \
+    MANDIR=/usr/share/man
+
+make
+make DESTDIR="$1" install

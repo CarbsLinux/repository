@@ -14,6 +14,7 @@
     --without-librtmp \
     --without-icu \
     --without-libpsl \
+    --with-openssl \
     --without-zstd \
     --with-pic
 

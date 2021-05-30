@@ -3,7 +3,12 @@
 export LDFLAGS="$LDFLAGS -static"
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --program-prefix=g
 
 make
 make DESTDIR="$1" install
+
+# Setup alternatives
+ln -s gm4   "$1/usr/bin/m4"
+ln -s gm4.1 "$1/usr/share/man/man1/m4.1"

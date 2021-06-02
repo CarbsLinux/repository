@@ -1,1 +1,2 @@
-https://www.alsa-project.org/files/pub/utils/alsa-utils-1.2.4.tar.bz2
+https://www.alsa-project.org/files/pub/utils/alsa-utils-1.2.5.tar.bz2
+patches/fix-limits.patch

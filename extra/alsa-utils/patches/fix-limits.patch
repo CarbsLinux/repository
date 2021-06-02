@@ -1,0 +1,11 @@
+diff -ur alsa-utils/alsactl/utils.c alsa-utils-patch/alsactl/utils.c
+--- alsa-utils/alsactl/utils.c	2021-05-27 20:18:36.000000000 +0300
++++ alsa-utils-patch/alsactl/utils.c	2021-06-02 21:09:22.160755213 +0300
+@@ -30,6 +30,7 @@
+ #include <syslog.h>
+ #include <sys/stat.h>
+ #include <sys/mman.h>
++#include <limits.h>
+ #include "alsactl.h"
+ 
+ int file_map(const char *filename, char **buf, size_t *bufsize)

@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-patch -p1 < dlo.patch
+patch -p1 < 1.2.5.patch
 
 ./configure \
     --prefix=/usr \

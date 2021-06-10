@@ -1,0 +1,9 @@
+[1;31mWARNING[m
+
+Grub now disables the use of os-prober by default. If you want to reenable it,
+add the following line to the [1m/etc/default/grub[m file:
+
+
+    GRUB_DISABLE_OS_PROBER="false"
+
+

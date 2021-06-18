@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < fix-limits.patch
-
 ./configure \
     --disable-alsaconf \
     --disable-bat \

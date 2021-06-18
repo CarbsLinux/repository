@@ -9,14 +9,3 @@ diff -ur alsa-lib/aserver/aserver.c alsa-lib-patch/aserver/aserver.c
  char *command;
  
  #if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 95)
-diff -ur alsa-lib/src/ucm/ucm_exec.c alsa-lib-patch/src/ucm/ucm_exec.c
---- alsa-lib/src/ucm/ucm_exec.c	2021-05-28 00:30:16.000000000 +0300
-+++ alsa-lib-patch/src/ucm/ucm_exec.c	2021-06-02 18:10:31.353590485 +0300
-@@ -31,6 +31,7 @@
- #include <sys/stat.h>
- #include <sys/wait.h>
- #include <dirent.h>
-+#include <limits.h>
- 
- static pthread_mutex_t fork_lock = PTHREAD_MUTEX_INITIALIZER;
- 

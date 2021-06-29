@@ -1,12 +1,16 @@
 #!/bin/sh -e
 
-make CC="${CC:-gcc}"
-make PREFIX="$1/usr" MANPREFIX="$1/usr/share/man" install
+mk() {
+    make \
+        PREFIX=/usr \
+        MANPREFIX=/usr/share/man \
+        CFLAGS="$CFLAGS -static" \
+        "$@"
+}
 
+mk
+mk DESTDIR="$1" install
+DESTDIR="$1" install-sv scron.run
 
-# Install runit service
-install -Dm755 scron.run "$1/etc/sv/scron/run"
-ln -sv /run/runit/supervise.scron "$1/etc/sv/scron/supervise"
-
-# Install sysmgr service
-install -Dm755 scron.run "$1/etc/sysmgr/scron"
+mv "$1/usr/bin/crond" "$1/usr/bin/scrond"
+ln -s scrond "$1/usr/bin/crond"

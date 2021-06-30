@@ -5,7 +5,7 @@ gperf  make
 gst-plugins-base
 gtk+3
 harfbuzz-icu
-libXslt
+libxslt
 libXt
 libgcrypt
 libsoup

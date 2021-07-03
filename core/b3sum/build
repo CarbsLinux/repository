@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+make PREFIX=/usr LDFLAGS=-static b3sum
+install -Dm755 b3sum "$1/usr/bin/b3sum"

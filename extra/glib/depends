@@ -1,4 +1,4 @@
-libffi
-meson make
+libffi make
+meson  make
 util-linux
 zlib

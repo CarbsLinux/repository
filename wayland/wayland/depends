@@ -1,5 +1,5 @@
 expat
-flex make
-libffi
+flex   make
+libffi make
 libxml2
-meson make
+meson  make

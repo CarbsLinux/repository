@@ -1,4 +1,4 @@
 glib
-libffi
+libffi make
 libxml2
-meson make
+meson  make

@@ -1,0 +1,3 @@
+description: Library and utilities to read/write streaming archive formats
+license: BSD-2-Clause
+maintainer: Cem Keylan <cem@carbslinux.org>

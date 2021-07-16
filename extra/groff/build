@@ -2,15 +2,13 @@
 
 patch -p0 < musl.patch
 
+export LDFLAGS="$LDFLAGS -static"
+
 ./configure \
-	--prefix=/usr \
-	--without-x \
-	--disable-rpath \
-	--with-doc=no \
-	--disable-nls
+    --prefix=/usr \
+    --without-x \
+    --disable-rpath \
+    --disable-nls
 
 make
 make DESTDIR="$1" install
-for file in /usr/share/man/man7/roff.7 /usr/share/man/man1/soelim.1 /usr/bin/soelim ; do
-	rm "$1/$file"
-done

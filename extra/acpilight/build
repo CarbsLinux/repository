@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-install -Dm755 xbacklight "$1/usr/bin/xbacklight"
-install -Dm644 xbacklight.1 "$1/usr/share/man/xbacklight.1"
-install -Dm644 90-backlight.rules "$1/usr/lib/udev/rules.d/90-backlight.rules"

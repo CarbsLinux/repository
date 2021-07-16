@@ -1,0 +1,3 @@
+description: DHCP client daemon
+license: BSD-2-Clause
+maintainer: Cem Keylan <cem@carbslinux.org>

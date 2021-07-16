@@ -1,0 +1,3 @@
+description: Tools to manipulate EFI variables
+license: LGPL-2.1+
+maintainer: Cem Keylan <cem@carbslinux.org>

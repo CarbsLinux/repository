@@ -1,5 +1,6 @@
 #!/bin/sh -e
 
+sed -i '/#include/a #include <limits.h>' cmds/filesystem-usage.c
 sed -i '/sysinfo\.h/d' common/utils.c
 
 ./configure \

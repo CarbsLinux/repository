@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+export DESTDIR=$1
+
 patch -p1 < remove_gettext.patch
 
 # Fix build errors when appstream-glib or
@@ -7,13 +9,15 @@ patch -p1 < remove_gettext.patch
 sed -i 's/appstream-util//'        data/meson.build
 sed -i 's/desktop-file-validate//' data/meson.build
 
-meson build \
+meson \
     --prefix=/usr \
     --sysconfdir=/etc \
     --buildtype=release \
-    -Dsynctex=disabled
+    -Dsynctex=disabled \
+    . output
  
-DESTDIR="$1" ninja -C build install
+ninja -C output
+ninja -C output install
 
 install -Dm 0644 zathura.1   "$1/usr/share/man/man1/zathura.1"
 install -Dm 0644 zathurarc.5 "$1/usr/share/man/man1/zathurarc.5"

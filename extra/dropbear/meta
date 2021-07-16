@@ -1,0 +1,3 @@
+description: Small SSH server and client implementation
+license: MIT
+maintainer: Cem Keylan <cem@carbslinux.org>

@@ -1,0 +1,3 @@
+description: GNU TLS library implementation
+license: GPL-3.0+, LGPL-2.1+
+maintainer: Cem Keylan <cem@carbslinux.org>

@@ -1,0 +1,3 @@
+description: Keychain manager for ssh-agent and gpg-agent
+license: GPL-2.0
+maintainer: Cem Keylan <cem@carbslinux.org>

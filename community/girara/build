@@ -1,12 +1,16 @@
 #!/bin/sh -e
 
+export DESTDIR=$1
+
 meson build \
     --prefix=/usr \
     --sysconfdir=/etc \
     --buildtype=release \
+    -Ddefault_library=static \
     -Djson=enabled \
     -Dnotify=disabled \
     -Ddocs=disabled \
     -Dtests=disabled 
 
-DESTDIR="$1" ninja -C build install
+ninja -C build
+ninja -C build install

@@ -19,6 +19,7 @@ cpt l wayland >/dev/null 2>&1 && wayland=--enable-wayland-backend
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
+    --enable-static \
     --enable-xkb \
     --enable-xinerama \
     --enable-xrandr \

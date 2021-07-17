@@ -1,0 +1,3 @@
+description: Ports of some OpenBSD utilities
+license: BSD-3-Clause
+maintainer: Cem Keylan <cem@carbslinux.org>

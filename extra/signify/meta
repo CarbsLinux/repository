@@ -1,0 +1,3 @@
+description: OpenBSD cryptographic signing and verification tool
+license: ISC
+maintainer: Cem Keylan <cem@carbslinux.org>

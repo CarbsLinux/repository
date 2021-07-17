@@ -1,0 +1,3 @@
+description: C header file only implementation of a typed linked list
+license: MIT
+maintainer: Cem Keylan <cem@carbslinux.org>

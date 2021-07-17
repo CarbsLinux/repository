@@ -1,3 +1,3 @@
-description: Ports of some OpenBSD utilities
+description: Ports of OpenBSD mandoc, doas, signify, pax, and more
 license: BSD-3-Clause
 maintainer: Cem Keylan <cem@carbslinux.org>

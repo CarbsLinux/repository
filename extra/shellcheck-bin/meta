@@ -1,0 +1,3 @@
+description: Static analysis tool for shell scripts
+license: GPL-3.0+
+maintainer: Cem Keylan <cem@carbslinux.org>

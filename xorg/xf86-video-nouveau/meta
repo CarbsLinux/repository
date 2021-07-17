@@ -1,0 +1,3 @@
+description: Xorg NVIDIA video driver (nouveau kernel module)
+license: MIT
+maintainer: Cem Keylan <cem@carbslinux.org>

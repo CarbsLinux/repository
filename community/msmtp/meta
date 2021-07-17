@@ -1,0 +1,3 @@
+description: Small SMTP client implementation
+license: GPL-3.0+
+maintainer: Cem Keylan <cem@carbslinux.org>

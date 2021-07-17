@@ -1,0 +1,3 @@
+description: Simple library for font loading and glyph rasterization
+license: MIT
+maintainer: Cem Keylan <cem@carbslinux.org>

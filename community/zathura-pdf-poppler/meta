@@ -1,0 +1,3 @@
+description: PDF support for zathura using poppler
+license: Zlib
+maintainer: Cem Keylan <cem@carbslinux.org>

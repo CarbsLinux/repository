@@ -4,6 +4,8 @@
 sed -i '/^\.for/,/^\.endfor/d' Makefile
 
 # Modify Makefile to properly use LDFLAGS
+# We don't want this expression to expand
+# shellcheck disable=2016
 sed -i '/^kfcgi:/{n; s,$, $(LDFLAGS),}' Makefile
 
 ./configure \

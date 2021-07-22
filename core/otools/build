@@ -1,18 +1,10 @@
 #!/bin/sh -e
 
-FTS=0; cpt l musl-fts && FTS=1
+export LDFLAGS="$LDFLAGS -static"
 
-# Remove symbolic link substitution on pax
-sed -i 's|IS_LINK|IS_HARDLINK|' bin/pax/pat_rep.c
+./configure \
+    --prefix=/usr \
+    --with-system-zlib
 
-mk() {
-    make \
-        PREFIX=/usr \
-        TLSLIB="$(pkgconf --static --libs libtls)" \
-        LDFLAGS="$LDFLAGS -static" \
-        FTS="$FTS" \
-        "$@"
-}
-
-mk
-mk DESTDIR="$1" install
+make
+make DESTDIR="$1" install

@@ -5,4 +5,4 @@ trap "go clean -modcache" EXIT INT
 go mod vendor
 
 CGO_ENABLED=0 go build
-install -Dm755 lf "$1/usr/bin/lf"
+clinst -Dm755 lf "$1/usr/bin/lf"

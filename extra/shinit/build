@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-install -Dm755 shinit   "$1/usr/bin/shinit"
-install -Dm755 poweroff "$1/usr/bin/poweroff"
-
+clinst -Dm755 -t "$1/usr/bin" shinit poweroff
 ln -s shinit   "$1/usr/bin/init"
 ln -s poweroff "$1/usr/bin/reboot"

@@ -6,8 +6,7 @@ go mod vendor
 
 go run build.go -no-upgrade -version "v$2" build
 
-install -Dm755 syncthing "$1/usr/bin/syncthing"
+clinst -Dm755 syncthing "$1/usr/bin/syncthing"
 
-for manpage in man/*.1 man/*.5 man/*.7; do
-    install -Dm644 "$manpage" "$1/usr/share/man/man${manpage##*.}/${manpage##*/}"
-done
+# Install manual pages.
+clman -d "$1" man/*.[0-9]

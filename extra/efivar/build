@@ -22,19 +22,19 @@ mk() {
     mk libefiboot.a libefivar.a efivar-static efiboot.pc efivar.pc
 
     # Install the binary.
-    install -Dm755 efivar-static "$1/usr/bin/efivar"
+    clinst -Dm755 efivar-static "$1/usr/bin/efivar"
     
     # Install libraries.
-    install -Dm644 libefiboot.a  "$1/usr/lib/libefiboot.a"
-    install -Dm644 libefivar.a   "$1/usr/lib/libefivar.a"
+    clinst -Dm644 libefiboot.a  "$1/usr/lib/libefiboot.a"
+    clinst -Dm644 libefivar.a   "$1/usr/lib/libefivar.a"
     
     # Install pkgconf files.
-    install -Dm644 efiboot.pc    "$1/usr/lib/pkgconfig/efiboot.pc"
-    install -Dm644 efivar.pc     "$1/usr/lib/pkgconfig/efivar.pc"
+    clinst -Dm644 efiboot.pc    "$1/usr/lib/pkgconfig/efiboot.pc"
+    clinst -Dm644 efivar.pc     "$1/usr/lib/pkgconfig/efivar.pc"
     
     # Install headers.
     find include -type f | while read -r header; do
-        install -Dm644 "$header" "$1/usr/$header"
+        clinst -Dm644 "$header" "$1/usr/$header"
     done
 )
 

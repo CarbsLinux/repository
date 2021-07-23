@@ -3,7 +3,7 @@
 export DESTDIR="$1"
 
 # Symbolic link loop on tests
-sed -i '/^test(/,/^)/d' intel/meson.build
+clsed '/^test(/,/^)/d' intel/meson.build
 
 meson \
     --prefix=/usr \

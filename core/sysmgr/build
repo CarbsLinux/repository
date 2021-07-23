@@ -3,4 +3,4 @@
 make
 make DESTDIR="$1" PREFIX=/usr install
 
-install -Dm644 sysmgr.boot "$1/etc/init/sysmgr.boot"
+clinst -Dm644 sysmgr.boot "$1/etc/init/sysmgr.boot"

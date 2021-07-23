@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-sed -i '/DECLS/d' utf8.h
+clsed '/DECLS/d' utf8.h
 
 mk() {
     make \

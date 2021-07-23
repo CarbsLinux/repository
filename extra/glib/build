@@ -8,7 +8,7 @@ cat _ > gio/meson.build; rm -f _
 
 # tests/fuzzing now depend on dbus. Remove them from the build.
 find . -type f -name meson.build -exec \
-    sed -i "/subdir('tests')/d;/subdir('fuzzing')/d" {} +
+    clsed "/subdir('tests')/d;/subdir('fuzzing')/d" {} +
 
 meson \
     --prefix=/usr \

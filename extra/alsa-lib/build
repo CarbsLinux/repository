@@ -19,4 +19,4 @@ make clean
     --enable-shared=no
 
 make
-install -Dm644 src/.libs/libasound.a "$1/usr/lib/libasound.a"
+clinst -Dm644 src/.libs/libasound.a "$1/usr/lib/libasound.a"

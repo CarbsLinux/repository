@@ -42,7 +42,7 @@ done
 chmod u+s "$1/usr/bin/busybox-suid"
 
 # Install runit and sysmgr services.
-DESTDIR=$1 install-sv crond.run mdev.run ntpd.run syslogd.run acpid.run
+clsv -d "$1" crond.run mdev.run ntpd.run syslogd.run acpid.run
 
 # Install configurations for ntp, init, and mdev.
 kinstall 644 ntp.conf  "$1/etc/ntp.conf"

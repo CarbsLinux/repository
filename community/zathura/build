@@ -19,5 +19,4 @@ meson \
 ninja -C output
 ninja -C output install
 
-install -Dm 0644 zathura.1   "$1/usr/share/man/man1/zathura.1"
-install -Dm 0644 zathurarc.5 "$1/usr/share/man/man1/zathurarc.5"
+clman zathura.1 zathurarc.5

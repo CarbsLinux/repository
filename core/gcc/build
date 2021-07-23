@@ -2,20 +2,14 @@
 
 sys_arch=${3:-$(uname -m)}
 
-sed_i() {
-    for file; do :; done
-    sed "$@" > _
-    cat _ > "$file"; rm -f _
-}
-
 # Make sure gmp is built with generic options.
 cp gcc/gmp/configfsf.guess gcc/gmp/config.guess
 cp gcc/gmp/configfsf.sub   gcc/gmp/config.sub
 
 if [ "${sys_arch#i*86}" ]; then
     # Do not create lib64 directories
-    sed_i '/m64=/s/lib64/lib/' gcc/gcc/config/i386/t-linux64
-    sed_i 's/lib64/lib/'       gcc/gcc/config/i386/linux64.h
+    clsed '/m64=/s/lib64/lib/' gcc/gcc/config/i386/t-linux64
+    clsed 's/lib64/lib/'       gcc/gcc/config/i386/linux64.h
 else
     # Apply libssp patch for i686.
     (cd gcc; patch -Np1 < ../musl-libssp.patch)
@@ -71,7 +65,7 @@ find "$1" -name libgij.a      -exec rm -f {} +
 ln -s gcc "$1/usr/bin/cc"
 
 # POSIX compliance.
-install -Dm755 ../c99 "$1/usr/bin/c99"
+clinst -Dm755 ../c99 "$1/usr/bin/c99"
 
 # Symlink for LTO.
 {

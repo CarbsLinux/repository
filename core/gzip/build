@@ -3,7 +3,7 @@
 make CC="${CC:-cc} -static"
 
 clinst -Dm755 pigz   "$1/usr/bin/pigz"
-clinst -Dm644 pigz.1 "$1/usr/share/man/man1/pigz.1"
+clman -d "$1" pigz.1
 
 ln -sf pigz   "$1/usr/bin/gzip"
 ln -sf pigz.1 "$1/usr/share/man/man1/gzip.1"

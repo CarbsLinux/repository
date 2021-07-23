@@ -1,25 +1,19 @@
 #!/bin/sh -e
 
-sed_i() {
-    for file; do :; done
-    sed "$@" > _
-    cat _ > "$file"; rm -f _
-}
-
 # Remove gettext requirement.
-sed_i 's/ngettext/printf/g' Tools/MiniBrowser/gtk/BrowserDownloadsBar.c
-sed_i '/po_files \*\.po/d'  Source/WebCore/platform/gtk/po/CMakeLists.txt
-sed_i '/^GETTEXT_C/d'       Source/WebCore/platform/gtk/po/CMakeLists.txt
+clsed 's/ngettext/printf/g' Tools/MiniBrowser/gtk/BrowserDownloadsBar.c
+clsed '/po_files \*\.po/d'  Source/WebCore/platform/gtk/po/CMakeLists.txt
+clsed '/^GETTEXT_C/d'       Source/WebCore/platform/gtk/po/CMakeLists.txt
 
 # Fix clang build.
-sed -i '/LC_ALL/d'       Source/JavaScriptCore/jsc.cpp
-sed -i '/WTFLogAlways/d' Source/JavaScriptCore/jsc.cpp
+clsed '/LC_ALL/d'       Source/JavaScriptCore/jsc.cpp
+clsed '/WTFLogAlways/d' Source/JavaScriptCore/jsc.cpp
 
 export DESTDIR="$1"
 
 # Webkit's CMake configuration forces color output using clang-specific flags
 # when using Ninja as the CMAKE_GENERATOR. We should disable them.
-sed_i s,-fcolor-diagnostics,, Source/cmake/WebKitCompilerFlags.cmake
+clsed s,-fcolor-diagnostics,, Source/cmake/WebKitCompilerFlags.cmake
 
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release \

@@ -1,6 +1,3 @@
 #!/bin/sh -e
 
-# Remove absolutely unnecessary 'install' flag from the Makefile.
-sed -i 's,-T,,' Makefile
-
-make prefix=/usr DESTDIR="$1" install
+find . -name '*.[1-8]' -exec clman -d "$1" {} +

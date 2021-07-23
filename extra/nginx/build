@@ -38,4 +38,4 @@ make DESTDIR="$1" install
 # Don't actually install this directory into the package.
 rm -r "$1/run"
 
-install -Dm644 man/nginx.8 "$1/usr/share/man/man8/nginx.8"
+clman -d "$1" man/nginx.8

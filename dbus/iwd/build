@@ -25,4 +25,4 @@ sed -i '/If not specified/s/systemd/resolvconf/' src/iwd.config.5
 make LDFLAGS=-all-static
 make DESTDIR="$1" install
 
-DESTDIR=$1 install-sv iwd.run ead.run
+clsv -d "$1" iwd.run ead.run

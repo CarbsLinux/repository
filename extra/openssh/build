@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 # Adds optional libedit support
-cpt-list libedit >/dev/null 2>&1 &&
-    libedit="--with-libedit" && LIBS="$(pkgconf --static --libs libedit)"
+cpt-list -q libedit &&
+    libedit="--with-libedit" LIBS="$(pkgconf --static --libs libedit)"
 
 export LIBS
 export LDFLAGS="$LDFLAGS -static"
@@ -25,12 +25,8 @@ export LDFLAGS="$LDFLAGS -static"
 make
 make DESTDIR="$1" install
 
-install -m 755 contrib/ssh-copy-id "$1/usr/bin/ssh-copy-id"
-install -m 644 contrib/ssh-copy-id.1 "$1/usr/share/man/man8/ssh-copy-id.1"
+clinst -m 755 contrib/ssh-copy-id "$1/usr/bin/ssh-copy-id"
+clinst -m 644 contrib/ssh-copy-id.1 "$1/usr/share/man/man8/ssh-copy-id.1"
 
-# Install runit service.
-install -Dm755 sshd.run "$1/etc/sv/sshd/run"
-ln -s /run/runit/supervise.sshd "$1/etc/sv/sshd/supervise"
-
-# Install sysmgr service.
-install -Dm755 sshd.run "$1/etc/sysmgr/sshd"
+# Install sshd service
+clsv -d "$1" sshd.run

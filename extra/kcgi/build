@@ -1,12 +1,12 @@
 #!/bin/sh -e
 
 # Modify Makefile to make it POSIX
-sed -i '/^\.for/,/^\.endfor/d' Makefile
+clsed '/^\.for/,/^\.endfor/d' Makefile
 
 # Modify Makefile to properly use LDFLAGS
 # We don't want this expression to expand
 # shellcheck disable=2016
-sed -i '/^kfcgi:/{n; s,$, $(LDFLAGS),}' Makefile
+clsed '/^kfcgi:/{n; s,$, $(LDFLAGS),}' Makefile
 
 ./configure \
     PREFIX=/usr \

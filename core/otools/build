@@ -9,4 +9,4 @@ export LDFLAGS="$LDFLAGS -static"
 make
 make DESTDIR="$1" install
 
-install -Dm644 doas.conf "$1/etc/doas.conf"
+clinst -Dm644 doas.conf "$1/etc/doas.conf"

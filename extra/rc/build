@@ -40,5 +40,5 @@ mkdir -p "$1/usr/bin"
     havefork.c \
     "prompt-$readline.c" $LIBS
 
-install -Dm644 rc.1        "$1/usr/share/man/man1/rc.1"
-install -Dm644 rcmain.unix "$1/etc/rcmain"
+clman -d "$1" rc.1
+clinst -Dm644 rcmain.unix "$1/etc/rcmain"

@@ -1,7 +1,0 @@
-#!/bin/sh -e
-
-install -Dm644 zsh-syntax-highlighting.zsh "$1/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-install -Dm644 .version "$1/usr/share/zsh/plugins/zsh-syntax-highlighting/.version"
-install -Dm644 .revision-hash "$1/usr/share/zsh/plugins/zsh-syntax-highlighting/.revision-hash"
-
-cp -r highlighters "$1/usr/share/zsh/plugins/zsh-syntax-highlighting/"

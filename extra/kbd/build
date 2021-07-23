@@ -9,7 +9,7 @@ export CC="${CC:-cc} --static"
     --enable-shared=no \
     --disable-tests
 
-find . -name Makefile -exec sed -i 's/gunzip/gzip -d/' {} \;
+find . -name Makefile -exec clsed 's/gunzip/gzip -d/' {} \;
 
 make
 make DESTDIR="$1" install

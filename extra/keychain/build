@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-install -Dm755 keychain "$1/usr/bin/keychain"
-install -Dm644 keychain.1 "$1/usr/share/man/man1/keychain.1"
+clinst -Dm755 keychain "$1/usr/bin/keychain"
+clman -d "$1" keychain.1

@@ -8,4 +8,4 @@ sed -i 's/op_test() {/& return 0;/' boot-strap
 ./boot-strap --prefix=/usr op=build
 ./boot-strap --prefix=/usr --install-destdir="$1" op=install
 
-install -Dm644 bmake.1 "$1/usr/share/man/man1/bmake.1"
+clman -d "$1" bmake.1

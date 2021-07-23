@@ -6,26 +6,23 @@ cd "runit-$2"
 (
     cd src
     
-    sed 's@sbin/runit@usr/bin/runit@g' -i runit.h
+    clsed 's@sbin/runit@usr/bin/runit@g' runit.h
     printf '%s -D_GNU_SOURCE -static\n' "${CC-cc}" "$CFLAGS" > conf-cc
     printf '%s %s -static -Wl,-z -Wl,noexecstack\n' "${CC-cc}" "$CFLAGS" > conf-ld
-    sed -i 's:^char \*varservice ="/service/";$:char \*varservice ="/var/service/";:' sv.c
+    clsed 's:^char \*varservice ="/service/";$:char \*varservice ="/var/service/";:' sv.c
     
     make
     
-    for bin in chpst runit runit-init runsv runsvchdir runsvdir sv svlogd \
-        utmpset ../../poweroff ../../reboot; do
-        install -Dm755 "$bin" "$1/usr/bin/${bin}"
-    done
+    clinst -Dm755 -t "$1/usr/bin" chpst runit runit-init runsv runsvchdir \
+                                  runsvdir sv svlogd utmpset ../../poweroff \
+                                  ../../reboot
 )
 
-for manpage in man/*; do
-    install -Dm644 "$manpage" "$1/usr/share/man/man8/${manpage##*/}"
-done
+clman -d "$1" man/*
 
 mkdir -p "$1/var/service" "$1/etc/runit"
 ln -s runit-init "$1/usr/bin/init"
 ln -s /usr/lib/init/rc.boot "$1/etc/runit/1"
 ln -s /usr/lib/init/rc.shutdown "$1/etc/runit/3"
 
-install -Dm755 ../2 "$1/etc/runit/2"
+clinst -Dm755 ../2 "$1/etc/runit/2"

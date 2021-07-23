@@ -23,10 +23,7 @@ export LDFLAGS="$LDFLAGS -static"
 make
 make DESTDIR="$1" install
 
-for man in man1/*.1 man5/*.5 man7/*.7; do
-    install -Dm644 "$man" "$1/usr/share/man/$man"
-done
-
+clman -d "$1" man1/*.1 man5/*.5 man7/*.7
 
 # Build and install remote-http helper. This doesn't happen by default when
 # building static git.

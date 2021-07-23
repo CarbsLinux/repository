@@ -6,5 +6,5 @@ patch -p1 < fix-inline.patch
     --prefix=/usr
 
 make
-install -Dm644 libargp.a "$1/usr/lib/libargp.a"
-install -Dm644 argp.h    "$1/usr/include/argp.h"
+clinst -Dm644 libargp.a "$1/usr/lib/libargp.a"
+clinst -Dm644 argp.h    "$1/usr/include/argp.h"

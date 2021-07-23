@@ -21,4 +21,4 @@ rm -f Completion/Linux/Command/_rpmbuild
 make
 make DESTDIR="$1" install
 
-install -Dm 644 zprofile "$1/etc/zprofile"
+clinst -Dm644 zprofile "$1/etc/zprofile"

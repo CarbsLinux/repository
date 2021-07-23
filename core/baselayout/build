@@ -5,12 +5,6 @@
 # The fallback is for backwards compatibility, this will be dropped later.
 sys_arch=${3:-$(uname -m)}
 
-kinstall_t() {
-    mod=$1 dir=$2; mkdir -p "$2"
-    shift 2
-    for file do cp "$file" "$dir"; chmod "$mod" "$file"; done
-}
-
 # Setup base directories.
 for d in boot dev etc home mnt usr var opt run; do
     mkdir -pm 755 "$1/$d"
@@ -66,10 +60,9 @@ done
 ln -s ../man "$1/usr/local/share/man"
 
 # /etc skeleton files.
-kinstall_t 644 "$1/etc" fstab group host.conf hosts issue keymap os-release \
-                        passwd profile securetty shells mime.types
-kinstall_t 600 "$1/etc" crypttab shadow
-
-kinstall_t 755 "$1/usr/bin" install-sv
+clinst -Dm644 -t "$1/etc"
+clinst -Dm644 -t "$1/etc" fstab group host.conf hosts issue keymap os-release \
+                          passwd profile securetty shells mime.types
+clinst -Dm600 -t "$1/etc" crypttab shadow
 
 ln -s /proc/self/mounts "$1/etc/mtab"

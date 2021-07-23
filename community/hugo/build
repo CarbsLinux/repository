@@ -6,4 +6,4 @@ trap "go clean -modcache" EXIT INT
 go mod vendor
 
 CGO_ENABLED=0 go build
-install -Dm755 hugo "$1/usr/bin/hugo"
+clinst -Dm755 hugo "$1/usr/bin/hugo"

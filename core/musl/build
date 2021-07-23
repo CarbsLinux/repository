@@ -5,17 +5,6 @@
 # we are only supporting i686 and x86_64.
 sys_arch="$(uname -m)"
 
-kinstall_t() {
-    # install -Dm* -t alternative
-    # usage: kinstall_t 755 /usr/bin file file2 file3
-    mod=$1 dir=$2; mkdir -p "$dir"
-    shift 2
-    for file; do
-        cp "$file" "$dir"
-        chmod "$mod" "$dir/$file"
-    done
-}
-
 ./configure \
     --prefix=/usr \
     --syslibdir=/usr/lib
@@ -34,7 +23,7 @@ case "$sys_arch" in
 esac
 
 # Install BSD compatibility headers.
-kinstall_t 755 "$1/usr/include/sys" cdefs.h queue.h tree.h
+clinst -Dm755 -t "$1/usr/include/sys" cdefs.h queue.h tree.h
 
 # Install getconf.
 "${CC:=cc}" --static getconf.c -o "$1/usr/bin/getconf"
@@ -45,4 +34,4 @@ case $sys_arch in i*86)
 esac
 
 # Install getent
-kinstall_t 755 "$1/usr/bin" getent
+clinst -Dm755 -t "$1/usr/bin" getent

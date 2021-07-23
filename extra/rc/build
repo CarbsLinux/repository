@@ -5,7 +5,7 @@ for patch in *.patch; do
 done
 
 # Change the location of rcmain to the /etc directory.
-sed -i 's|/lib/rcmain|/etc/rcmain|;s|PREFIX||' unix.c
+clsed 's|/lib/rcmain|/etc/rcmain|;s|PREFIX||' unix.c
 
 # If readline is available, build with it.
 if cpt-list readline >/dev/null 2>&1; then

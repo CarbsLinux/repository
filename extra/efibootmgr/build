@@ -4,5 +4,5 @@ export LDFLAGS="$LDFLAGS -static"
 
 make CC="${CC:-cc}" EFIDIR=/boot/efi efibootmgr
 
-install -Dm0755 src/efibootmgr   "$1/usr/bin/efibootmgr"
-install -Dm0644 src/efibootmgr.8 "$1/usr/share/man/man8/efibootmgr.8"
+clinst -Dm755 src/efibootmgr "$1/usr/bin/efibootmgr"
+clman -d "$1" src/efibootmgr.8

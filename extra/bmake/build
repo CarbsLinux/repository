@@ -2,8 +2,8 @@
 
 export LDFLAGS="$LDFLAGS -static"
 
-sed -i '1s,:,#!/bin/sh,' install-sh
-sed -i 's/op_test() {/& return 0;/' boot-strap
+clsed '1s,:,#!/bin/sh,' install-sh
+clsed 's/op_test() {/& return 0;/' boot-strap
 
 ./boot-strap --prefix=/usr op=build
 ./boot-strap --prefix=/usr --install-destdir="$1" op=install

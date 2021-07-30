@@ -1,0 +1,15 @@
+####           #         #    #
+#  #           #         #
+#     ### #### ###   ### #    # ###  #  # #  #
+#  # #  # #    #  #  ##  #    # #  # #  #  ##
+#### #### #    #### ###  #### # #  # ###  #  #
+------------------------------------------------------------
+
+
+- 2021-07-31 :: otools 'grep' and 'm4' seems to break the
+  build system of certain packages, you are advised to
+  replace these by running:
+
+        cpt a m4 /usr/bin/m4
+        cpt a busybox /usr/bin/grep
+

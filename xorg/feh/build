@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+mk() {
+    make \
+        PREFIX=/usr \
+        exif=1 \
+        help=1 \
+        stat64=1 \
+        "$@"
+}
+
+mk
+mk DESTDIR="$1" install

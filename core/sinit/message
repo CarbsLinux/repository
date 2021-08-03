@@ -1,9 +1,5 @@
 !! IMPORTANT !!
 
-To start using sinit, edit /etc/init/sinit-launch-services.boot and uncomment
-the getty function, and optionally uncomment the runit function if you deem
-necessary.
-
 sinit is installed as /usr/bin/sinit. It can fully replace busybox init by
 running the following command.
 

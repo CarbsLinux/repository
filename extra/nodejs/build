@@ -1,7 +1,9 @@
 #!/bin/sh -e
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --with-intl=none \
+    --ninja
 
-make
-make DESTDIR="$1" install
+ninja -C out/Release
+tools/install.py install "$1" /usr

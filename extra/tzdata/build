@@ -8,6 +8,7 @@ make DESTDIR="$1" install
 # Get rid of the sbin directory
 mv "$1/usr/sbin/zic" "$1/usr/bin/zic"
 rm -rf "$1/usr/sbin"
+rm -rf "${1:?}/etc"
 
 set -- africa asia australasia europe northamerica southamerica
 

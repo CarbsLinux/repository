@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# shellcheck disable=3045
+ulimit -n 4096 ||:
+
 ./configure \
     --prefix=/usr \
     --with-intl=none \

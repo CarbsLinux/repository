@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+yacc -o awkgram.tab.c -H awkgram.tab.h awkgram.y
+
 make CFLAGS="$CFLAGS -static"
 clinst -Dm755 "a.out" "$1/usr/bin/nawk"
 ln -s /usr/bin/nawk "$1/usr/bin/awk"

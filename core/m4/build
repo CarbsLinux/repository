@@ -3,7 +3,8 @@
 export LDFLAGS="$LDFLAGS -static"
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --program-prefix=g
 
 make
 make DESTDIR="$1" install

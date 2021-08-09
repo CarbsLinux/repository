@@ -1,0 +1,24 @@
+--- meson.build.orig	Mon Aug  9 21:05:49 2021
++++ meson.build	Mon Aug  9 21:07:48 2021
+@@ -1821,19 +1821,8 @@
+     prog_bison = find_program('bison', 'yacc', required : with_any_opengl)
+   endif
+ else
+-  prog_bison = find_program('bison', required : false)
+-
+-  if not prog_bison.found()
+-    prog_bison = find_program('byacc', required : with_any_opengl)
+-    yacc_is_bison = false
+-  endif
+-
+-  # Disable deprecated keyword warnings, since we have to use them for
+-  # old-bison compat.  See discussion in
+-  # https://gitlab.freedesktop.org/mesa/mesa/merge_requests/2161
+-  if find_program('bison', required : false, version : '> 2.3').found()
+-    prog_bison = [prog_bison, '-Wno-deprecated']
+-  endif
++  prog_bison = find_program('byacc', required : with_any_opengl)
++  yacc_is_bison = false
+ 
+   prog_flex = find_program('flex', required : with_any_opengl)
+   prog_flex_cpp = prog_flex

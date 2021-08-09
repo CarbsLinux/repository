@@ -29,13 +29,8 @@ python3 bin/git_sha1_gen.py --output include/git_sha1.h
 platforms=x11
 cpt l wayland-protocols >/dev/null 2>&1 && platforms=$platforms,wayland
 
-# Fix broken radeon object links
-(
-    cd src/mesa/drivers/dri/r200
-    find . -type l | while read -r link; do
-        ln -sf "$PWD/../radeon/$link" "$link"
-    done
-)
+# Force byacc even if bison is installed
+patch -p1 < force-byacc.patch
 
 meson \
     --prefix=/usr \

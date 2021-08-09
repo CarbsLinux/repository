@@ -17,7 +17,6 @@ otools
 cpt
 libressl
 linux-headers
-m4
 make
 musl
 pkgconf

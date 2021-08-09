@@ -4,6 +4,7 @@ export LDFLAGS="$LDFLAGS -static"
 
 ./configure \
     --prefix=/usr \
+    --enable-btyacc \
     --program-transform='s/^/b/'
 
 make

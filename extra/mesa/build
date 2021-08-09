@@ -29,9 +29,6 @@ python3 bin/git_sha1_gen.py --output include/git_sha1.h
 platforms=x11
 cpt l wayland-protocols >/dev/null 2>&1 && platforms=$platforms,wayland
 
-# Force byacc even if bison is installed
-patch -p1 < force-byacc.patch
-
 meson \
     --prefix=/usr \
     --sysconfdir=/etc \

@@ -1,10 +1,5 @@
 #!/bin/sh -e
 
-kinstall() {
-    mkdir -p "${3%/*}"; cp "$2" "$3"
-    chmod "$1" "$3"
-}
-
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \
@@ -16,6 +11,4 @@ make DESTDIR="$1" install
 ln -s dbclient "$1/usr/bin/ssh"
 
 # Install user services
-kinstall 755 run "$1/etc/sv/dropbear/run"
-kinstall 755 run "$1/etc/sysmgr/dropbear"
-ln -sf /run/runit/supervise.dropbear "$1/etc/sv/dropbear/supervise"
+clsv -d "$1" -a dropbear run

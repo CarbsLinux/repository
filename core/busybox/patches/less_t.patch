@@ -1,0 +1,28 @@
+Accept and ignore the -T flag for compatibility.
+--- busybox/miscutils/less.c.orig	2021-08-10 22:16:57.493134340 +0300
++++ busybox/miscutils/less.c	2021-08-10 22:18:15.421458884 +0300
+@@ -179,6 +179,7 @@
+ 	FLAG_F = 1 << 6,
+ 	FLAG_S = (1 << 7) * ENABLE_FEATURE_LESS_TRUNCATE,
+ 	FLAG_R = (1 << 8) * ENABLE_FEATURE_LESS_RAW,
++	FLAG_T = 1 << 9,
+ /* hijack command line options variable for internal state vars */
+ 	LESS_STATE_MATCH_BACKWARDS = 1 << 15,
+ };
+@@ -1807,6 +1808,7 @@
+ int less_main(int argc, char **argv)
+ {
+ 	char *tty_name;
++	char *str_ignored;
+ 	int tty_fd;
+ 
+ 	INIT_G();
+@@ -1820,7 +1822,7 @@
+ 	getopt32(argv, "EMmN~IF"
+ 		IF_FEATURE_LESS_TRUNCATE("S")
+ 		IF_FEATURE_LESS_RAW("R")
+-		/*ignored:*/"s"
++		/*ignored:*/"sT:", &str_ignored
+ 	);
+ 	argv += optind;
+ 	num_files = argc - optind;

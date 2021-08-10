@@ -16,3 +16,4 @@ patches/adduser-no-setgid.patch        patches
 patches/install-fix-chown.patch        patches
 patches/print-unicode.patch            patches
 patches/libressl.patch                 patches
+patches/less_t.patch                   patches

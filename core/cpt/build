@@ -1,6 +1,10 @@
 #!/bin/sh -e
 
-make PREFIX=/usr DESTDIR="$1" install
+./configure \
+    --prefix=/usr
+
+make
+make DESTDIR="$1" install
 
 clinst -Dm644 cpt-base "$1/etc/cpt-base"
 clinst -Dm755 news     "$1/usr/bin/cpt-news"

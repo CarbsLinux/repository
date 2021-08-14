@@ -1,7 +1,15 @@
 #!/bin/sh -e
 
-WITH_ASM=1
-case $3 in i*86) WITH_ASM=0; esac
+asm=1
+case $3 in i*86) asm=0; esac
 
-make LDFLAGS="$LDFLAGS -static" WITH_ASM="$WITH_ASM"
-make PREFIX=/usr DESTDIR="$1" install
+mk() {
+    make \
+        PREFIX=/usr \
+        LDFLAGS="$LDFLAGS -static" \
+        WITH_ASM="$asm" \
+        "$@"
+}
+
+mk
+mk DESTDIR="$1" install

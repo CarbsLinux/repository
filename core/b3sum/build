@@ -1,4 +1,7 @@
 #!/bin/sh -e
 
-make LDFLAGS="$LDFLAGS -static"
+WITH_ASM=1
+case $3 in i*86) WITH_ASM=0; esac
+
+make LDFLAGS="$LDFLAGS -static" WITH_ASM="$WITH_ASM"
 make PREFIX=/usr DESTDIR="$1" install

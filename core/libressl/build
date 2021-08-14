@@ -7,7 +7,7 @@
 make
 make DESTDIR="$1" install
 
-clinst -Dm 755 update-certdata.sh "$1/etc/ssl"
+clinst -Dm755 -t "$1/etc/ssl" update-certdata.sh 
 
 # Link ca-certificates to cert.pem
-ln -sfv ../cert.pem "$1/etc/ssl/certs/ca-certificates.crt"
+ln -s ../cert.pem "$1/etc/ssl/certs/ca-certificates.crt"

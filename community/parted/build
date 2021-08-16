@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+export LDFLAGS="$LDFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --sbindir=/usr/bin \
+    --disable-nls \
+    --disable-rpath \
+    --disable-device-mapper \
+    "--with$(cpt l -C readline '' out)-readline"
+
+make
+make DESTDIR="$1" install

@@ -9,7 +9,9 @@ TEST=OFF
 cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
+    -DENABLE_DOCUMENTATION=OFF \
     -DENABLE_TESTING=$TEST \
+    -DREDIS_STORAGE_BACKEND=OFF \
     -DZSTD_LIBRARY=/usr/lib/libzstd.a
 
 cmake --build   build

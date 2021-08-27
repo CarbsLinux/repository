@@ -14,13 +14,14 @@ meson \
     --sysconfdir=/etc \
     --localstatedir=/var\
     -Dgtk_doc=false \
-    -Dwayland-backend=false \
+    -Dwayland-backend="$(cpt l -C wayland true false)" \
     -Dwin32-backend=false \
     -Dintrospection=disabled \
     -Dmedia-gstreamer=disabled \
     -Dsassc=disabled \
     -Dprint-cups=disabled \
     -Ddemos=false \
+    -Df16c=disabled \
     -Dbuild-tests=false \
     -Dbuild-examples=false \
     -Dvulkan=disabled \

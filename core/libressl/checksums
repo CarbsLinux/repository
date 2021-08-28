@@ -1,2 +1,3 @@
-a471565b36ccd1a70d0bd7d37c6e95c43a26a62829b487d9d2cdebfe58be3066  libressl-3.3.3.tar.gz
-043d2c3d64ecfaa021dbd1e772e42bf261917ef9b8b5b2ea955efd64c0791f00  update-certdata.sh
+%BLAKE3
+202a0dd86bd72a52d5408b723e2f2e2cbd96b958498a98aae14bcb369b1252b4  libressl-3.3.4.tar.gz
+028a88ed4224d4a09cda1631f54d2afee683d3020cb954e5974b006791de5c8b  update-certdata.sh

@@ -10,5 +10,6 @@ export LDFLAGS="$LDFLAGS -static"
     --disable-device-mapper \
     "--with$(cpt l -C readline '' out)-readline"
 
-make
+# I hate it when build systems don't adhere to flags.
+make CC="${CC:-cc} --static"
 make DESTDIR="$1" install

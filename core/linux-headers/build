@@ -1,6 +1,3 @@
 #!/bin/sh -e
 
-# Switched back to the rsync installation method
-# as it is back to core, and sbase find causes a
-# faulty manifest generation.
-make headers_install INSTALL_HDR_PATH="$1/usr"
+make PREFIX=/usr ARCH=x86 DESTDIR="$1" install

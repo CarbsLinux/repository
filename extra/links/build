@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+export LDFLAGS="$LDFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --mandir=/usr/share/man \
+    --without-libevent \
+    --with-ssl
+
+make
+make DESTDIR="$1" install

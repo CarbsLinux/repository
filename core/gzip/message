@@ -1,0 +1,8 @@
+[1;33mIMPORTANT[m
+
+[1mgzip[m package has been renamed to [1mpigz[m. You are expected to replace the
+package by doing the following:
+
+    [1m$[m cpt bi pigz
+    [1m$[m cpt a | grep ^pigz | cpt a -
+    [1m$[m cpt r gzip

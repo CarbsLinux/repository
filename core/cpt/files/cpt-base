@@ -12,7 +12,7 @@ flex
 gcc
 git
 rsync
-gzip
+pigz
 otools
 cpt
 libressl

@@ -5,11 +5,18 @@
 #### #### #    #### ###  #### # #  # ###  #  #
 ------------------------------------------------------------
 
+- 2021-09-06 :: 'gzip' has been renamed to 'pigz'. You need
+  to run the following to switch between packages:
 
-- 2021-07-31 :: otools 'grep' and 'm4' seems to break the
-  build system of certain packages, you are advised to
-  replace these by running:
+        cpt bi pigz
+        cpt a | grep ^pigz | cpt a -
+        cpt r gzip
 
-        cpt a m4 /usr/bin/m4
+- 2021-08-10 :: 'm4' is no longer part of the standard base
+
+- 2021-07-31 :: otools 'grep' seems to break the build
+  system of certain packages, you are advised to replace
+  it by running:
+
         cpt a busybox /usr/bin/grep
 

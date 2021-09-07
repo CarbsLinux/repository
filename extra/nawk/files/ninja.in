@@ -14,6 +14,7 @@ rule yacc
 
 rule maketab
   command = ./maketab $in > $out
+  description = MAKETAB $out
 
 rule custom
   command = false

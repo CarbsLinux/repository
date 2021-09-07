@@ -1,0 +1,52 @@
+rule cc
+  command = $cc $cflags -MD -MF $out.d -c -o $out $in
+  description = CC $out
+  depfile = $out.d
+  deps = gcc
+
+rule link
+  command = $cc $ldflags -o $out $in
+  description = LINK $out
+
+rule yacc
+  command = $yacc -o awkgram.tab.c -H awkgram.tab.h awkgram.y
+  description = YACC $out
+
+rule maketab
+  command = ./maketab $in > $out
+
+rule custom
+  command = false
+  description = 
+
+rule install-bin
+  command = clinst -Dm755 nawk "$destdir/usr/bin/nawk" && ln -s nawk "$destdir/usr/bin/awk"
+  description = Installing nawk and linking awk
+
+rule install-man
+  command = clman -d $destdir nawk.1 && ln -s nawk.1 "$destdir/usr/share/man/man1/awk.1"
+  description = Installing nawk.1 and linking awk.1
+
+build all: phony nawk
+build nawk: link b.o main.o parse.o proctab.o tran.o lib.o run.o lex.o awkgram.tab.o
+build awkgram.tab.c awkgram.tab.h: yacc awkgram.y | awk.h proto.h
+build b.o: cc b.c
+build main.o: cc main.c
+build parse.o: cc parse.c
+build proctab.o: cc proctab.c
+build tran.o: cc tran.c
+build lib.o: cc lib.c
+build run.o: cc run.c
+build lex.o: cc lex.c
+build awkgram.tab.o: cc awkgram.tab.c
+build proctab.c: maketab awkgram.tab.h | maketab
+build maketab: link maketab.c
+build maketab.o: cc maketab.c | awkgram.tab.h
+build PHONY: phony
+build INSTALL_BIN: install-bin PHONY
+build INSTALL_MAN: install-man PHONY nawk.1
+build install: phony INSTALL_BIN INSTALL_MAN
+build nawk.1: custom awk.1
+  command = cp awk.1 nawk.1
+  description = GEN nawk.1
+default all

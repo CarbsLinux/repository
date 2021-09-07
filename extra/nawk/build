@@ -1,11 +1,12 @@
 #!/bin/sh -e
 
-yacc -o awkgram.tab.c -H awkgram.tab.h awkgram.y
+printf 'cflags = %s\nldflags = %s\ncc = %s\nyacc = %s\ndestdir = %s\n' \
+       "$CFLAGS -Wall -pedantic -Wcast-qual -O2" \
+       "$LDFLAGS -static" \
+       "${CC:-cc}" \
+       "${YACC:-yacc}" \
+       "$1" |
+cat - ninja.in > build.ninja
 
-make CFLAGS="$CFLAGS -static"
-clinst -Dm755 "a.out" "$1/usr/bin/nawk"
-ln -s /usr/bin/nawk "$1/usr/bin/awk"
-
-mv awk.1 nawk.1
-clman -d "$1" nawk.1
-ln -s nawk.1 "$1/usr/share/man/man1/awk.1"
+ninja
+ninja install

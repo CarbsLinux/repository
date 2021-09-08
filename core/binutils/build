@@ -9,13 +9,15 @@ case ${3:-$(uname -m)} in
                       --host=x86_64-pc-linux-musl"
 esac
 
-cat > makeinfo <<EOF
+cpt l -q texinfo || {
+    cat > makeinfo <<EOF
 #!/bin/sh
 printf 'makeinfo (GNU texinfo) 5.2\n'
 EOF
 
-chmod +x makeinfo
-export PATH=$PATH:$PWD
+    chmod +x makeinfo
+    export PATH=$PATH:$PWD
+}
 
 # Word splitting is intentional here.
 # shellcheck disable=2086
@@ -34,3 +36,7 @@ export PATH=$PATH:$PWD
 
 make
 make DESTDIR="$1" install
+
+# Manual pages are empty for some reason in binutils-2.37, so
+# we are installing the manual pages from 2.36.1
+clman -d "$1" man/*.1

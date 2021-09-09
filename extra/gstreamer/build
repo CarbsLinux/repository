@@ -1,10 +1,8 @@
 #!/bin/sh -e
 
-export DESTDIR="$1"
+export DESTDIR=$1
 
-meson \
-    --prefix=/usr \
-    -Dbuildtype=release \
+cl-meson \
     -Ddbghelp=disabled \
     -Dintrospection=disabled \
     -Dexample=false \

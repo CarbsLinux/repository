@@ -1,4 +1,5 @@
-b6e50e3a9bbcd56ee6ec71c33aa8332cc9c926b0c1fae995aac8b3040ebe39b0  gst-plugins-good-1.18.4.tar.xz
-74e806bc5595b18c70e9ca93571e27e79dfb808e5d2e7967afa952b52e99c85f  gst-plugins-bad-1.18.4.tar.xz
-218df0ce0d31e8ca9cdeb01a3b0c573172cc9c21bb3d41811c7820145623d13c  gst-plugins-ugly-1.18.4.tar.xz
-344a463badca216c2cef6ee36f9510c190862bdee48dc4591c0a430df7e8c396  gst-libav-1.18.4.tar.xz
+%BLAKE3
+8db280af3652e09587fb78e0314de69b0188f25c411e13cb3a24037fccf9131f  gst-plugins-good-1.18.5.tar.xz
+7c7983afdd1219fe7732204da66e40b1681823c4fbeb6ee9c87d08be170801ad  gst-plugins-bad-1.18.5.tar.xz
+12aecd1b68fd5362594513555162a1217e85f05382b884475f9cef223b0d2eb7  gst-plugins-ugly-1.18.5.tar.xz
+6c764e36f81dd46c9f232718c3b0c9e804a11c6eb902fd2ae3722f6b25857faa  gst-libav-1.18.5.tar.xz

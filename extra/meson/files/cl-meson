@@ -3,6 +3,13 @@
 # any downloads from subproject wrappers. We want the builds to be as
 # reproducible as possible, and we want to be adding features most of the
 # time instead of removing them.
+#
+# Unfortunately, there are lots of people who lack the ability to read the
+# documentation of meson (which is really simple by the way), and declare
+# features as 'combo' type instead of 'feature' type. This means that you
+# shouldn't rely entirely on the '--auto-features=disabled', because those
+# people declare their features as string lists.
+# https://mesonbuild.com/Build-options.html#features
 
 exec meson setup \
     --prefix=/usr \
@@ -10,6 +17,7 @@ exec meson setup \
     --localstatedir=/var \
     --libexecdir=lib \
     --sbindir=bin \
+    --mandir=share/man \
     --buildtype=release \
     --auto-features=disabled \
     --wrap-mode=nodownload \

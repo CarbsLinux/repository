@@ -1,1 +1,10 @@
 #!/bin/sh -e
+
+export DESTDIR=$1
+
+cl-meson \
+    -Dman-pages=enabled \
+    . output
+
+ninja -C output
+ninja -C output install

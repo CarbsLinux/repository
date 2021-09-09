@@ -2,8 +2,10 @@
 
 export DESTDIR="$1"
 
-meson \
-    --prefix=/usr \
+cl-meson \
+    -Dwith_x11=yes \
+    -Dwith_glx=yes \
+    -Dwith_wayland="$(cpt l -C wayland yes no)" \
     . output
 
 ninja -C output

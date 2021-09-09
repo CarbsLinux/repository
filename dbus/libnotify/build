@@ -2,9 +2,7 @@
 
 export DESTDIR="$1"
 
-meson \
-    --prefix=/usr \
-    --sysconfdir=/etc \
+cl-meson \
     -Dintrospection=disabled \
     -Dtests=false \
     -Dman=false \

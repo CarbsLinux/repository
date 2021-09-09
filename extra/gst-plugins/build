@@ -7,7 +7,9 @@ export DESTDIR="$1"
 for plugin in libav good bad ugly; do (
     cd "$plugin"
 
+    # Enable auto-features in gst-plugins
     cl-meson \
+        --auto-features=auto \
         -Dexample=false \
         -Dtests=${test:-disabled} \
         -Dqt5=disabled \

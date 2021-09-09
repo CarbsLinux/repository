@@ -1,5 +1,6 @@
 cairo
 libjpeg-turbo
 meson make
+scdoc make
 wayland
 wayland-protocols make

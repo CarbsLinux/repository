@@ -7,6 +7,7 @@ cl-meson \
     -Dexamples=false \
     -Dxwayland=enabled \
     -Dx11-backend=enabled \
+    -Drenderers=gles2 \
     . build
 
 ninja -C build

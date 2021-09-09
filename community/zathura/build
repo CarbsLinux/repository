@@ -9,10 +9,7 @@ patch -p1 < remove_gettext.patch
 clsed 's/appstream-util//'        data/meson.build
 clsed 's/desktop-file-validate//' data/meson.build
 
-meson \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --buildtype=release \
+cl-meson \
     -Dsynctex=disabled \
     . output
  

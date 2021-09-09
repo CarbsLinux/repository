@@ -4,9 +4,7 @@ export DESTDIR="$1"
 export LDFLAGS="$LDFLAGS -Wl,-z,lazy"
 export CFLAGS="$CFLAGS -fcommon"
 
-meson \
-    --prefix=/usr \
-    --libexecdir=/usr/lib \
+cl-meson \
     -Ddefault-dri=3 \
     -Dxvmc=false \
     -Dvalgrind=false \

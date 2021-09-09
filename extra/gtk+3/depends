@@ -10,6 +10,7 @@ libXi
 libXinerama
 libXrandr
 libepoxy
+meson  make
 pango
 perl   make
 python make

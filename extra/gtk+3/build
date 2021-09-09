@@ -1,41 +1,28 @@
 #!/bin/sh -e
 
-sed_i() {
-    for file; do :; done
-    sed "$@" > _
-    cat _ > "$file"; rm -f _
-}
+export DESTDIR=$1
+
+# Remove error on array-bounds
+clsed '/array-bounds/d' meson.build
 
 # Remove 'atk-bridge' dependency which removes the 'dbus' dependency.
-sed_i 's/ATK_PACKAGES="atk atk-bridge-2.0"/ATK_PACKAGES="atk"/' \
-    configure
+clsed '/atk-bridge-2/d' meson.build
 
-sed_i '/<atk-bridge.h>/d;/atk_bridge_adaptor_init/d' \
+clsed '/<atk-bridge.h>/d;/atk_bridge_adaptor_init/d' \
     gtk/a11y/gtkaccessibility.c
 
-cpt l wayland >/dev/null 2>&1 && wayland=--enable-wayland-backend
+tests=false; [ "$CPT_TEST" = 1 ] && tests=true
 
-./configure \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --localstatedir=/var \
-    --enable-static \
-    --enable-xkb \
-    --enable-xinerama \
-    --enable-xrandr \
-    --enable-xfixes \
-    --enable-xcomposite \
-    --enable-xdamage \
-    --enable-x11-backend \
-    "$wayland" \
-    --enable-debug=no \
-    --disable-schemas-compile \
-    --disable-cups \
-    --disable-papi \
-    --disable-cloudprint \
-    --enable-introspection \
-    --enable-colord=no \
-    --enable-gtk-doc-html=no
+cl-meson \
+    -Ddefault_library=both \
+    -Dxinerama=yes \
+    -Dx11_backend=true \
+    -Dwayland_backend="$(cpt l -C wayland true false)" \
+    -Dprint_backends=file \
+    -Ddemos=false \
+    -Dexamples=false \
+    -Dtests="$tests" \
+    . output
 
-make
-make DESTDIR="$1" install
+ninja -C output
+ninja -C output install

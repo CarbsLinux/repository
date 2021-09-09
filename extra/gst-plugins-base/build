@@ -2,7 +2,9 @@
 
 export DESTDIR="$1"
 
+# So many features are auto that we are going to make an exception for this one.
 cl-meson \
+    --auto-features=auto \
     -Dtremor=disabled \
     -Dexamples=disabled \
     -Dgtk_doc=disabled \

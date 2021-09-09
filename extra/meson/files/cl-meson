@@ -1,0 +1,15 @@
+#!/bin/sh -e
+# Wrapper for meson, we disable all auto features by default, and disable
+# any downloads from subproject wrappers. We want the builds to be as
+# reproducible as possible, and we want to be adding features most of the
+# time instead of removing them.
+
+exec meson setup \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --libexecdir=lib \
+    --sbindir=bin \
+    --buildtype=release \
+    --auto-features=disabled \
+    --wrap-mode=nodownload \
+    "$@"

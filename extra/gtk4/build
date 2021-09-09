@@ -2,17 +2,7 @@
 
 export DESTDIR=$1
 
-# Create gtk-doc subproject directory so that meson doesn't try to clone it
-# even when we disable it. We also don't really need sass, but there is no
-# option to disable it.
-mkdir -p subprojects/gtk-doc \
-         subprojects/libsass \
-         subprojects/sassc
-
-meson \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --localstatedir=/var\
+cl-meson \
     -Dgtk_doc=false \
     -Dwayland-backend="$(cpt l -C wayland true false)" \
     -Dwin32-backend=false \

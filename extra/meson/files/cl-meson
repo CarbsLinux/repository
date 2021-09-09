@@ -7,6 +7,7 @@
 exec meson setup \
     --prefix=/usr \
     --sysconfdir=/etc \
+    --localstatedir=/var \
     --libexecdir=lib \
     --sbindir=bin \
     --buildtype=release \

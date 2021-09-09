@@ -2,10 +2,11 @@
 
 export DESTDIR="$1"
 
-meson \
-    --prefix=/usr \
+cl-meson \
     -Dgdk-pixbuf=enabled \
     -Dxwayland=enabled \
+    -Dman-pages=enabled \
+    -Dfish-completions=false \
     . output
 
 ninja -C output

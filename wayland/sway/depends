@@ -1,7 +1,9 @@
 cairo
+gdk-pixbuf
 json-c
 meson make
 pcre
+scdoc make
 wayland
 wayland-protocols make
 wlroots

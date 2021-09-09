@@ -1,5 +1,6 @@
 cairo
 gdk-pixbuf
 meson make
+scdoc make
 wayland
 wayland-protocols make

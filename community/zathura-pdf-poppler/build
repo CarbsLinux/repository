@@ -1,8 +1,9 @@
 #!/bin/sh -e
 
-meson build \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --buildtype=release
+export DESTDIR=$1
+
+cl-meson \
+    . output
  
-DESTDIR="$1" ninja -C build install
+ninja -C output
+ninja -C output install

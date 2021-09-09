@@ -2,9 +2,10 @@
 
 export DESTDIR="$1"
 
-meson \
-    --prefix=/usr \
-    -Dwayland=false \
+cl-meson \
+    -Ddrm=true \
+    -Dx11=true \
+    -Dwayland="$(cpt l -C wayland true false)" \
     . output
 
 ninja -C output

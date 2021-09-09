@@ -1,4 +1,6 @@
 cairo
+dbus
 meson make
 pango
+scdoc make
 wayland

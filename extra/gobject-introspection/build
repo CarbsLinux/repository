@@ -2,11 +2,7 @@
 
 export DESTDIR=$1
 
-meson \
-    --prefix=/usr \
-    -Dcairo=disabled \
-    -Ddefault_library=both \
-    -Ddoctool=disabled \
+cl-meson \
     . output
 
 ninja -C output

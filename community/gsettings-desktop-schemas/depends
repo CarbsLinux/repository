@@ -1,0 +1,3 @@
+glib
+gobject-introspection make
+meson make

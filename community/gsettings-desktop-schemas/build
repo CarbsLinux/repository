@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+export DESTDIR=$1
+
+cl-meson \
+    . output
+
+ninja -C output
+ninja -C output install

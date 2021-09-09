@@ -1,0 +1,3 @@
+description: Collection of GSettings schemas for shared desktop settings
+license: LGPL-2.1-or-later
+maintainer: Cem Keylan <cem@carbslinux.org>

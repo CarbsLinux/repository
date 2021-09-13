@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+mk() {
+    make \
+        prefix=/usr \
+        LIBINTL=MUSL \
+        "$@"
+}
+
+mk
+mk DESTDIR="$1" install

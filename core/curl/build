@@ -18,5 +18,5 @@
     --without-zstd \
     --with-pic
 
-make curl_LDFLAGS=-all-static
+make LDFLAGS=-all-static
 make DESTDIR="$1" install

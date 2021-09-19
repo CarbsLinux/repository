@@ -18,5 +18,8 @@
     --without-zstd \
     --with-pic
 
-make LDFLAGS=-all-static
+make
 make DESTDIR="$1" install
+rm -f src/curl
+make LDFLAGS=-all-static
+clinst -Dm755 src/curl "$1/usr/bin/curl"

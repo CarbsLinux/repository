@@ -1,8 +1,0 @@
-#!/bin/sh -e
-
-./configure
-
-make
-mkdir -p "$1/usr/share/man/man3"
-
-./sqlite2mdoc -p "$1/usr/share/man/man3" /usr/include/sqlite3.h

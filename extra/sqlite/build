@@ -2,8 +2,7 @@
 
 export CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1"
 
-sed 's/ -ltinfo//g' configure > _
-cat _ > configure; rm -f _
+clsed 's/ -ltinfo//g' configure
 
 ./configure \
     --prefix=/usr \
@@ -13,3 +12,12 @@ cat _ > configure; rm -f _
 
 make
 make DESTDIR="$1" install
+
+# Build sqlite manual pages
+cd mdoc
+
+./configure
+make
+
+mkdir -p "$1/usr/share/man/man3"
+./sqlite2mdoc -p "$1/usr/share/man/man3" "$1/usr/include/sqlite3.h"

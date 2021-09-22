@@ -27,6 +27,7 @@ done
 # Some packages look for libcurses instead of libncurses when building.
 printf '%s\n' "INPUT(-lncursesw)" > "$1/usr/lib/libcursesw.so"
 ln -s libncurses.so "$1/usr/lib/libcurses.so"
+ln -s libncurses.a  "$1/usr/lib/libcurses.a"
 
 # Copy pkgconfig.
 ln -s ncursesw.pc "$1/usr/lib/pkgconfig/ncurses.pc"

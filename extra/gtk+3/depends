@@ -12,6 +12,5 @@ libXrandr
 libepoxy
 meson  make
 pango
-perl   make
 python make
 shared-mime-info

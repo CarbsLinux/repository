@@ -9,4 +9,4 @@ make DESTDIR="$1" install
 
 # Even when only installing libraries, the build system installs manual pages
 # and documentation for the utilities.
-rm -r "$1/usr/share"
+rm -r "${1:?}/usr/share"

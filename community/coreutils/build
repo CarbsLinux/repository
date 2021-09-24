@@ -3,7 +3,12 @@
 export LDFLAGS="$LDFLAGS -static"
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --enable-single-binary=symlinks \
+    --with-packager="Carbs Linux" \
+    --without-libgmp \
+    --disable-libcap \
+    --disable-nls
 
 make
 make DESTDIR="$1" install

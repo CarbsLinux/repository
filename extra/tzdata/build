@@ -16,3 +16,7 @@ set -- africa asia australasia europe northamerica southamerica
 ./zic -d "$pkg_dir/usr/share/zoneinfo/posix" "$@"
 ./zic -d "$pkg_dir/usr/share/zoneinfo/right" -L leapseconds "$@"
 ./zic -d "$pkg_dir/usr/share/zoneinfo" -p America/New_York
+
+# The 'tzselect' script is not great by any means, but it will work with most
+# POSIX compatible shells, if not all.
+clsed '1c#!/bin/sh' "$pkg_dir/usr/bin/tzselect"

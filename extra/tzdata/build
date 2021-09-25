@@ -3,12 +3,10 @@
 pkg_dir=$1
 
 make CC="${CC:-gcc}" LDFLAGS="$LDFLAGS -static"
-make DESTDIR="$1" install
 
-# Get rid of the sbin directory
-mv "$1/usr/sbin/zic" "$1/usr/bin/zic"
-rm -rf "$1/usr/sbin"
-rm -rf "${1:?}/etc"
+clinst -Dm755 -t "$1/usr/bin"  zic zdump
+clinst -Dm755 -s '1c#!/bin/sh' tzselect "$1/usr/bin/tzselect"
+clman  -d "$1" zic.8 zdump.8 tzselect.8
 
 set -- africa asia australasia europe northamerica southamerica
 
@@ -17,6 +15,4 @@ set -- africa asia australasia europe northamerica southamerica
 ./zic -d "$pkg_dir/usr/share/zoneinfo/right" -L leapseconds "$@"
 ./zic -d "$pkg_dir/usr/share/zoneinfo" -p America/New_York
 
-# The 'tzselect' script is not great by any means, but it will work with most
-# POSIX compatible shells, if not all.
-clsed '1c#!/bin/sh' "$pkg_dir/usr/bin/tzselect"
+clinst -Dm644 -t "$pkg_dir/usr/share/zoneinfo" ./*.tab

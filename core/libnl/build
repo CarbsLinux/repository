@@ -1,9 +1,0 @@
-#!/bin/sh -e
-
-./configure \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --disable-shared
-
-make LDFLAGS="$LDFLAGS -static" CCLD="${CC:-cc} -all-static"
-make DESTDIR="$1" install

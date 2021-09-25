@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# Don't let foot break your ncurses compilation.
+unset TERMINFO
+
 ./configure \
     --prefix=/usr \
     --mandir=/usr/share/man \

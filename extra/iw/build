@@ -2,6 +2,14 @@
 
 # iw manpage is extremely small, 
 # we don't need to compress it.
-sed 's@\(iw\.8\)\.gz@\1@' Makefile > _
-cat _ > Makefile; rm -f _
-make DESTDIR="$1" LDFLAGS="$LDFLAGS -static" PREFIX="/usr" SBINDIR="/usr/bin" install
+clsed 's@\(iw\.8\)\.gz@\1@' Makefile
+
+make \
+    DESTDIR="$1" \
+    LDFLAGS="$LDFLAGS -static" \
+    CFLAGS="$CFLAGS -I/usr/include/libnl-tiny -DCONFIG_LIBNL20 -D_GNU_SOURCE" \
+    NL1FOUND="" NL2FOUND=Y NLLIBNAME=libnl-tiny \
+    LIBS=-lnl-tiny \
+    PREFIX="/usr" \
+    SBINDIR="/usr/bin" \
+    install

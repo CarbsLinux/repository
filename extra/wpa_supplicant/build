@@ -2,5 +2,16 @@
 
 cd wpa_supplicant
 
-make LIBDIR=/usr/lib BINDIR=/usr/bin LDFLAGS="$LDFLAGS -static"
-make LIBDIR=/usr/lib BINDIR=/usr/bin DESTDIR="$1" install
+mk() {
+    make \
+        LIBDIR=/usr/lib \
+        BINDIR=/usr/bin \
+        LDFLAGS="$LDFLAGS -static" \
+        "$@"
+}
+
+mk
+mk DESTDIR="$1" install
+
+clman -d "$1" ./doc/docbook/*.[0-9]
+clsv  -d "$1" wpa_supplicant.run

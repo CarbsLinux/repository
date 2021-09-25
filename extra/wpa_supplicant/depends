@@ -1,3 +1,3 @@
-libnl    make
-libressl make
-pkgconf  make
+libnl-tiny make
+libressl   make
+pkgconf    make

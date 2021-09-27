@@ -1,0 +1,5 @@
+[1;33mNOTE[m
+
+[1mcatgirl(1)[m depends on the [1mopenssl(1)[m binary for certificate
+generation, but it's not listed as a runtime dependency.
+

@@ -1,4 +1,5 @@
 #!/bin/sh -e
 
-make PREFIX=/usr
+make PREFIX=/usr lib-release
+make PREFIX=/usr LDFLAGS="$LDFLAGS -static" zstd-release
 make DESTDIR="$1" PREFIX=/usr install

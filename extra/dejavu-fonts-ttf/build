@@ -1,4 +1,0 @@
-#!/bin/sh -e
-
-clinst -Dm644 -t "$1/usr/share/fonts/TTF"  ttf/*.ttf
-clinst -Dm644 -t "$1/etc/fonts/conf.avail" fontconfig/*.conf

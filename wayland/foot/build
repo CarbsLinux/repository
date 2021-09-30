@@ -4,7 +4,6 @@ export DESTDIR=$1
 
 cl-meson \
     -Ddocs=enabled \
-    -Dcustom-terminfo-install-location=no \
     . output
 
 ninja -C output

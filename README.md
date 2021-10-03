@@ -38,7 +38,7 @@ All the package repositories have their own purpose:
 - `xorg`:
   packages for building the X11 display server and friends.
 - `wayland`:
-  packages for building wayland. (not yet stable)
+  packages for building wayland.
 - `dbus`:
   IRC conversation starter / dbus and packages with hard dependencies.
 

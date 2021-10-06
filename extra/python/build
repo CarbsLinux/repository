@@ -15,7 +15,7 @@
     make depend
     make
 
-    make DESTDIR=$PWD/pkg install_sw
+    make DESTDIR="$PWD/pkg" install_sw
 )
 
 patch -p1 < python3-always-pip.patch

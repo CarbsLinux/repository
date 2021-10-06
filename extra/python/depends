@@ -1,6 +1,6 @@
 bzip2
 expat
-libffi   make
-libressl make
+libffi make
+perl   make
 sqlite
 zlib

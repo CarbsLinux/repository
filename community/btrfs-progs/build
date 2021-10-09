@@ -1,6 +1,5 @@
 #!/bin/sh -e
 
-clsed '/#include/a #include <limits.h>' cmds/filesystem-usage.c
 clsed '/sysinfo\.h/d' common/utils.c
 
 ./configure \

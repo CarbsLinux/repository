@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+export DESTDIR=$1
+
+cl-meson \
+    -Dlibjpeg=enabled \
+    -Dlibpng=enabled \
+    -Dlibtiff=enabled \
+    -Dlibrsvg="$(cpt l -C librsvg enabled disabled)" \
+    -Dwindows=wayland \
+    . output
+
+ninja -C output
+ninja -C output install

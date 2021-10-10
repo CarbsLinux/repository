@@ -1,0 +1,11 @@
+cairo
+glib
+libgrapheme
+libjpeg-turbo
+libpng
+libxkbcommon
+mesa
+meson make
+pango
+tiff
+wayland

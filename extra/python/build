@@ -1,24 +1,8 @@
 #!/bin/sh -e
 
-# Forgive me father, for I have sinned.
-(
-    cd openssl
-
-    ./Configure \
-        --prefix=/usr \
-        --openssldir=/etc/ssl \
-        --libdir=lib \
-        no-unit-test \
-        no-shared \
-        linux-x86_64
-
-    make depend
-    make
-
-    make DESTDIR="$PWD/pkg" install_sw
-)
-
-patch -p1 < python3-always-pip.patch
+for patch in *.patch; do
+    patch -p1 < "$patch"
+done
 
 ./configure \
     --prefix=/usr \
@@ -26,8 +10,7 @@ patch -p1 < python3-always-pip.patch
     --enable-static \
     --with-system-expat \
     --with-system-ffi \
-    --with-openssl="$PWD/openssl/pkg/usr" \
-    --with-openssl-rpath=no \
+    --with-ssl-default-suites='TLSv1.3:TLSv1.2+AEAD+ECDHE:TLSv1.2+AEAD+DHE' \
     --with-ensurepip=yes
 
 make

@@ -1,4 +1,4 @@
 %BLAKE3
 37b51e7a1285525e54071df48ba4a3b763480c63fd9f029b39ace0f5eb15ee7f  Python-3.10.0.tar.xz
-ad380ed774eebaac9cafeb3f82422e2e5ffad0c20d239a95ad34ddf82a369d8d  openssl-3.0.0.tar.gz
 3d764f2f6c4d40261a96617a6fa23456a7db841a919ed2589d15746b7ef26314  python3-always-pip.patch
+6176ac6bc4178963dcb8745297d110ac8ba412cea57ad6f339f0c6ffc39917e3  libressl-support.patch

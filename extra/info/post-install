@@ -1,1 +1,5 @@
-../texinfo/post-install
+#!/bin/sh
+
+find "$CPT_ROOT/usr/share/info" -type f ! -name dir | while read -r file; do
+    install-info "$file" "$CPT_ROOT/usr/share/info/dir"
+done

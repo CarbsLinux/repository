@@ -1,8 +1,9 @@
 #!/bin/sh -e
 
+# LANG variable can often lead to failures in compiling lineedit commands. So we
+# disable it.
+unset LANG
 export LDFLAGS="$LDFLAGS -static"
-
-patch -p1 < neatvi-completion.patch
 
 ./configure \
     --prefix=/usr \

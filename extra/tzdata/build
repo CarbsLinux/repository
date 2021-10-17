@@ -2,11 +2,17 @@
 
 pkg_dir=$1
 
-make CC="${CC:-gcc}" LDFLAGS="$LDFLAGS -static"
+make CC="${CC:-cc}" LDFLAGS="$LDFLAGS -static"
 
-clinst -Dm755 -t "$1/usr/bin"  zic zdump
-clinst -Dm755 -s '1c#!/bin/sh' tzselect "$1/usr/bin/tzselect"
-clman  -d "$1" zic.8 zdump.8 tzselect.8
+# I decided to remove these from the package, because I don't know of a use case
+# since we are building the timezone files in the package's build script anyway.
+# If you for some reason think that these should absolutely be included in the
+# package, contact me saying so, otherwise uncomment the following lines to
+# install these.
+#
+# clinst -Dm755 -t "$1/usr/bin"  zic zdump
+# clinst -Dm755 -s '1c#!/bin/sh' tzselect "$1/usr/bin/tzselect"
+# clman  -d "$1" zic.8 zdump.8 tzselect.8
 
 set -- africa asia australasia europe northamerica southamerica
 

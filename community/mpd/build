@@ -2,8 +2,6 @@
 
 export DESTDIR="$1"
 
-export CPPFLAGS="$CPPFLAGS -I$PWD/subprojects/fmt/include"
-
 cl-meson \
     --auto-features=auto \
     -Dlibmpdclient=disabled \

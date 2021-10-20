@@ -8,5 +8,8 @@ ulimit -n 4096 ||:
     --with-intl=none \
     --ninja
 
+# Remove broken subninja that we don't require anyway.
+clsed '/^subninja.*openssl-fipsmodule/d' out/Release/build.ninja
+
 ninja -C out/Release
 tools/install.py install "$1" /usr

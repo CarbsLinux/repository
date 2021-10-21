@@ -3,13 +3,11 @@
 export DESTDIR="$1"
 
 mk() { 
-    # No, I actually want to get the output, shellcheck, thank you very much.
-    # shellcheck disable=2181
     make \
         PREFIX=/usr \
         MANDIR=/usr/share \
         DESTDIR="$DESTDIR" \
-        WAYLAND="$(cpt l wayland >/dev/null 2>&1; printf '%s' "$(($? == 0))")" \
+        WAYLAND="$(cpt l -C wayland 1 0)" \
         "$@" 
 }
 

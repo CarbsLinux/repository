@@ -11,5 +11,6 @@ mesa
 meson make
 pixman
 wayland
+wayland-protocols make
 xorgproto make
 xtrans make

@@ -1,11 +1,12 @@
 #!/bin/sh -e
 
-export DESTDIR=$PWD/tmp
+export xcvt=$PWD/tmp
 
 (
+    export DESTDIR=$xcvt
     cd xcvt
 
-    # Make it a static library
+    # Make it a static library, so we don't need it.
     clsed 's,shared_library,static_library,' lib/meson.build
 
     cl-meson \
@@ -17,10 +18,9 @@ export DESTDIR=$PWD/tmp
 
 patch -p1 < rootless_modesetting.patch
 
-export LIBXCVT_CFLAGS="-I$DESTDIR/usr/include"
-export LIBXCVT_LIBS="-L$DESTDIR/usr/lib -lxcvt"
-export PKG_CONFIG_PATH="$DESTDIR/usr/lib/pkgconfig"
-export DESTDIR=$1
+export LIBXCVT_CFLAGS="-I$xcvt/usr/include"
+export LIBXCVT_LIBS="-L$xcvt/usr/lib -lxcvt"
+export PKG_CONFIG_PATH="$xcvt/usr/lib/pkgconfig"
 
 ./configure \
     --prefix=/usr \
@@ -40,6 +40,3 @@ make
 make DESTDIR="$1" install
 
 rm -f "$1/usr/share/X11/xorg.conf.d/10-evdev.conf"
-
-clman tmp/usr/share/man/man1/cvt.1
-clinst -Dm755

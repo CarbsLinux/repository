@@ -1,12 +1,12 @@
 #!/bin/sh -e
 
-export xcvt=$PWD/tmp
+export DESTDIR=$1
 
 (
-    export DESTDIR=$xcvt
     cd xcvt
 
-    # Make it a static library, so we don't need it.
+    # This is a really small library that is probably only needed by
+    # xorg-server. We are going to build it statically.
     clsed 's,shared_library,static_library,' lib/meson.build
 
     cl-meson \
@@ -18,9 +18,9 @@ export xcvt=$PWD/tmp
 
 patch -p1 < rootless_modesetting.patch
 
-export LIBXCVT_CFLAGS="-I$xcvt/usr/include"
-export LIBXCVT_LIBS="-L$xcvt/usr/lib -lxcvt"
-export PKG_CONFIG_PATH="$xcvt/usr/lib/pkgconfig"
+export LIBXCVT_CFLAGS="-I$1/usr/include"
+export LIBXCVT_LIBS="-L$1/usr/lib -lxcvt"
+export PKG_CONFIG_PATH="$1/usr/lib/pkgconfig"
 
 ./configure \
     --prefix=/usr \

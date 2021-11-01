@@ -20,9 +20,14 @@ Information on the repository
 This repository assumes that the packages in the [cpt-base] file will be
 available at all times. You might go ahead and change it, but don't post any
 issues when a package fails to build because you removed a package that was
-previously in the base.
+previously in the base. Most importantly, lots of packages use the convenience
+programs provided in the [cl-utils] package in their build scripts, so if you
+want to use the packages of this repository from a separate distribution, you
+may want to consider obtaining `cl-utils` in one way or another and customise it
+for your own use.
 
 [cpt-base]: (./core/cpt/files/cpt-base)
+[cl-utils]: (./core/cl-utils/)
 
 All the package repositories have their own purpose:
 

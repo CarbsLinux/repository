@@ -1,5 +1,4 @@
-https://cdn.kernel.org/pub/linux/network/wireless/iwd-1.18.tar.xz
+https://cdn.kernel.org/pub/linux/network/wireless/iwd-1.19.tar.xz
 patches/fix-name-request.patch
-patches/musl-fix.patch
 files/ead.run
 files/iwd.run

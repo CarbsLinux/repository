@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+export CFLAGS="$CFLAGS -static"
+
 cfgdir=/etc/nginx
 tmpdir=/var/tmp/nginx
 

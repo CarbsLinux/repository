@@ -17,7 +17,7 @@ make DESTDIR="$tmp_dir" install
 cd libbsd
 
 export CFLAGS="$CFLAGS -I$tmp_dir/include"
-export LIBS=$tmp_dir/lib/libmd.a
+export LIBS="$tmp_dir/lib/libmd.a"
 
 ./configure \
     --prefix=/usr

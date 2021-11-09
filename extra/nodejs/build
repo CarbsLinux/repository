@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# shellcheck disable=3045
+# shellcheck disable=3045,2039
 ulimit -n 4096 ||:
 
 ./configure \

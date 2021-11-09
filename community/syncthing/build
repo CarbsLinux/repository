@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-export GOPATH=$PWD/gopath
+export GOPATH="$PWD/gopath"
 trap "go clean -modcache" EXIT INT
 go mod vendor
 

@@ -1,13 +1,7 @@
 #!/bin/sh -e
 
-export DESTDIR="$1"
+make libutf8proc.a
 
-cmake -B output \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DBUILD_SHARED_LIBS=OFF \
-    -Wno-dev
-
-cmake --build   output
-cmake --install output
-
+clinst -Dm644 libutf8proc.a "$1/usr/lib/libutf8proc.a"
+clinst -Dm644 utf8proc.h    "$1/usr/include/utf8proc.h"
 clinst -Dm644 -s "s,@VERSION@,$2,g" libutf8proc.pc.in "$1/usr/lib/pkgconfig/libutf8proc.pc"

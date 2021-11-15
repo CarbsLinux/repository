@@ -1,5 +1,6 @@
 fontconfig
 freetype-harfbuzz
+libutf8proc make
 pixman
 scdoc make
 tllist make

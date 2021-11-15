@@ -9,9 +9,14 @@ clsed 's/as_fn_error.*fts/: "/g'     configure
 clsed 's/as_fn_error.*obstack/: "/g' configure
 
 # Don't compile unrelated C files which require argp.
-clsed 's/color.*printversion../#/g' lib/Makefile.in
-clsed 's/error.*printversion../#/g' lib/Makefile.in
-clsed 's/color\.\$(OBJ/#/g'         lib/Makefile.in
+#
+# False positive, we are not trying to expand anything
+# shellcheck disable=2016
+{
+    clsed 's/color.*printversion../#/g' lib/Makefile.in
+    clsed 's/error.*printversion../#/g' lib/Makefile.in
+    clsed 's/color\.\$(OBJ/#/g'         lib/Makefile.in
+}
 
 ./configure \
     --prefix=/usr \

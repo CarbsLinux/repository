@@ -4,10 +4,14 @@ for patch in bash51-0??; do
     patch -p0 < "$patch"
 done
 
+# Even with '--disable-nls', bash build fails if gettext-tiny is available
+# on the system. We can completely disable it, by adding the "--with-included"
+# gettext flag
 ./configure \
     --prefix=/usr \
     --without-bash-malloc \
-    --disable-nls
+    --disable-nls \
+    --with-included-gettext
 
 export MAKEFLAGS="TERMCAP_LIB=/usr/lib/libncursesw.a $MAKEFLAGS"
 

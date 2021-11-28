@@ -1,2 +1,3 @@
-bd90c3eb96bee996206b83be7065c9ce19aef38c3f4fb53073ada0d0b69bbce3  sqlite-autoconf-3360000.tar.gz
-8f24f63ecb9c87475a193564b12a298844a795dff4354409faaddefb2adec829  VERSION_0_1_8.tar.gz
+%BLAKE3
+62db9db908aacc602ec6a13b9c33d56b4cf7df1723b4be1e6572cc22f7108706  sqlite-autoconf-3370000.tar.gz
+38d5b8c238aca602d41e6230a665564701dd8b8fdc40cb7479ea00506f1d2b15  VERSION_0_1_8.tar.gz

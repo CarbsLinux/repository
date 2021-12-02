@@ -7,8 +7,14 @@ patch -p1 < no-bash.patch
 # This breaks Go.
 :> nostrip
 
+case $3 in
+    x86_64) export GOARCH=amd64 ;;
+    i?86)   export GOARCH=386   ;;
+    *) printf 'unsupported architecture: %s\n' "$3"
+       exit 1
+esac
+
 export CC="${CC:-cc}"
-export GOARCH=amd64
 export GO_LDFLAGS="-w -s"
 
 [ -f "$CPT_ROOT/var/db/cpt/installed/go/manifest" ] || {

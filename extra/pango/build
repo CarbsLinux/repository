@@ -7,7 +7,6 @@ cl-meson \
     -Dfreetype=enabled \
     -Dcairo=enabled \
     -Dxft=enabled \
-    -Dgir=true \
     -Dgtk_doc=false \
     -Dintrospection=enabled \
     . build

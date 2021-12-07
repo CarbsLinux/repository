@@ -11,7 +11,7 @@ cpt l libX11 libSM libICE >/dev/null 2>&1 && xorg=--with-x
     --disable-asserts \
     --with-dbus-user=dbus \
     --with-system-socket=/run/dbus/system_bus_socket \
-    --with-system-pid-file=/run/dus/pid \
+    --with-system-pid-file=/run/dbus/pid \
     --with-console-auth-dir=/run/console \
     "$xorg" \
     --disable-systemd \

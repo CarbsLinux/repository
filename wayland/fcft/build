@@ -8,6 +8,3 @@ cl-meson \
 
 ninja -C output
 ninja -C output install
-
-# Remove unneeded files
-rm -r "$1/usr/share/doc"

@@ -1,0 +1,129 @@
+From a83304d4d673aae6efed51da1986bd7315a4d642 Mon Sep 17 00:00:00 2001
+From: Cem Keylan <cem@ckyln.com>
+Date: Tue, 7 Dec 2021 14:40:57 +0100
+Subject: [PATCH] Add support for libgrapheme as an icu replacement
+
+---
+ meson.build       | 11 ++++++++++-
+ meson_options.txt |  8 ++++++++
+ src/console.c     | 28 ++++++++++++++++++++++++++++
+ 3 files changed, 46 insertions(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 7cf64b5..26ee0a1 100644
+--- a/meson.build
++++ b/meson.build
+@@ -38,6 +38,15 @@ else
+   target_single_ws = false
+ endif
+ 
++_unicode = get_option('unicode')
++if _unicode == 'icu'
++  unicode_lib = dependency('icu-io')
++  add_project_arguments('-DIMV_USE_ICU', language: 'c')
++elif _unicode == 'grapheme'
++  unicode_lib = cc.find_library('grapheme')
++  add_project_arguments('-DIMV_USE_GRAPHEME', language: 'c')
++endif
++
+ gl_dep = dependency('gl', required: false)
+ if not gl_dep.found()
+   # libglvnd fallback for pure-wayland systems
+@@ -49,7 +58,7 @@ deps_for_imv = [
+   gl_dep,
+   dependency('threads'),
+   dependency('xkbcommon'),
+-  dependency('icu-io'),
++  unicode_lib,
+   dependency('inih', fallback : ['inih', 'inih_dep']),
+   m_dep,
+ ]
+diff --git a/meson_options.txt b/meson_options.txt
+index 389b7fd..c13ef7a 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -8,6 +8,14 @@ option('windows',
+   description : 'window system to use'
+ )
+ 
++# Unicode backend - default is ICU
++option('unicode',
++  type: 'combo',
++  value: 'icu',
++  choices : ['icu', 'grapheme'],
++  description : 'unicode library to use'
++)
++
+ option('test',
+   type : 'feature',
+   description : 'enable tests'
+diff --git a/src/console.c b/src/console.c
+index 073274f..323383f 100644
+--- a/src/console.c
++++ b/src/console.c
+@@ -6,8 +6,15 @@
+ #include <ctype.h>
+ #include <stdlib.h>
+ #include <string.h>
++
++#ifdef IMV_USE_ICU
+ #include <unicode/utext.h>
+ #include <unicode/ubrk.h>
++#endif
++
++#ifdef IMV_USE_GRAPHEME
++#include <grapheme.h>
++#endif
+ 
+ struct imv_console {
+   char *buffer;
+@@ -25,6 +32,7 @@ struct imv_console {
+ /* Iterates forwards over characters in a UTF-8 string */
+ static size_t next_char(char *buffer, size_t position)
+ {
++  #if defined(IMV_USE_ICU)
+   size_t result = position;
+   UErrorCode status = U_ZERO_ERROR;
+   UText *ut = utext_openUTF8(NULL, buffer, -1, &status);
+@@ -42,11 +50,19 @@ static size_t next_char(char *buffer, size_t position)
+   utext_close(ut);
+   assert(U_SUCCESS(status));
+   return result;
++  #elif defined(IMV_USE_GRAPHEME)
++  if (buffer[position] != 0) {
++    return position + grapheme_bytelen(buffer + position);
++  } else {
++    return position;
++  }
++  #endif
+ }
+ 
+ /* Iterates backwards over characters in a UTF-8 string */
+ static size_t prev_char(char *buffer, size_t position)
+ {
++  #if defined(IMV_USE_ICU)
+   size_t result = position;
+   UErrorCode status = U_ZERO_ERROR;
+   UText *ut = utext_openUTF8(NULL, buffer, -1, &status);
+@@ -64,6 +80,18 @@ static size_t prev_char(char *buffer, size_t position)
+   utext_close(ut);
+   assert(U_SUCCESS(status));
+   return result;
++
++  #elif defined(IMV_USE_GRAPHEME)
++  size_t result = 0;
++  size_t step;
++  do {
++    step = grapheme_bytelen(buffer + result);
++    if (result + step >= position)
++      break;
++    result += step;
++  } while (step > 0);
++  return result;
++  #endif
+ }
+ 
+ static void add_to_history(struct list *history, const char *line)
+-- 
+2.32.0
+

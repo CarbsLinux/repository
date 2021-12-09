@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+patch -p1 < support-libgrapheme.patch
+
 export DESTDIR="$1"
 
 cl-meson \
@@ -7,6 +9,7 @@ cl-meson \
     -Dlibpng=enabled \
     -Dlibtiff=enabled \
     -Dlibrsvg="$(cpt l -C librsvg enabled disabled)" \
+    -Dunicode=grapheme \
     -Dwindows=wayland \
     . output
 

@@ -1,9 +1,12 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --enable-static \
-    --disable-documentation
+export DESTDIR="$1"
 
-make
-make DESTDIR="$1" install 
+cl-meson \
+    --default-library=both \
+    -Ddocumentation=false \
+    -Dtests=false \
+    . output
+
+ninja -C output
+ninja -C output install

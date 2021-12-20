@@ -6,7 +6,7 @@ cl-meson \
     --default-library=both \
     -Dexamples=false \
     -Dxwayland=enabled \
-    -Dbackends=drm,libinput,x11 \
+    -Dx11-backend=enabled \
     -Drenderers=gles2 \
     . build
 

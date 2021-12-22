@@ -1,6 +1,8 @@
 #!/bin/sh -e
 
-patch -p1 < support-libgrapheme.patch
+for patch in *.patch; do
+    [ -f "$patch" ] && patch -p1 < "$patch"
+done
 
 export DESTDIR="$1"
 

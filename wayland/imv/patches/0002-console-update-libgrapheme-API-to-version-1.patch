@@ -1,0 +1,39 @@
+From 3e76c68e6de460e0b49402962eee47555e2711ce Mon Sep 17 00:00:00 2001
+From: Cem Keylan <cem@ckyln.com>
+Date: Wed, 22 Dec 2021 18:45:43 +0100
+Subject: [PATCH imv] console: update libgrapheme API to version 1
+
+---
+libgrapheme has recently seen its first release, along with some API
+changes. I have updated the functions to match the current API. The
+dedicated page for the library is now on
+<https://libs.suckless.org/libgrapheme>.
+
+ src/console.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/console.c b/src/console.c
+index 323383f..9db18e7 100644
+--- a/src/console.c
++++ b/src/console.c
+@@ -52,7 +52,7 @@ static size_t next_char(char *buffer, size_t position)
+   return result;
+   #elif defined(IMV_USE_GRAPHEME)
+   if (buffer[position] != 0) {
+-    return position + grapheme_bytelen(buffer + position);
++    return position + grapheme_next_character_break(buffer + position, SIZE_MAX);
+   } else {
+     return position;
+   }
+@@ -85,7 +85,7 @@ static size_t prev_char(char *buffer, size_t position)
+   size_t result = 0;
+   size_t step;
+   do {
+-    step = grapheme_bytelen(buffer + result);
++    step = grapheme_next_character_break(buffer + result, SIZE_MAX);
+     if (result + step >= position)
+       break;
+     result += step;
+-- 
+2.34.1
+

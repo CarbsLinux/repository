@@ -8,7 +8,6 @@ cl-meson \
     -Dwin32-backend=false \
     -Dintrospection=disabled \
     -Dmedia-gstreamer=disabled \
-    -Dsassc=disabled \
     -Dprint-cups=disabled \
     -Ddemos=false \
     -Df16c=disabled \

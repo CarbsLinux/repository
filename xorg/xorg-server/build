@@ -7,7 +7,7 @@ export DESTDIR="$1"
 
     # This is a really small library that is probably only needed by
     # xorg-server. We are going to build it statically.
-    clsed 's,shared_library,static_library,' lib/meson.build
+    clsed 's,shared_library,static_library,;/version/d' lib/meson.build
 
     cl-meson \
         . output

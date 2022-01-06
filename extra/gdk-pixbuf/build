@@ -4,7 +4,6 @@ export DESTDIR="$1"
 
 cl-meson \
     -Dintrospection=enabled \
-    -Djasper=false \
     -Dpng=true \
     -Ddocs=false \
     -Dman=false \

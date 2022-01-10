@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
-patch -p1 < respawn-fix.patch
+for patch in *.patch; do
+    patch -p1 < "$patch"
+done
 
 make DESTDIR="$1" install

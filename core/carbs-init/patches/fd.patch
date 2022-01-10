@@ -1,0 +1,13 @@
+diff --git a/rc.boot b/rc.boot
+index 49d7fa5..ba5d3dd 100755
+--- a/rc.boot
++++ b/rc.boot
+@@ -27,7 +27,7 @@ out "Mounting pseudo filesystems..."; {
+     mnt mode=1777,nosuid,nodev        tmpfs  shm    /dev/shm
+ 
+     {
+-        ln -sf /proc/self/fs /dev/fd
++        ln -sf /proc/self/fd /dev/fd
+         ln -sf fd/0          /dev/stdin
+         ln -sf fd/1          /dev/stdout
+         ln -sf fd/2          /dev/stderr

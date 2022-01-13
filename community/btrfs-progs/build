@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-clsed '/sysinfo\.h/d' common/utils.c
-
 ./configure \
     --prefix=/usr \
     --bindir=/usr/bin \

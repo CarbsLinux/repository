@@ -1,21 +1,8 @@
-From 308e4f113891bea997bcac7e7e48a18956478265 Mon Sep 17 00:00:00 2001
-From: Michael Forney <mforney@mforney.org>
-Date: Tue, 5 Oct 2021 14:44:43 -0700
-Subject: [PATCH] Re-add support for libressl
-
----
- Modules/_hashopenssl.c          |  4 +++
- Modules/_ssl.c                  | 58 +++++++++++++++++++++------------
- Modules/_ssl/debughelpers.c     |  4 +++
- Modules/clinic/_hashopenssl.c.h | 10 +++++-
- Modules/clinic/_ssl.c.h         | 28 ++++++++++++----
- 5 files changed, 77 insertions(+), 27 deletions(-)
-
 diff --git a/Modules/_hashopenssl.c b/Modules/_hashopenssl.c
-index b9e68c05c3..75eb76266a 100644
+index cb8460ab2f..2c245262f3 100644
 --- a/Modules/_hashopenssl.c
 +++ b/Modules/_hashopenssl.c
-@@ -40,10 +40,12 @@
+@@ -45,10 +45,12 @@
  
  #define MUNCH_SIZE INT_MAX
  
@@ -26,9 +13,9 @@ index b9e68c05c3..75eb76266a 100644
  #define PY_OPENSSL_HAS_BLAKE2 1
 +#endif
  
- static PyModuleDef _hashlibmodule;
- 
-@@ -1794,6 +1796,7 @@ hashlib_md_meth_names(PyObject *module)
+ #if OPENSSL_VERSION_NUMBER >= 0x30000000L
+ #define PY_EVP_MD EVP_MD
+@@ -1884,6 +1886,7 @@ hashlib_md_meth_names(PyObject *module)
      return 0;
  }
  
@@ -36,7 +23,7 @@ index b9e68c05c3..75eb76266a 100644
  /*[clinic input]
  _hashlib.get_fips_mode -> int
  
-@@ -1831,6 +1834,7 @@ _hashlib_get_fips_mode_impl(PyObject *module)
+@@ -1921,6 +1924,7 @@ _hashlib_get_fips_mode_impl(PyObject *module)
      return result;
  #endif
  }
@@ -398,6 +385,3 @@ index b59b129af8..f6bcd09e03 100644
  #endif /* !defined(_SSL_ENUM_CRLS_METHODDEF) */
 -/*[clinic end generated code: output=5a7d7bf5cf8ee092 input=a9049054013a1b77]*/
 +/*[clinic end generated code: output=0e12e5e4ee2221b5 input=a9049054013a1b77]*/
--- 
-2.32.0
-

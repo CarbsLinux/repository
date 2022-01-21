@@ -1,3 +1,4 @@
 %BLAKE3
-ab40db58499bba835d5a9979295022678dcf2b7d23397d9330fa24ed3f1ed832  wpa_supplicant-2.9.tar.gz
+7a14f578ff7c6a47c00da7f8259f2d27a458cc08e95d6c20cbd4c3f1fd6ef4dc  wpa_supplicant-2.10.tar.gz
 67a51a809af00ee94b712c3c10d95114eaf9844cd9301de43ee470e0e2ad9305  .config
+31cd8d3da593a5e8dc8afedf74af9383a20fbffd7710eeca63aec1e92e43be03  wpa_supplicant.run

@@ -1,6 +1,29 @@
 #!/bin/sh -e
 
+export WLROOTS_DIR="$PWD/pkg"
+
+(
+cd wlroots
+
+export DESTDIR="$WLROOTS_DIR"
+
+cl-meson \
+    --default-library=static \
+    -Dexamples=false \
+    -Dxwayland=enabled \
+    -Dx11-backend=enabled \
+    -Drenderers=gles2 \
+    . output
+
+ninja -C output
+ninja -C output install
+)
+
 export DESTDIR="$1"
+export LDLIBS="$LDLIBS -L$WLROOTS_DIR/usr/lib $WLROOTS_DIR/usr/lib/libwlroots.a"
+export LDFLAGS="$LDFLAGS -L$WLROOTS_DIR/usr/lib $WLROOTS_DIR/usr/lib/libwlroots.a"
+export CFLAGS="$CFLAGS -I$WLROOTS_DIR/usr/include"
+export PKG_CONFIG_PATH=$WLROOTS_DIR/usr/lib/pkgconfig
 
 cl-meson \
     -Dman-pages=enabled \

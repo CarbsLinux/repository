@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+mk() {
+    make \
+        PREFIX=/usr \
+        "$@"
+}
+
+mk -C lib
+mk -C programs LDFLAGS="$LDFLAGS -static" lz4 lz4c
+
+mk DESTDIR="$1" install

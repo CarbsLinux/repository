@@ -1,34 +1,24 @@
 #!/bin/sh -e
 
-make MYCFLAGS="$CFLAGS -fPIC" \
-     MYLDFLAGS="$LDFLAGS -static" \
-     posix
+export DESTDIR="$1"
 
-make INSTALL_TOP="$1/usr" \
-     INSTALL_MAN="$1/usr/share/man/man1" \
-     INSTALL_DATA="cp -d" \
-     install
+# Make LUA_ROOT "/usr" instead of "/usr/local"
+clsed '/define LUA_ROOT/c#define LUA_ROOT "/usr/"' src/luaconf.h
 
-mkdir -p "$1/usr/lib/pkgconfig"
-cat <<EOF> "$1/usr/lib/pkgconfig/lua.pc"
-V=${2%.*}
-R=$2
+# Optionally link with readline if available
+r=$(cpt l -C readline 1 "")
 
-prefix=/usr
-INSTALL_BIN=\${prefix}/bin
-INSTALL_INC=\${prefix}/include
-INSTALL_LIB=\${prefix}/lib
-INSTALL_MAN=\${prefix}/man/man1
-INSTALL_LMOD=\${prefix}/share/lua/\${V}
-INSTALL_CMOD=\${prefix}/lib/lua/\${V}
-exec_prefix=\${prefix}
-libdir=\${exec_prefix}/lib
-includedir=\${prefix}/include
+mk() {
+    make \
+        MYCFLAGS="$CFLAGS -fPIC" \
+        MYLDFLAGS="$LDFLAGS" \
+        INSTALL_TOP="$DESTDIR/usr" \
+        INSTALL_MAN="$DESTDIR/usr/share/man/man1" \
+        INSTALL_DATA="cp -d" \
+        "$@"
+}
 
-Name: Lua
-Description: An Extensible Extension Language
-Version: \${R}
-Requires: 
-Libs: -L\${libdir} -llua -lm
-Cflags: -I\${includedir}
-EOF
+mk "linux${r:+-readline}"
+mk install
+
+clinst -Dm644 -s "s|@V@|${2%.*}|;s|@R@|$2|" lua.pc.in "$1/usr/lib/pkgconfig/lua.pc"

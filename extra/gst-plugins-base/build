@@ -7,10 +7,9 @@ cl-meson \
     --auto-features=auto \
     -Dtremor=disabled \
     -Dexamples=disabled \
-    -Dgtk_doc=disabled \
+    -Ddoc=disabled \
     -Dcdparanoia=disabled \
     -Dintrospection=disabled \
-    -Dsndio=enabled \
     . output
 
 ninja -C output

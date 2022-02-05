@@ -1,5 +1,15 @@
 #!/bin/sh -e
 
+check_option() {
+    # Meson >=0.60.0 fails when an option used is unspecified in the project.
+    # Meson also fails when supplied with empty arguments, so we set the return
+    # value to something that the project provides
+    grep -q "^option('$1'," meson_options.txt || set -- localedir share/locale
+    # We are not trying to pass an option to printf here.
+    # shellcheck disable=3045
+    printf '-D%s=%s' "$@"
+}
+
 export DESTDIR="$1"
 
 [ "$CPT_TEST" ] && test=enabled
@@ -10,9 +20,10 @@ for plugin in libav good bad ugly; do (
     # Enable auto-features in gst-plugins
     cl-meson \
         --auto-features=auto \
-        -Dexample=false \
-        -Dtests=${test:-disabled} \
-        -Dqt5=disabled \
+        "$(check_option example false)" \
+        "$(check_option introspection disabled)" \
+        "$(check_option tests ${test:-disabled})" \
+        "$(check_option qt5 disabled)" \
         . output
 
     ninja -C output

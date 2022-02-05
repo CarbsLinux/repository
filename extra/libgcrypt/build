@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+clsed '43a #include <limits.h>' random/jitterentropy-base-user.h
+clsed '44a #include <fcntl.h>'  random/jitterentropy-base-user.h
+
 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
@@ -7,5 +10,5 @@
     --localstatedir=/var \
     --enable-static
 
-make
+make -j1
 make DESTDIR="$1" install

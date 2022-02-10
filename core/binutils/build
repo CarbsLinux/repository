@@ -36,7 +36,3 @@ EOF
 
 make
 make DESTDIR="$1" install
-
-# Manual pages are empty for some reason in binutils-2.37, so
-# we are installing the manual pages from 2.36.1
-clman -d "$1" man/*.1

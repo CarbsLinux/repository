@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 export GOPATH="$PWD/gopath"
+export GOFLAGS="$GOFLAGS -mod=vendor"
 trap "go clean -modcache" EXIT INT
-go mod vendor
 
 go run build.go -no-upgrade -version "v$2" build
 

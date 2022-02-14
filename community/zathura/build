@@ -2,7 +2,8 @@
 
 export DESTDIR="$1"
 
-patch -p1 < remove_gettext.patch
+# Disable gettext requirement.
+clsed '/i18n/,/^)$/d' data/meson.build
 
 # Fix build errors when appstream-glib or
 # desktop-file-utils are installed.

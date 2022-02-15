@@ -11,8 +11,7 @@
 
 )
 
-pyver=$(python3 --version) pyver=${pyver##* }
-PYTHONPATH="$PWD/mako/dist/usr/lib/python${pyver%.*}/site-packages:$(python -c "import sys; print(':'.join(sys.path))")"
+PYTHONPATH=$(./pythonpath)
 
 export PYTHONPATH
 export DESTDIR="$1"

@@ -1,9 +1,4 @@
 #!/bin/sh -e
 
-export GOPATH="$PWD/gopath"
-
-trap "go clean -modcache" EXIT INT
-go mod vendor
-
-CGO_ENABLED=0 go build
+CGO_ENABLED=0 go build -v -mod=vendor
 clinst -Dm755 hugo "$1/usr/bin/hugo"

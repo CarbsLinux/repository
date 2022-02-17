@@ -13,9 +13,11 @@ libfontenc
 libpciaccess
 libressl
 libxcb
+libxcvt make
 libxkbfile
 libxshmfence
 mesa
+meson make
 pixman
 xkeyboard-config
 xtrans make

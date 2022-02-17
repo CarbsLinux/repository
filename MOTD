@@ -5,6 +5,13 @@
 #### #### #    #### ###  #### # #  # ###  #  #
 ------------------------------------------------------------
 
+- 2022-02-17 :: Users who have 'xorg-server' should install
+  'libxcvt' package and switch to it using the alternative
+  system:
+
+        cpt bi libxcvt
+        cpt a | grep ^libxcvt | cpt a -
+
 - 2021-09-06 :: 'gzip' has been renamed to 'pigz'. You need
   to run the following to switch between packages:
 

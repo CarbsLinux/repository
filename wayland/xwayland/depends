@@ -5,6 +5,7 @@ libdrm
 libepoxy
 libressl
 libtirpc
+libxcvt make
 libxkbfile
 libxshmfence
 mesa

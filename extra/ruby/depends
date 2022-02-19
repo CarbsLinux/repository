@@ -1,3 +1,4 @@
-libffi make
+autoconf make
+libffi   make
 libressl
 zlib

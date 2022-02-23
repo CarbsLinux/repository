@@ -4,7 +4,7 @@ export DESTDIR="$1"
 
 cl-meson \
     -Dexamples=disabled \
-    -Dbuiltin=enabled \
+    -Dlibseat-builtin=enabled \
     -Dman-pages=enabled \
     . output
 

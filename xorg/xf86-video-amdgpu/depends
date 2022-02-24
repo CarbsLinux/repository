@@ -3,4 +3,5 @@ expat
 libdrm
 libpciaccess
 mesa
-xorgproto
+xorgproto   make
+xorg-server make

@@ -1,11 +1,15 @@
 #!/bin/sh -e
 
+export LDFLAGS="$LDFLAGS -static"
+
 ./configure \
     --prefix=/usr \
-    --sbindir=/usr/sbin \
+    --sbindir=/usr/bin \
+    --disable-shared \
+    --enable-static \
     --enable-libipq \
-    --with-xtlibdir=/lib/xtables \
+    --with-xtlibdir=/usr/lib/xtables \
     --disable-nftables
 
-make
+make LDFLAGS="$LDFLAGS -all-static"
 make DESTDIR="$1" install

@@ -1,2 +1,3 @@
 %BLAKE3
-a556aae48ce505774e984d0a566d9452cd3c8dcded0db20cfe63871c61002db8  glib-networking-2.70.1.tar.xz
+175c8c47aca7ca729ecedd68cc042dccabde73a96584585cd0300291a9e21885  glib-networking-2.72.0.tar.xz
+ed0366e9e1df448074e139fc4bc0696ed22f35ef9f34edfe7f740ebcba65828b  libressl.patch

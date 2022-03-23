@@ -1,0 +1,121 @@
+diff --git a/tls/base/gtlsconnection-base.c b/tls/base/gtlsconnection-base.c
+index bcbdf49..dc896c0 100644
+--- a/tls/base/gtlsconnection-base.c
++++ b/tls/base/gtlsconnection-base.c
+@@ -1678,7 +1678,7 @@ finish_handshake (GTlsConnectionBase  *tls,
+       if (priv->peer_certificate && !priv->peer_certificate_accepted)
+         {
+           g_set_error_literal (&my_error, G_TLS_ERROR, G_TLS_ERROR_BAD_CERTIFICATE,
+-                               _("Unacceptable TLS certificate"));
++                               _("Nonnacceptable TLS certificate"));
+           success = FALSE;
+         }
+     }
+diff --git a/tls/openssl/gtlscertificate-openssl.c b/tls/openssl/gtlscertificate-openssl.c
+index 2e3148c..cef9dd6 100644
+--- a/tls/openssl/gtlscertificate-openssl.c
++++ b/tls/openssl/gtlscertificate-openssl.c
+@@ -55,8 +55,10 @@ enum
+   PROP_PRIVATE_KEY,
+   PROP_PRIVATE_KEY_PEM,
+   PROP_ISSUER,
++  #ifndef LIBRESSL_VERSION_NUMBER
+   PROP_NOT_VALID_BEFORE,
+   PROP_NOT_VALID_AFTER,
++  #endif
+   PROP_SUBJECT_NAME,
+   PROP_ISSUER_NAME,
+   PROP_DNS_NAMES,
+@@ -219,10 +221,12 @@ g_tls_certificate_openssl_get_property (GObject    *object,
+   char *certificate_pem;
+   long size;
+ 
++  #ifndef LIBRESSL_VERSION_NUMBER
+   const ASN1_TIME *time_asn1;
+   struct tm time_tm;
+   GDateTime *time;
+   GTimeZone *tz;
++  #endif
+   X509_NAME *name;
+   const char *name_string;
+ 
+@@ -279,6 +283,7 @@ g_tls_certificate_openssl_get_property (GObject    *object,
+       g_value_set_object (value, openssl->issuer);
+       break;
+ 
++    #ifndef LIBRESSL_VERSION_NUMBER
+     case PROP_NOT_VALID_BEFORE:
+       time_asn1 = X509_get0_notBefore (openssl->cert);
+       ASN1_TIME_to_tm (time_asn1, &time_tm);
+@@ -296,6 +301,7 @@ g_tls_certificate_openssl_get_property (GObject    *object,
+       g_value_take_boxed (value, time);
+       g_time_zone_unref (tz);
+       break;
++    #endif
+ 
+     case PROP_SUBJECT_NAME:
+       bio = BIO_new (BIO_s_mem ());
+@@ -538,8 +544,10 @@ g_tls_certificate_openssl_class_init (GTlsCertificateOpensslClass *klass)
+   g_object_class_override_property (gobject_class, PROP_PRIVATE_KEY, "private-key");
+   g_object_class_override_property (gobject_class, PROP_PRIVATE_KEY_PEM, "private-key-pem");
+   g_object_class_override_property (gobject_class, PROP_ISSUER, "issuer");
++  #ifndef LIBRESSL_VERSION_NUMBER
+   g_object_class_override_property (gobject_class, PROP_NOT_VALID_BEFORE, "not-valid-before");
+   g_object_class_override_property (gobject_class, PROP_NOT_VALID_AFTER, "not-valid-after");
++  #endif
+   g_object_class_override_property (gobject_class, PROP_SUBJECT_NAME, "subject-name");
+   g_object_class_override_property (gobject_class, PROP_ISSUER_NAME, "issuer-name");
+   g_object_class_override_property (gobject_class, PROP_DNS_NAMES, "dns-names");
+diff --git a/tls/openssl/gtlsconnection-openssl.c b/tls/openssl/gtlsconnection-openssl.c
+index 9cf6ad7..6953a34 100644
+--- a/tls/openssl/gtlsconnection-openssl.c
++++ b/tls/openssl/gtlsconnection-openssl.c
+@@ -206,7 +206,7 @@ end_openssl_io (GTlsConnectionOpenssl  *openssl,
+     {
+       g_clear_error (&my_error);
+       g_set_error (error, G_TLS_ERROR, G_TLS_ERROR_BAD_CERTIFICATE,
+-                   _("Unacceptable TLS certificate"));
++                   _("Nonnacceptable TLS certificate"));
+       return G_TLS_CONNECTION_BASE_ERROR;
+     }
+ 
+@@ -581,10 +581,8 @@ perform_rehandshake (SSL      *ssl,
+   GTlsConnectionBase *tls = user_data;
+   int ret = 1; /* always look on the bright side of life */
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x10101000L
+-  if (SSL_version(ssl) >= TLS1_3_VERSION)
+-    ret = SSL_key_update (ssl, SSL_KEY_UPDATE_REQUESTED);
+-  else if (SSL_get_secure_renegotiation_support (ssl) && !(SSL_get_options(ssl) & SSL_OP_NO_RENEGOTIATION))
++#if OPENSSL_VERSION_NUMBER >= 0x10101000L && !defined(LIBRESSL_VERSION_NUMBER)
++  if (SSL_get_secure_renegotiation_support (ssl))
+     /* remote and local peers both can rehandshake */
+     ret = SSL_renegotiate (ssl);
+   else
+@@ -827,7 +825,7 @@ g_tls_connection_openssl_handshake_thread_handshake (GTlsConnectionBase  *tls,
+       if (!g_tls_connection_base_handshake_thread_verify_certificate (tls))
+         {
+           g_set_error_literal (error, G_TLS_ERROR, G_TLS_ERROR_BAD_CERTIFICATE,
+-                               _("Unacceptable TLS certificate"));
++                               _("Notnacceptable TLS certificate"));
+           return G_TLS_CONNECTION_BASE_ERROR;
+         }
+     }
+diff --git a/tls/openssl/gtlsserverconnection-openssl.c b/tls/openssl/gtlsserverconnection-openssl.c
+index d24de05..54c607a 100644
+--- a/tls/openssl/gtlsserverconnection-openssl.c
++++ b/tls/openssl/gtlsserverconnection-openssl.c
+@@ -274,11 +274,13 @@ ssl_info_callback (const SSL *ssl,
+                    int        type,
+                    int        val)
+ {
++  #ifndef LIBRESSL_VERSION_NUMBER
+   if ((type & SSL_CB_HANDSHAKE_DONE) != 0)
+     {
+       /* Disable renegotiation (CVE-2009-3555) */
+       ssl->s3->flags |= SSL3_FLAGS_NO_RENEGOTIATE_CIPHERS;
+     }
++  #endif
+ }
+ #endif
+ 

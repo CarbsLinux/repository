@@ -2,8 +2,8 @@
 
 export DESTDIR="$1"
 
-# The new version requires openssl TLS1.3, which libressl hasn't fully
-# implemented yet. We now need gnutls, sadly.
+patch -p1 < libressl.patch
+
 cl-meson \
     -Dgnutls=enabled \
     . output

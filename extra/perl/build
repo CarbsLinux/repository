@@ -24,7 +24,7 @@ export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
     -Dar="${AR:-ar}" \
     -Dnm="${NM:-nm}" \
     -Dranlib="${RANLIB:-ranlib}" \
- 	-Dperl_static_inline="static __inline__" \
+    -Dperl_static_inline="static __inline__" \
     -Dd_static_inline
 
 make
@@ -42,3 +42,7 @@ find "$1" \( \
 
 # Fix permissions.
 find "$1/usr/lib" -type f -exec chmod 644 {} \;
+
+# This is the first time ever that I'm removing the manual pages from a package,
+# but perl install hundreds of manual pages and they are over 20MBs total.
+rm -rf "$1/usr/share/man"

@@ -1,6 +1,6 @@
 diff -ur a/go-current/src/make.bash b/go-current/src/make.bash
---- a/go-current/src/make.bash	2021-02-16 21:12:04.000000000 +0300
-+++ b/go-current/src/make.bash	2021-02-17 00:42:09.963840381 +0300
+--- a/go-current/src/make.bash	Tue Mar 15 15:08:16 2022
++++ b/go-current/src/make.bash	Wed Mar 23 13:56:11 2022
 @@ -1,4 +1,4 @@
 -#!/usr/bin/env bash
 +#!/bin/sh
@@ -16,26 +16,18 @@ diff -ur a/go-current/src/make.bash b/go-current/src/make.bash
  		if ! cat $se_mount/booleans/allow_execstack | grep -c '^1 1$' >> /dev/null ; then
  			echo "WARNING: the default SELinux policy on, at least, Fedora 12 breaks "
  			echo "Go. You can enable the features that Go needs via the following "
-@@ -154,14 +154,14 @@
+@@ -164,7 +164,7 @@
+ export GOROOT_BOOTSTRAP
  
- export GOROOT_BOOTSTRAP=${GOROOT_BOOTSTRAP:-$HOME/go1.4}
  export GOROOT="$(cd .. && pwd)"
 -IFS=$'\n'; for go_exe in $(type -ap go); do
 +for go_exe in $(command -v go); do
  	if [ ! -x "$GOROOT_BOOTSTRAP/bin/go" ]; then
  		goroot=$(GOROOT='' GOOS='' GOARCH='' "$go_exe" env GOROOT)
  		if [ "$goroot" != "$GOROOT" ]; then
- 			GOROOT_BOOTSTRAP=$goroot
- 		fi
- 	fi
--done; unset IFS
-+done
- if [ ! -x "$GOROOT_BOOTSTRAP/bin/go" ]; then
- 	echo "ERROR: Cannot find $GOROOT_BOOTSTRAP/bin/go." >&2
- 	echo "Set \$GOROOT_BOOTSTRAP to a working Go tree >= Go 1.4." >&2
 diff -ur a/go1.4-bootstrap/src/make.bash b/go1.4-bootstrap/src/make.bash
---- a/go1.4-bootstrap/src/make.bash	2017-11-22 04:33:58.000000000 +0300
-+++ b/go1.4-bootstrap/src/make.bash	2021-02-17 00:40:52.245631282 +0300
+--- a/go1.4-bootstrap/src/make.bash	Wed Nov 22 02:33:58 2017
++++ b/go1.4-bootstrap/src/make.bash	Wed Mar 23 13:53:56 2022
 @@ -1,4 +1,4 @@
 -#!/usr/bin/env bash
 +#!/bin/sh

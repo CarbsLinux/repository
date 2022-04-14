@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 export GOPATH="$PWD/gopath"
-trap "go clean -modcache" EXIT INT
-go mod vendor
+
+clsed '/^BUILD_FLAGS/s/$/ -mod=vendor/' Makefile
 
 make FZF_VERSION="$2" FZF_REVISION="${2##*.}"
 make FZF_VERSION="$2" FZF_REVISION="${2##*.}" install

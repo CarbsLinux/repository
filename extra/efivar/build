@@ -2,12 +2,9 @@
 
 export LDFLAGS="$LDFLAGS -static"
 
-for patch in *.patch; do
-    patch -p1 < "$patch"
-done
-
 mk() {
     make \
+        TOPDIR=.. \
         libdir=/usr/lib/ \
         bindir=/usr/bin/ \
         mandir=/usr/share/man/ \
@@ -17,9 +14,12 @@ mk() {
 
 (
     cd src
+    clsed '/#include <sys\/cdefs.h>/d' compiler.h
 
     # Build static targets.
-    mk libefiboot.a libefivar.a efivar-static efiboot.pc efivar.pc
+    mk libefiboot.a libefivar.a efiboot.pc efivar.pc
+    patch -p2 < ../musl-compat.patch
+    mk efivar-static
 
     # Install the binary.
     clinst -Dm755 efivar-static "$1/usr/bin/efivar"

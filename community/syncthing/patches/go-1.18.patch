@@ -1,0 +1,103 @@
+From e30898ddb3e51225d4bda8661a1510c5cc9afe08 Mon Sep 17 00:00:00 2001
+From: Jeffery To <jeffery.to@gmail.com>
+Date: Sat, 9 Apr 2022 22:01:24 +0800
+Subject: [PATCH] build: Update go directive to 1.17 (fixes #8258) (#8260)
+
+This should fix compiling from the source tarball with Go 1.18.
+---
+ build.go |  2 +-
+ go.mod   | 25 ++++++++++++++++++++++++-
+ go.sum   |  6 ------
+ 3 files changed, 25 insertions(+), 8 deletions(-)
+
+diff --git a/build.go b/build.go
+index 7888c834d2..71cdf12d6c 100644
+--- a/build.go
++++ b/build.go
+@@ -883,7 +883,7 @@ func shouldRebuildAssets(target, srcdir string) bool {
+ 
+ func updateDependencies() {
+ 	runPrint(goCmd, "get", "-u", "./cmd/...")
+-	runPrint(goCmd, "mod", "tidy", "-go=1.16", "-compat=1.16")
++	runPrint(goCmd, "mod", "tidy", "-go=1.17", "-compat=1.17")
+ 
+ 	// We might have updated the protobuf package and should regenerate to match.
+ 	proto()
+diff --git a/go.mod b/go.mod
+index c1ae4cd376..6ff3a7aff4 100644
+--- a/go.mod
++++ b/go.mod
+@@ -57,4 +57,27 @@ require (
+ 	google.golang.org/protobuf v1.27.1
+ )
+ 
+-go 1.16
++require (
++	github.com/Azure/go-ntlmssp v0.0.0-20200615164410-66371956d46c // indirect
++	github.com/beorn7/perks v1.0.1 // indirect
++	github.com/cheekybits/genny v1.0.0 // indirect
++	github.com/go-ole/go-ole v1.2.6 // indirect
++	github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0 // indirect
++	github.com/golang/protobuf v1.5.2 // indirect
++	github.com/marten-seemann/qtls-go1-16 v0.1.4 // indirect
++	github.com/marten-seemann/qtls-go1-17 v0.1.0 // indirect
++	github.com/marten-seemann/qtls-go1-18 v0.1.0-beta.1 // indirect
++	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
++	github.com/nxadm/tail v1.4.8 // indirect
++	github.com/onsi/ginkgo v1.16.4 // indirect
++	github.com/oschwald/maxminddb-golang v1.8.0 // indirect
++	github.com/petermattis/goid v0.0.0-20180202154549-b0b1615b78e5 // indirect
++	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
++	github.com/prometheus/client_model v0.2.0 // indirect
++	github.com/russross/blackfriday/v2 v2.1.0 // indirect
++	github.com/yusufpapurcu/wmi v1.2.2 // indirect
++	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
++	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
++)
++
++go 1.17
+diff --git a/go.sum b/go.sum
+index 9f4fcebeef..e02031fc96 100644
+--- a/go.sum
++++ b/go.sum
+@@ -337,7 +337,6 @@ github.com/prometheus/procfs v0.7.3/go.mod h1:cz+aTbrPOrUb4q7XlbU9ygM+/jj0fzG6c1
+ github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 h1:N/ElC8H3+5XpJzTSTfLsJV/mx9Q9g7kxmchpfZyxgzM=
+ github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475/go.mod h1:bCqnVzQkZxMG4s8nGwiZ5l3QUCyqpo9Y+/ZMZ9VjZe4=
+ github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
+-github.com/russross/blackfriday v1.5.2 h1:HyvC0ARfnZBqnXwABFeSZHpKvJHJJfPz81GNueLj0oo=
+ github.com/russross/blackfriday v1.5.2/go.mod h1:JO/DiYxRf+HjHt06OyowR9PTA263kcR/rfWxYHBV53g=
+ github.com/russross/blackfriday/v2 v2.0.1/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
+ github.com/russross/blackfriday/v2 v2.1.0 h1:JIOH55/0cWyOuilr9/qlrm0BSXldqnqwMsf35Ld67mk=
+@@ -407,7 +406,6 @@ github.com/yuin/goldmark v1.1.27/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9de
+ github.com/yuin/goldmark v1.1.32/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
+ github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
+ github.com/yuin/goldmark v1.3.5/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1Zlc8k=
+-github.com/yuin/goldmark v1.4.0/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1Zlc8k=
+ github.com/yusufpapurcu/wmi v1.2.2 h1:KBNDSne4vP5mbSWnJbO+51IMOXJB67QiYCSBrubbPRg=
+ github.com/yusufpapurcu/wmi v1.2.2/go.mod h1:SBZ9tNy3G9/m5Oi98Zks0QjeHVDvuK0qfxQmPyzfmi0=
+ go.opencensus.io v0.18.0/go.mod h1:vKdFvxhtzZ9onBp9VKHK8z/sRpBMnKAsufL7wlDrCOA=
+@@ -507,7 +505,6 @@ golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4/go.mod h1:p54w0d4576C0XHj96b
+ golang.org/x/net v0.0.0-20210428140749-89ef3d95e781/go.mod h1:OJAsFXCWl8Ukc7SiCT/9KSuxbyM7479/AVlXFRxuMCk=
+ golang.org/x/net v0.0.0-20210525063256-abc453219eb5/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
+ golang.org/x/net v0.0.0-20210716203947-853a461950ff/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
+-golang.org/x/net v0.0.0-20210805182204-aaa1db679c0d/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
+ golang.org/x/net v0.0.0-20210924151903-3ad01bbaa167 h1:eDd+TJqbgfXruGQ5sJRU7tEtp/58OAx4+Ayjxg4SM+4=
+ golang.org/x/net v0.0.0-20210924151903-3ad01bbaa167/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
+ golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be/go.mod h1:N/0e6XlmueqKjAGxoOufVs8QHGRruUQn6yWY3a++T0U=
+@@ -585,7 +582,6 @@ golang.org/x/sys v0.0.0-20210510120138-977fb7262007/go.mod h1:oPkhp1MJrh7nUepCBc
+ golang.org/x/sys v0.0.0-20210603081109-ebe580a85c40/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+ golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+ golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+-golang.org/x/sys v0.0.0-20210809222454-d867a43fc93e/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+ golang.org/x/sys v0.0.0-20210816074244-15123e1e1f71/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+ golang.org/x/sys v0.0.0-20211013075003-97ac67df715c h1:taxlMj0D/1sOAuv/CbSD+MMDof2vbyPTqz5FNYKpXt8=
+ golang.org/x/sys v0.0.0-20211013075003-97ac67df715c/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+@@ -652,8 +648,6 @@ golang.org/x/tools v0.0.0-20201224043029-2b0845dc783e/go.mod h1:emZCQorbCU4vsT4f
+ golang.org/x/tools v0.0.0-20210106214847-113979e3529a/go.mod h1:emZCQorbCU4vsT4fOWvOPXz4eW1wZW4PmDk9uLelYpA=
+ golang.org/x/tools v0.1.1/go.mod h1:o0xws9oXOQQZyjljx8fwUC0k7L1pTE6eaCbjGeHmOkk=
+ golang.org/x/tools v0.1.5/go.mod h1:o0xws9oXOQQZyjljx8fwUC0k7L1pTE6eaCbjGeHmOkk=
+-golang.org/x/tools v0.1.6 h1:SIasE1FVIQOWz2GEAHFOmoW7xchJcqlucjSULTL0Ag4=
+-golang.org/x/tools v0.1.6/go.mod h1:LGqMHiF4EqQNHR1JncWGqT5BVaXmza+X+BDGol+dOxo=
+ golang.org/x/tools v0.1.7 h1:6j8CgantCy3yc8JGBqkDLMKWqZ0RDU2g1HVgacojGWQ=
+ golang.org/x/tools v0.1.7/go.mod h1:LGqMHiF4EqQNHR1JncWGqT5BVaXmza+X+BDGol+dOxo=
+ golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=

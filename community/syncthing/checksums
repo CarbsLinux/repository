@@ -1,2 +1,3 @@
 %BLAKE3
-15255ff34dcbc48d20d6bb8e2aec91119cb35bc25e31bf5d6ffba94ff08aff7b  syncthing-source-v1.19.1.tar.gz
+d054614c0f87b5cc7dfedde7de06918584cc372b7dcecdc10a018fcad6e2e994  syncthing-source-v1.19.2.tar.gz
+051ae768a7d5bd614534dcc06536705ed219d490bddd6cdbb8ac6ee52d67eaa0  go-1.18.patch

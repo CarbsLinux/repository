@@ -17,6 +17,9 @@ export PYTHONPATH
 export DESTDIR="$1"
 export CFLAGS="-DGLX_X86_READONLY_TEXT $CFLAGS"
 
+# Revert commit that causes WebKit to break on Wayland.
+patch -p1 < revert_deprecation.patch
+
 # Fix issues with musl and firefox.
 # https://bugs.freedesktop.org/show_bug.cgi?id=35268
 # https://github.com/mesa3d/mesa/commit/9f37c9903b87f86a533bfaffa72f0ecb285b02b2

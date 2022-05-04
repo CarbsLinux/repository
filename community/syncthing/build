@@ -1,9 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < go-1.18.patch ||:
-
-go mod vendor
-
 export GOPATH="$PWD/gopath"
 export GOFLAGS="$GOFLAGS -mod=vendor"
 trap "go clean -modcache" EXIT INT

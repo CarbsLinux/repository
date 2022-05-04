@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-sed 's/pthread-stubs //' configure >_
-cat _ > configure; rm -f _
+clsed 's/pthread-stubs //' configure
 
 ./configure \
     --prefix=/usr

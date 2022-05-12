@@ -12,8 +12,9 @@ if [ "${sys_arch#i*86}" ]; then
     clsed 's/lib64/lib/'       gcc/gcc/config/i386/linux64.h
 else
     # Apply libssp patch for i686.
-    (cd gcc; patch -Np1 < ../musl-libssp.patch)
+    patch -d gcc -p1 < musl-libssp.patch
 fi
+patch -d gcc -p1 < musl-sched_h-calloc-poison.patch
 
 case "$sys_arch" in
     i*86)   archopts="--build=i686-pc-linux-musl \

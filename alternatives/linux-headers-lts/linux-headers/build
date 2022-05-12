@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+make PREFIX=/usr ARCH=x86 DESTDIR="$1" install

@@ -11,5 +11,8 @@ export LDFLAGS="$LDFLAGS -static"
     --with-xtlibdir=/usr/lib/xtables \
     --disable-nftables
 
+clsed '/^#include <netinet\/ether.h>/d' libxtables/xtables.c
+clsed 's/u_int16_t/uint16_t/g' iptables/xshared.h
+
 make LDFLAGS="$LDFLAGS -all-static"
 make DESTDIR="$1" install

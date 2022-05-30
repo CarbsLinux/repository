@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+# The default include directory messes with otools
+./configure \
+     --prefix=/usr \
+     --includedir=/usr/include/md
+
+make
+make DESTDIR="$1" install

@@ -1,12 +1,14 @@
 #!/bin/sh -e
 
-export LDFLAGS="$LDFLAGS -static"
-
 ./configure \
     --prefix=/usr \
     --mandir=/usr/share/man \
     --without-libevent \
     --with-ssl
 
-make
+# We don't need libbsd, there is no way to disable it from
+printf '#undef HAVE_LIBBSD\n' >> config.h
+clsed 's/-lbsd//' Makefile
+
+make LDFLAGS="$LDFLAGS -static"
 make DESTDIR="$1" install

@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-export CPPFLAGS="$CPPFLAGS $(pkgconf --cflags libmd)"
+CPPFLAGS="$CPPFLAGS $(pkgconf --cflags libmd)"
+export CPPFLAGS
 
 ./configure \
     --prefix=/usr

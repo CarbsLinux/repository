@@ -13,3 +13,9 @@ clsed '/^subninja.*openssl-fipsmodule/d' out/Release/build.ninja
 
 ninja -C out/Release
 tools/install.py install "$1" /usr
+
+# Change name of file that has a name longer than the value allowed by the ustar
+# format.
+cd "$1/usr/lib/node_modules/corepack/dist"
+mv vendors-_yarn*.js vendors-_yarn_berry_cache.js
+clsed '/yarn_berry/s/vendors-[^"]*/vendors-_yarn_berry_cache/' corepack.js

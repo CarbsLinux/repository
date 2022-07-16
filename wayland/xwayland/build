@@ -2,6 +2,10 @@
 
 export DESTDIR="$1"
 
+# I don't know why these build systems add these "optional" dependencies, then
+# don't let you disable them when your system has it.
+clsed "/libbsd\_dep/s/'libbsd'/'libnothankyou'/" meson.build
+
 cl-meson \
     -Ddefault_font_path=/usr/share/fonts \
     -Dsha1=libcrypto \

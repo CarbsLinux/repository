@@ -1,5 +1,4 @@
-https://cdn.kernel.org/pub/linux/network/wireless/iwd-1.28.tar.xz
+https://cdn.kernel.org/pub/linux/network/wireless/iwd-1.29.tar.xz
 patches/fix-name-request.patch
-patches/0001-build-fix-time.h-related-breakage-on-musl.patch
 files/ead.run
 files/iwd.run

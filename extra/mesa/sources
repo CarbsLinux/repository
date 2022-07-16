@@ -1,4 +1,4 @@
-https://github.com/mesa3d/mesa/archive/mesa-22.1.2.tar.gz
+https://github.com/mesa3d/mesa/archive/mesa-22.1.4.tar.gz
 https://files.pythonhosted.org/packages/source/M/Mako/Mako-1.1.1.tar.gz mako
 files/pythonpath
 patches/revert_deprecation.patch

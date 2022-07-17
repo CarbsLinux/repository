@@ -8,7 +8,7 @@ clsed 's/ -ltinfo//g' configure
     --prefix=/usr \
     --enable-threadsafe \
     --disable-readline \
-    --disable-dynamic-extensions \
+    --enable-dynamic-extensions \
     --enable-fts5
 
 make

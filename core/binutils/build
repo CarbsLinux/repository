@@ -31,6 +31,7 @@ EOF
     --disable-nls \
     --disable-readline \
     --disable-gprof \
+    --disable-gprofng \
     --with-mmap \
     --with-system-zlib
 

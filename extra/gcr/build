@@ -5,6 +5,7 @@ export DESTDIR="$1"
 cl-meson \
     -Dintrospection=false \
     -Dgtk_doc=false \
+    -Dssh_agent=false \
     . output
 
 ninja -C output

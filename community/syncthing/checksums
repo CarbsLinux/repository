@@ -1,2 +1,4 @@
 %BLAKE3
-5d49fccc6c2cf3dc27c5a8310c1d7cf9997dc9447f3973ed021ebaf51d06d1cb  syncthing-source-v1.20.3.tar.gz
+5c4ba9f7ba2c06dcd69f7ea5068249babef062b211b6725ecac8e14ba0dee87e  v1.20.4.tar.gz
+53d996672f694761b1bbd0816a65ab0031b525fb2997d0bd9a261cc1a2f49b9e  syncthing-1.20.4-mod-vendor.tar.xz
+4a60658dad68c620204363f7789b3759d9df0b74472128cca1db8b90ced9391b  go-1.19.patch

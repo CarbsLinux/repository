@@ -4,6 +4,8 @@ export GOPATH="$PWD/gopath"
 export GOFLAGS="$GOFLAGS -mod=vendor"
 trap "go clean -modcache" EXIT INT
 
+patch -p1 < go-1.19.patch
+
 go run build.go -no-upgrade -version "v$2" build
 
 clinst -Dm755 syncthing "$1/usr/bin/syncthing"

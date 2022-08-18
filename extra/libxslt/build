@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
+cpt l -q python && {
+    pyver=$(python --version)
+    pyver=${pyver##* }
+    export am_cv_python_version="${pyver%.*}"
+}
+
 ./configure \
     --prefix=/usr
 

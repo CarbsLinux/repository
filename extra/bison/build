@@ -4,7 +4,8 @@ export LDFLAGS="$LDFLAGS -static"
 export M4=gm4
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --disable-nls
 
 make
 make DESTDIR="$1" install

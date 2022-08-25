@@ -7,6 +7,7 @@
     --enable-hidden-symbols \
     --without-libidn \
     --without-libidn2 \
+    --without-nghttp2 \
     --disable-manual \
     --disable-ldap \
     --disable-ares \

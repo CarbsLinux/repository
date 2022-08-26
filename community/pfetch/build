@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+patch -p1 < add-cpt.patch
+
+install -Dm 755 pfetch "$1/usr/bin/pfetch"

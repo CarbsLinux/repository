@@ -1,0 +1,25 @@
+From 03b4f3db7364372f6e8298a3ec904cb837050d9f Mon Sep 17 00:00:00 2001
+From: Cem Keylan <cem@ckyln.com>
+To: Dylan Araps <dylan@k1ss.org>
+Date: Wed, 16 Sep 2020 15:16:10 +0300
+Subject: [PATCH][pfetch] get_pkgs(): add Carbs Packaging Tools
+
+---
+ pfetch | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/pfetch b/pfetch
+index 625e9e1..755ad2a 100755
+--- a/pfetch
++++ b/pfetch
+@@ -491,6 +491,7 @@ get_pkgs() {
+ 
+                 # Directories containing packages.
+                 has kiss       && printf '%s\n' /var/db/kiss/installed/*/
++                has cpt-list   && printf '%s\n' /var/db/cpt/installed/*/
+                 has brew       && printf '%s\n' "$(brew --cellar)/"*
+                 has emerge     && printf '%s\n' /var/db/pkg/*/*/
+                 has pkgtool    && printf '%s\n' /var/log/packages/*
+-- 
+2.28.0
+

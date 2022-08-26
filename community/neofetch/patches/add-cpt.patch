@@ -1,0 +1,25 @@
+From f77d157496f7816ca1c03acef6a349a4db3c374d Mon Sep 17 00:00:00 2001
+From: Cem Keylan <cem@ckyln.com>
+To: Dylan Araps <dylan@k1ss.org>
+Date: Wed, 16 Sep 2020 15:12:00 +0300
+Subject: [PATCH][neofetch] get_packages(): add Carbs Packaging Tools
+
+---
+ neofetch | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/neofetch b/neofetch
+index 4a38096..0df70a8 100755
+--- a/neofetch
++++ b/neofetch
+@@ -1489,6 +1489,7 @@ get_packages() {
+         Linux|BSD|"iPhone OS"|Solaris)
+             # Package Manager Programs.
+             has kiss       && tot kiss l
++            has cpt-list   && tot cpt-list
+             has pacman-key && tot pacman -Qq --color never
+             has dpkg       && tot dpkg-query -f '.\n' -W
+             has rpm        && tot rpm -qa
+-- 
+2.28.0
+

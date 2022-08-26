@@ -1,3 +1,5 @@
 #!/bin/sh -e
 
+patch -p1 < add-cpt.patch
+
 make DESTDIR="$1" install

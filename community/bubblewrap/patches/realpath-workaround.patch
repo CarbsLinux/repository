@@ -1,0 +1,45 @@
+diff --git a/bind-mount.c b/bind-mount.c
+index 877b095..a4185fd 100644
+--- a/bind-mount.c
++++ b/bind-mount.c
+@@ -24,6 +24,28 @@
+ #include "utils.h"
+ #include "bind-mount.h"
+ 
++#ifndef __GLIBC__
++static char *
++normpath(char *path)
++{
++  char *seg = NULL, *p = NULL;
++
++  for (p = path, seg = NULL; *p; p++) {
++    if (strncmp(p, "/../", 4) == 0 || strncmp(p, "/..", 4) == 0) {
++      memmove(seg ? seg : p, p+3, strlen(p+3) + 1);
++      return normpath(path);
++    } else if (strncmp(p, "/./", 3) == 0 || strncmp(p, "/.", 3) == 0) {
++      memmove(p, p+2, strlen(p+2) + 1);
++    } else if (strncmp(p, "//", 2) == 0 || strncmp(p, "/", 2) == 0) {
++      memmove(p, p+1, strlen(p+1) + 1);
++    }
++    if (*p == '/')
++      seg = p;
++  }
++  return path;
++}
++#endif
++
+ static char *
+ skip_token (char *line, bool eat_whitespace)
+ {
+@@ -402,7 +424,11 @@ bind_mount (int           proc_fd,
+      path, so to find it in the mount table we need to do that too. */
+   resolved_dest = realpath (dest, NULL);
+   if (resolved_dest == NULL)
++#ifdef __GLIBC__
+     return BIND_MOUNT_ERROR_REALPATH_DEST;
++#else
++  resolved_dest = normpath(strdup(dest));
++#endif
+ 
+   dest_fd = open (resolved_dest, O_PATH | O_CLOEXEC);
+   if (dest_fd < 0)

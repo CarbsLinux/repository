@@ -7,8 +7,8 @@ clsed '/^test(/,/^)/d' intel/meson.build
 
 cl-meson \
     -Ddefault_library=both \
-    -Dcairo-tests=false \
-    -Dvalgrind=false \
+    -Dcairo-tests=disabled \
+    -Dvalgrind=disabled \
     . output
 
 ninja -C output

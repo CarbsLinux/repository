@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -static-libgcc -static-libstdc++"
+export CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++"
+export DESTDIR="$1"
+
+cl-meson \
+    -Dreadline="$(cpt l -C readline enabled disabled)" \
+    . output
+
+ninja -C output
+ninja -C output install

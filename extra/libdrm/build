@@ -6,6 +6,7 @@ export DESTDIR="$1"
 clsed '/^test(/,/^)/d' intel/meson.build
 
 cl-meson \
+    --auto-features=auto \
     -Ddefault_library=both \
     -Dcairo-tests=disabled \
     -Dvalgrind=disabled \

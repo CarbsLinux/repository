@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-autoreconf -fi
+# There is a problem with the archive format so we can't extract it with pax.
+busybox tar -xJ --strip-components 1 -f "ruby-$2.tar.xz?no_extract"
 
 ./configure \
     --prefix=/usr \

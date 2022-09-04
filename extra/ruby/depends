@@ -1,4 +1,4 @@
-autoconf make
+busybox  make
 libffi   make
 libressl
 zlib

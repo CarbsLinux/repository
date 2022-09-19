@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --enable-static \
+    --enable-jit
+
+make
+make DESTDIR="$1" install
+
+# Remove html docs
+rm -r "$1/usr/share/doc"

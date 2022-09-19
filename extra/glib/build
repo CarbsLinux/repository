@@ -9,7 +9,7 @@ find . -type f -name meson.build -exec \
 cl-meson \
     -Ddefault_library=both \
     -Dman=false \
-    -Dfam=false \
+    -Dnls=disabled \
     . build
 
 ninja -C build

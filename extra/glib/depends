@@ -1,5 +1,6 @@
 libelf
 libffi make
 meson  make
+pcre2
 util-linux
 zlib

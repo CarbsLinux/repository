@@ -1,0 +1,18 @@
+freetype-harfbuzz
+libX11
+libXcursor
+libXext
+libXi
+libXinerama
+libXrandr
+libXrender
+libogg
+libtheora
+libvorbis
+libwebp
+libxcb
+mesa
+opus
+opusfile
+python make
+zlib

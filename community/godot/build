@@ -1,0 +1,39 @@
+#!/bin/sh -e
+
+# Temporarily install scons to build godot
+(
+    cd scons
+
+    python3 setup.py build
+    python3 setup.py install \
+        --prefix=/usr \
+        --root="$PWD/dist"
+
+)
+
+PYTHONPATH=$(./pythonpath)
+PATH=$PWD/scons/dist/usr/bin:$PATH
+
+export PYTHONPATH PATH
+
+clsed 's/#ifdef CRASH_HANDLER_ENABLED/#if defined(CRASH_HANDLER_ENABLED) \&\& defined(__GLIBC__)/' \
+      platform/x11/crash_handler_x11.cpp
+
+scons \
+    platform=x11 \
+    target=release_debug \
+    tools=yes \
+    dev=no \
+    progress=yes \
+    arch=x64 \
+    builtin_libwebp=false \
+    builtin_zlib=false \
+    builtin_freetype=false \
+    builtin_libvorbis=false \
+    builtin_libogg=false \
+    builtin_opus=false \
+    builtin_libtheora=false
+
+clinst -Dm755 bin/godot.x11.opt.tools.x64 "$1/usr/bin/godot"
+clinst -Dm644 icon.png                    "$1/usr/share/pixmaps/godot.png"
+clinst -Dm644 godot.desktop               "$1/usr/share/applications/godot.desktop"

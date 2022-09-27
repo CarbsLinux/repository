@@ -3,13 +3,10 @@
 export CFLAGS="$CFLAGS -fPIC"
 
 # I am really tired of how bash and readline handles patches.
-[ "${2##*p*}" ] || {
-    maj=${2%%.*}
-    min=${2%%p*} min=${min##*.}
-    for patch in "readline$maj$min"-0??; do
-        patch -p0 < "$patch"
-    done
-}
+rl_maj=${2%%.*} rl_min=${2%.p*} rl_min=${rl_min#$rl_maj.}
+for patch in "readline$rl_maj$rl_min-"0??; do
+    [ -f "$patch" ] && patch -p0 < "$patch"
+done
 
 ./configure \
     --prefix=/usr

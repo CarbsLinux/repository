@@ -1,0 +1,3 @@
+description: Library for opening, seeking, and decoding .opus files
+license: BSD-3-Clause
+maintainer: Cem Keylan <cem@carbslinux.org>

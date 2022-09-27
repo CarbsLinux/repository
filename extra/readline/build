@@ -3,7 +3,7 @@
 export CFLAGS="$CFLAGS -fPIC"
 
 # I am really tired of how bash and readline handles patches.
-rl_maj=${2%%.*} rl_min=${2%.p*} rl_min=${rl_min#$rl_maj.}
+rl_maj=${2%%.*} rl_min=${2%.p*} rl_min=${rl_min#"$rl_maj."}
 for patch in "readline$rl_maj$rl_min-"0??; do
     [ -f "$patch" ] && patch -p0 < "$patch"
 done

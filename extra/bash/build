@@ -1,7 +1,9 @@
 #!/bin/sh -e
 
-for patch in bash51-0??; do
-    patch -p0 < "$patch"
+bash_maj=${2%%.*}
+bash_min=${2%.p*} bash_min=${bash_min#$bash_maj.}
+for patch in "bash$bash_maj$bash_min-"0??; do
+    [ -f "$patch" ] && patch -p0 < "$patch"
 done
 
 ./configure \

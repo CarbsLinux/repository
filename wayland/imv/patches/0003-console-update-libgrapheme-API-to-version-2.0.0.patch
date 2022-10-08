@@ -1,0 +1,38 @@
+From 10ddb6571e811be121ed62d5725ddaf40e3923dc Mon Sep 17 00:00:00 2001
+From: Cem Keylan <cem@ckyln.com>
+Date: Fri, 7 Oct 2022 13:03:15 +0200
+Subject: [PATCH] console: update libgrapheme API to version 2.0.0
+
+libgrapheme recently saw its second major version which was "refactored
+for correctness and conformance"[1].
+
+[1]: http://lists.suckless.org/news/2210/0036.html
+---
+ src/console.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/console.c b/src/console.c
+index 9db18e7..22803e1 100644
+--- a/src/console.c
++++ b/src/console.c
+@@ -52,7 +52,7 @@ static size_t next_char(char *buffer, size_t position)
+   return result;
+   #elif defined(IMV_USE_GRAPHEME)
+   if (buffer[position] != 0) {
+-    return position + grapheme_next_character_break(buffer + position, SIZE_MAX);
++    return position + grapheme_next_character_break_utf8(buffer + position, SIZE_MAX);
+   } else {
+     return position;
+   }
+@@ -85,7 +85,7 @@ static size_t prev_char(char *buffer, size_t position)
+   size_t result = 0;
+   size_t step;
+   do {
+-    step = grapheme_next_character_break(buffer + result, SIZE_MAX);
++    step = grapheme_next_character_break_utf8(buffer + result, SIZE_MAX);
+     if (result + step >= position)
+       break;
+     result += step;
+-- 
+2.38.0
+

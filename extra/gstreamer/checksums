@@ -1,2 +1,3 @@
 %BLAKE3
-ecbd7864234cbd831b366365e91d306c82b66f3a8959150e450ca433a48aa710  gstreamer-1.20.3.tar.xz
+cf0c5c28ce50c5428afbeea89829dbeed3446e79e17edeedd8d812e186ca3a68  gstreamer-1.20.4.tar.xz
+d69378fcb6e40f43f7341e08d1bcb135ce5425eedf88e0bee6021b39de2e7955  byacc.patch

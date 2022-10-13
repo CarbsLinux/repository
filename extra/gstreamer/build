@@ -2,6 +2,10 @@
 
 export DESTDIR="$1"
 
+# Let's not use bison as long as we don't need to
+patch -p1 < byacc.patch
+clsed '/^args/{s/yfile,//;s/cfile/cfile, yfile/;}' gst/parse/gen_grammar.py.in
+
 cl-meson \
     -Ddbghelp=disabled \
     -Dintrospection=disabled \

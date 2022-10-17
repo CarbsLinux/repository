@@ -3,9 +3,10 @@
 export DESTDIR="$1"
 
 cl-meson \
-    -Dintrospection=false \
+    -Dintrospection=true \
     -Dgtk_doc=false \
     -Dssh_agent=false \
+    -Dsystemd=disabled \
     . output
 
 ninja -C output

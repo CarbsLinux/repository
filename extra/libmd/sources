@@ -1,1 +1,0 @@
-https://libbsd.freedesktop.org/releases/libmd-1.0.4.tar.xz

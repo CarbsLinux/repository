@@ -1,8 +1,0 @@
-#!/bin/sh -e
-
-export LDFLAGS="$LDFLAGS -static"
-
-make
-
-clinst -Dm755 signify   "$1/usr/bin/signify"
-clman -d "$1" signify.1

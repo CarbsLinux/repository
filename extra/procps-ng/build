@@ -5,10 +5,10 @@
     --sbindir=/usr/bin
 
 # Fix includes for w.c
-clsed 's|HAVE_UTMPX_H|DONT_HAVE_IT_THANK_YOU_VERY_MUCH|g' w.c
+clsed 's|HAVE_UTMPX_H|DONT_HAVE_IT_THANK_YOU_VERY_MUCH|g' src/w.c
 
 # Fix includes for proc/escape.c
-clsed '/\#endif/a #include <langinfo.h>' proc/escape.c
+clsed '/\#endif/a #include <langinfo.h>' library/escape.c
 
 make CCLD="${CC:-cc} -all-static"
 make DESTDIR="$1" install

@@ -1,11 +1,13 @@
 #!/bin/sh -e
 
-python waf/waf-light configure \
-    --prefix=/usr \
-    --mandir=/usr/share/man \
-    --confdir=/etc/mpv \
-    --enable-alsa \
-    --disable-libarchive
+export DESTDIR="$1"
 
-python waf/waf-light build
-python waf/waf-light install --destdir="$1"
+cl-meson \
+    --auto-features=auto \
+    -Dalsa=enabled \
+    -Dx11=disabled \
+    -Dlibarchive=disabled \
+    . output
+
+ninja -C output
+ninja -C output install

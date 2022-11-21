@@ -1,2 +1,2 @@
-https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.8.0.tar.gz yes
-https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.8.0.tar.gz no
+https://github.com/pciutils/pciutils/archive/refs/tags/v3.9.0.tar.gz yes
+https://github.com/pciutils/pciutils/archive/refs/tags/v3.9.0.tar.gz no

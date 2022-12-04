@@ -1,3 +1,3 @@
-https://www.musicpd.org/download/mpd/0.23/mpd-0.23.10.tar.xz
-https://github.com/fmtlib/fmt/archive/7.1.3.tar.gz subprojects/fmt
-files/meson.build                                  subprojects/fmt
+https://www.musicpd.org/download/mpd/0.23/mpd-0.23.11.tar.xz
+https://github.com/fmtlib/fmt/archive/9.1.0.tar.gz subprojects/fmt-9.1.0
+files/meson.build                                  subprojects/fmt-9.1.0

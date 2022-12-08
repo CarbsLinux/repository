@@ -1,0 +1,7 @@
+glib
+gobject-introspection make
+gtk4
+libgcrypt
+libtasn1
+meson make
+p11-kit

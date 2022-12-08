@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+cl-meson \
+    -Dintrospection=true \
+    -Dgtk_doc=false \
+    -Dssh_agent=false \
+    -Dsystemd=disabled \
+    . output
+
+ninja -C output
+ninja -C output install

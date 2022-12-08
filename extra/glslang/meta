@@ -1,0 +1,3 @@
+description: Khronos-reference frontend for GLSL, ESSL, and a SPIR-V generator
+license: BSD-3-Clause
+maintainer: Cem Keylan <cem@carbslinux.org>

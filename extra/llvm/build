@@ -2,12 +2,13 @@
 
 export DESTDIR="$1"
 
-cmake -B build \
+cmake -S llvm -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
+    -DLIBCXX_HAS_MUSL_LIBC=YES \
     -DLLVM_BUILD_LLVM_DYLIB=ON \
     -DLLVM_LINK_LLVM_DYLIB=ON \
-    -DLLVM_TARGETS_TO_BUILD="host;AMDGPU" \
+    -DLLVM_ENABLE_PROJECTS="clang;lld" \
     -DLLVM_ENABLE_RTTI=ON \
     -DLLVM_HOST_TRIPLE="$(cc -dumpmachine)" \
     -DLLVM_BUILD_EXAMPLES=OFF \

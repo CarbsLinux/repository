@@ -1,5 +1,7 @@
+eudev
 expat
-flex         make
+flex              make
+glslang           make
 libX11
 libXdamage
 libXext
@@ -11,7 +13,9 @@ libelf
 libxcb
 libxshmfence
 llvm
-meson        make
-python       make
+meson             make
+python            make
+wayland
+wayland-protocols make
 xorgproto
 zlib

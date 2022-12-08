@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+# Support for vulkan drivers of intel, amd, and broadcom. Change if you just
+# want to specify your own graphics card.
+vulkan_drivers=amd,intel,broadcom
+
 # Temporarily install python-mako to build mesa
 (
     cd mako
@@ -17,9 +21,6 @@ export PYTHONPATH
 export DESTDIR="$1"
 export CFLAGS="-DGLX_X86_READONLY_TEXT $CFLAGS"
 
-# Revert commit that causes WebKit to break on Wayland.
-patch -p1 < revert_deprecation.patch
-
 # Fix issues with musl and firefox.
 # https://bugs.freedesktop.org/show_bug.cgi?id=35268
 # https://github.com/mesa3d/mesa/commit/9f37c9903b87f86a533bfaffa72f0ecb285b02b2
@@ -27,11 +28,9 @@ clsed "/pre_args += '-DUSE_ELF_TLS'/d" meson.build
 
 python3 bin/git_sha1_gen.py --output include/git_sha1.h
 
-platforms=x11
-cpt l -q wayland-protocols && platforms=$platforms,wayland
-
 cl-meson \
-    -Dplatforms="$platforms" \
+    -Dplatforms=x11,wayland \
+    -Dvulkan-drivers="$vulkan_drivers" \
     -Dzstd=false \
     . output
 

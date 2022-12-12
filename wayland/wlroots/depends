@@ -1,4 +1,5 @@
 eudev
+hwdata
 libX11
 libdrm
 libinput
@@ -7,6 +8,7 @@ libxkbcommon
 mesa
 meson make
 pixman
+seatd
 wayland
 wayland-protocols make
 xcb-util-wm

@@ -4,6 +4,7 @@ export DESTDIR="$1"
 
 cl-meson \
     --default-library=both \
+    -Db_lto=true \
     -Dexamples=false \
     -Dxwayland=enabled \
     -Dbackends=drm,libinput,x11 \

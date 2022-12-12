@@ -1,4 +1,4 @@
 libXi
+xorg-server      make
 xorg-util-macros make
 xorgproto        make
-xorg-server      make

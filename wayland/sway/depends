@@ -2,7 +2,7 @@ cairo
 gdk-pixbuf
 json-c
 meson make
-pcre
+pcre2
 scdoc make
 wayland
 wayland-protocols make

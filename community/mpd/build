@@ -2,6 +2,8 @@
 
 patch -p1 < boost-1.81.patch
 
+clsed '/^directory =/s/=.*/= fmt/' subprojects/fmt.wrap
+
 export DESTDIR="$1"
 
 cl-meson \

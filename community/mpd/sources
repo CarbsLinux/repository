@@ -1,4 +1,4 @@
 https://www.musicpd.org/download/mpd/0.23/mpd-0.23.11.tar.xz
-https://github.com/fmtlib/fmt/archive/9.1.0.tar.gz subprojects/fmt-9.1.0
-files/meson.build                                  subprojects/fmt-9.1.0
+https://github.com/fmtlib/fmt/archive/9.1.0.tar.gz subprojects/fmt
+files/meson.build                                  subprojects/fmt
 patches/boost-1.81.patch

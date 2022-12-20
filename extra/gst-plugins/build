@@ -20,10 +20,11 @@ for plugin in libav good bad ugly; do (
     # Enable auto-features in gst-plugins
     cl-meson \
         --auto-features=auto \
-        "$(check_option example false)" \
+        "$(check_option examples      disabled)" \
+        "$(check_option nls           disabled)" \
         "$(check_option introspection disabled)" \
         "$(check_option tests ${test:-disabled})" \
-        "$(check_option qt5 disabled)" \
+        "$(check_option qt5           disabled)" \
         . output
 
     ninja -C output

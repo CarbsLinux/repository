@@ -1,4 +1,5 @@
 busybox  make
 libffi   make
 libressl
+libyaml
 zlib

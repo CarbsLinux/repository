@@ -3,6 +3,7 @@
 export DESTDIR="$1"
 
 cl-meson \
+    -Dlocaledir="$PWD/trash" \
     -Dtls_check=false \
     . output
 

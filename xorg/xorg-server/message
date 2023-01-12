@@ -1,9 +1,0 @@
-NOTE: You must be a part of the [1mvideo[m group
-      for rootless xorg-server to work.
-
-NOTE: This groups based permissions model may not
-      be suitable if Carbs Linux will be used as a multi
-      user system. Further configuration can be
-      done at your own discretion.
-
--> addgroup USER video

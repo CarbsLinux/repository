@@ -27,6 +27,8 @@ cd gcc-build
 
 export libat_cv_have_ifunc=no
 
+# Word splitting is intentional
+# shellcheck disable=2086
 ../gcc/configure \
     --prefix=/usr \
     --disable-multilib \

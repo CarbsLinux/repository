@@ -23,7 +23,7 @@ for plugin in libav good bad ugly; do (
         "$(check_option examples      disabled)" \
         "$(check_option nls           disabled)" \
         "$(check_option introspection disabled)" \
-        "$(check_option tests ${test:-disabled})" \
+        "$(check_option tests "${test:-disabled}")" \
         "$(check_option qt5           disabled)" \
         . output
 

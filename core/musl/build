@@ -35,7 +35,7 @@ case "$sys_arch" in
 esac
 
 # Install BSD compatibility headers.
-clinst -Dm755 -t "$1/usr/include/sys" cdefs.h queue.h tree.h
+clinst -Dm644 -t "$1/usr/include/sys" cdefs.h queue.h tree.h
 
 # Install getconf.
 "${CC:=cc}" --static getconf.c -o "$1/usr/bin/getconf"

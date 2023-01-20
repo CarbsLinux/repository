@@ -1,5 +1,2 @@
-https://git.sr.ht/~exec64/imv/archive/v4.3.1.tar.gz
+https://git.sr.ht/~exec64/imv/archive/v4.4.0.tar.gz
 https://github.com/benhoyt/inih/archive/r52.tar.gz subprojects/inih
-patches/0001-support-libgrapheme.patch
-patches/0002-console-update-libgrapheme-API-to-version-1.patch
-patches/0003-console-update-libgrapheme-API-to-version-2.0.0.patch

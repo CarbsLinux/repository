@@ -1,6 +1,3 @@
 %BLAKE3
-154ed94c58e3c97ca1d9d8c9dbf1bd86e8661be07454822048eaa80886ddeffd  v4.3.1.tar.gz
+bbcc11b702ed9554ddc460f629b3ed39be0395aaf1f8d6ead2d2cb32780c4f14  v4.4.0.tar.gz
 3f3775e97c033b812a8a45c1587d6003fff54c99b64102ec366fe2e86f649e9b  r52.tar.gz
-2ad333e1c8f277be3961bede9696a9c111636f63a8797b17b8780a6fb4c1e483  0001-support-libgrapheme.patch
-7f4a255e11eaff0ece1051e27b190e47b4893728fe40d1e4f17ef8c7c17d3863  0002-console-update-libgrapheme-API-to-version-1.patch
-d526047a247ec94d7d3eb3ca0fbbf040da86094cce353cf455116c8a9673fd9c  0003-console-update-libgrapheme-API-to-version-2.0.0.patch

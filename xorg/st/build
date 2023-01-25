@@ -1,6 +1,0 @@
-#!/bin/sh -e
-
-sed 's|Liberation Mono|Monospace|g' config.def.h > config.h
-
-make
-make PREFIX=/usr DESTDIR="$1" install

@@ -1,4 +1,0 @@
-#!/bin/sh -e
-
-make
-make MANDIR=/share/man/man1 DESTDIR="$1" install

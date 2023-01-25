@@ -1,4 +1,0 @@
-#!/bin/sh -e
-
-make CC="${CC:-cc}"
-make DESTDIR="$1" install

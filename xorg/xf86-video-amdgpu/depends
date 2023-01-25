@@ -1,7 +1,0 @@
-eudev
-expat
-libdrm
-libpciaccess
-mesa
-xorgproto   make
-xorg-server make

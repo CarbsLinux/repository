@@ -1,10 +1,12 @@
 #!/bin/sh -e
 
+clsed s/2022/2023/g LICENSE
+
 ./configure \
     --prefix=/usr
 
 make
 make DESTDIR="$1" install
 
-clinst -Dm644 cpt-base "$1/etc/cpt-base"
+clinst -Dm644 cpt-base "$1/etc/cpt/base"
 clinst -Dm755 news     "$1/usr/bin/cpt-news"

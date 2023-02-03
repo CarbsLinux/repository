@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+make yt-dlp
+command -v pandoc >/dev/null && make yt-dlp.1
+
+clbin yt-dlp youtube-dl
+clman yt-dlp.1

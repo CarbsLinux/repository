@@ -1,0 +1,2 @@
+#!/bin/sh -e
+exec yt-dlp --compat-options youtube-dl "$@"

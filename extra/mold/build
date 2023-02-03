@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+# Create static library of xxhash to link locally.
+make -C xxhash
+
+export CXXFLAGS="$CXXFLAGS -I$PWD/xxhash -L$PWD/xxhash -static-libgcc -static-libstdc++"
+
+export DESTDIR="$1"
+
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DMI_BUILD_SHARED=OFF \
+    -DMOLD_MOSTLY_STATIC=ON
+
+cmake --build   build
+cmake --install build
+
+ln -s mold "$1/usr/bin/ld"
+
+# Create symbolic link for GCC to use mold.
+mkdir -p "$1/usr/lib/mold"
+ln -s ../../bin/mold "$1/usr/lib/mold/ld"

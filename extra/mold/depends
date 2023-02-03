@@ -1,0 +1,3 @@
+cmake    make
+libressl make
+zlib     make

@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+export PKG_CONFIG="pkgconf --static"
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --disable-nls \
+    --disable-rpath \
+    --without-libpsl \
+    --without-libpcre \
+    --without-libpcre2 \
+    --without-gpgme \
+    --without-libnghttp2 \
+    --without-libmicrohttpd \
+    --without-plugin-support \
+    --with-ssl=openssl
+
+make LDFLAGS="$LDFLAGS -all-static"
+make DESTDIR="$1" install

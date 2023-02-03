@@ -1,0 +1,5 @@
+bzip2    make
+libressl
+xz       make
+zlib     make
+zstd     make

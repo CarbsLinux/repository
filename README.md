@@ -56,11 +56,11 @@ Distribution releases are signed with signify, and the keys can be found on
 repository also tracks my GnuPG signature, this README also provides the
 latest signify public key used to sign releases.
 
-- `carbslinux-2021.08.pub`
+- `carbslinux-2023.02.pub`
 
 ```
-untrusted comment: Carbs Linux 2021-08 release public key
-RWTK4GFDD7Jior1UvPYiK3e91PfynJKaQK7YyC72E2LYjIS8H25+opdU
+untrusted comment: Carbs Linux 2023-02 release public key
+RWTe38zmx+iyuJoZN9cgUU42OOKMjRJBvwzn0BiYrCnPFoTlboodImeL
 ```
 
 

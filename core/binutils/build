@@ -25,7 +25,6 @@ EOF
     --prefix=/usr \
     $archopts \
     --enable-targets=x86_64-pep \
-    --enable-gold \
     --disable-multilib \
     --disable-werror \
     --disable-gdb \

@@ -1,4 +1,0 @@
-curl     make
-libressl make
-libevent make
-zlib     make

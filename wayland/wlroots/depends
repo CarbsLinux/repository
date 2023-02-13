@@ -11,5 +11,6 @@ pixman
 seatd
 wayland
 wayland-protocols make
+xcb-util-renderutil
 xcb-util-wm
 xkeyboard-config

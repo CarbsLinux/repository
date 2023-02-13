@@ -7,7 +7,21 @@
     --with-included-libtasn1 \
     --with-included-unistring \
     --disable-guile \
-    --enable-static
+    --disable-static
+
+make
+make DESTDIR="$1" install
+
+./configure \
+    --prefix=/usr \
+    --disable-nls \
+    --with-nettle-mini \
+    --with-included-libtasn1 \
+    --with-included-unistring \
+    --disable-guile \
+    --enable-static \
+    --disable-shared \
+    --without-p11-kit
 
 make
 make DESTDIR="$1" install

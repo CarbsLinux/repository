@@ -17,6 +17,9 @@ cl-meson \
 ninja -C output
 ninja -C output install
 
-clinst -Dt "$1/usr/lib"              tmp/usr/lib/libharfbuzz-icu*
-clinst -Dt "$1/usr/lib/pkgconfig"    tmp/usr/lib/pkgconfig/harfbuzz-icu.pc
-clinst -Dt "$1/usr/include/harfbuzz" tmp/usr/include/harfbuzz/hb-icu.h
+# Install library files
+clinst -Dm644 -t "$1/usr/lib/pkgconfig"    tmp/usr/lib/pkgconfig/harfbuzz-icu.pc
+cp -H tmp/usr/lib/libharfbuzz-icu* "$1/usr/lib/"
+
+# Install header
+clinst -Dm644 -t "$1/usr/include/harfbuzz" tmp/usr/include/harfbuzz/hb-icu.h

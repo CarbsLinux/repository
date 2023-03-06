@@ -2,6 +2,10 @@
 
 export DESTDIR="$1"
 
+# Disable usage of execinfo on the testsuite
+clsed '/#ifndef G_OS_WIN32/c#if !defined(G_OS_WIN32) && defined(__GLIBC__)' \
+    testsuite/reftests/gtk-reftest.c
+
 cl-meson \
     -Dgtk_doc=false \
     -Dwayland-backend="$(cpt l -C wayland true false)" \

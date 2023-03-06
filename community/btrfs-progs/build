@@ -1,9 +1,5 @@
 #!/bin/sh -e
 
-# For some reason they changed the place of this file to be in the include/
-# directory, but the location on the filesystem is not updated
-mv config.h.in include/
-
 ./configure \
     --prefix=/usr \
     --bindir=/usr/bin \

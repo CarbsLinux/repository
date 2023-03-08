@@ -1,17 +1,29 @@
 cairo
 cmake  make
+freetype-harfbuzz
+gdk-pixbuf
+glib
 glib-networking
 gperf  make
 gst-plugins-base
+gstreamer
 gtk+3
 harfbuzz-icu
-libxslt
-libXt
+icu
 libgcrypt
+libgpg-error
+libjpeg-turbo
+libpng
 libsoup
 libwebp
+libxml2
+libxslt
 mesa
+openjpeg2
+pango
 perl   make
 python make
 ruby   make
 sqlite
+wayland
+zlib

@@ -6,12 +6,17 @@ if cpt-list cmake >/dev/null 2>&1; then
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_INSTALL_LIBDIR=/usr/lib \
-        -DCMAKE_SHARED_LIBS=True \
+        -DCMAKE_SHARED_LIBS=ON \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_USE_SYSTEM_CURL=True \
-        -DCMAKE_USE_SYSTEM_EXPAT=True \
-        -DCMAKE_USE_SYSTEM_ZLIB=True \
-        -DCMAKE_USE_SYSTEM_BZIP2=True \
+        -DCMAKE_USE_SYSTEM_BZIP2=ON \
+        -DCMAKE_USE_SYSTEM_CURL=ON \
+        -DCMAKE_USE_SYSTEM_EXPAT=ON \
+        -DCMAKE_USE_SYSTEM_LIBARCHIVE=ON \
+        -DCMAKE_USE_SYSTEM_LIBLZMA=ON \
+        -DCMAKE_USE_SYSTEM_LIBUV=ON \
+        -DCMAKE_USE_SYSTEM_NGHTTP2=ON \
+        -DCMAKE_USE_SYSTEM_ZLIB=ON \
+        -DCMAKE_USE_SYSTEM_ZSTD=ON \
         -DBUILD_TESTING=OFF
 
     cmake --build   build

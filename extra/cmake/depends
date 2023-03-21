@@ -2,6 +2,5 @@ bzip2
 curl
 expat
 libarchive
-libuv
 zlib
 zstd

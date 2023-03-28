@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+make -C unifdef
+
 # Remove gettext requirement.
 clsed 's/ngettext/printf/g' Tools/MiniBrowser/gtk/BrowserDownloadsBar.c
 clsed '/po_files \*\.po/d'  Source/WebCore/platform/gtk/po/CMakeLists.txt
@@ -19,6 +21,7 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
+    -DUNIFDEF_EXECUTABLE="$PWD/unifdef/unifdef" \
     -DLIB_INSTALL_DIR=/usr/lib \
     -DENABLE_BUBBLEWRAP_SANDBOX=OFF \
     -DENABLE_DOCUMENTATION=OFF \
@@ -35,6 +38,7 @@ cmake -B build \
     -DENABLE_WAYLAND_TARGET=ON \
     -DENABLE_X11_TARGET=OFF \
     -DPORT=GTK \
+    -DUSE_AVIF=OFF \
     -DUSE_LIBHYPHEN=OFF \
     -DUSE_LIBNOTIFY="$(cpt l -C libnotify ON OFF)" \
     -DUSE_LIBSECRET=OFF \

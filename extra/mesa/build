@@ -32,6 +32,7 @@ cl-meson \
     -Dplatforms=x11,wayland \
     -Dvulkan-drivers="$vulkan_drivers" \
     -Dzstd=false \
+    -Dxmlconfig=enabled \
     . output
 
 ninja -C output

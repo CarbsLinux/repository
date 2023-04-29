@@ -1,11 +1,13 @@
 #!/bin/sh -e
 
 export LDFLAGS="$LDFLAGS -static"
+export LIBGNUTLS_CFLAGS="$(pkgconf --static --cflags gnutls)"
+export LIBGNUTLS_LIBS="$(pkgconf --static --libs gnutls)"
 
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \
-    --disable-gnutls
+    # --disable-gnutls
 
 make
 make DESTDIR="$1" install

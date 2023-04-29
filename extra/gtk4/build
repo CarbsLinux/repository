@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 export DESTDIR="$1"
+export LD=ld.bfd
 
 # Disable usage of execinfo on the testsuite
 clsed '/#ifndef G_OS_WIN32/c#if !defined(G_OS_WIN32) && defined(__GLIBC__)' \

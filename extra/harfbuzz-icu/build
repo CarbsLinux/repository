@@ -12,6 +12,7 @@ cl-meson \
     -Dbenchmark=disabled \
     -Dcairo=disabled \
     -Ddocs=disabled \
+    -Dtests=disabled \
     . output
 
 ninja -C output

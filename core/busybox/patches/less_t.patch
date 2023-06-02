@@ -21,8 +21,8 @@ Accept and ignore the -T flag for compatibility.
  	getopt32(argv, "EMmN~IF"
  		IF_FEATURE_LESS_TRUNCATE("S")
  		IF_FEATURE_LESS_RAW("R")
--		/*ignored:*/"s"
-+		/*ignored:*/"sT:", &str_ignored
+-		/*ignored:*/"sX"
++		/*ignored:*/"sXT:", &str_ignored
  	);
  	argv += optind;
  	num_files = argc - optind;

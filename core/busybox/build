@@ -12,11 +12,28 @@ done
 
 # Build and install regular busybox.
 # This excludes utilities which require 'suid' to function.
-make CC="${CC:-gcc}"
+make CC="${CC:=gcc}"
 make CONFIG_PREFIX="$1/usr" install
 
 # Rename the binary temporarily.
 mv "$1/usr/bin/busybox" "$1/usr/bin/busybox-nosuid"
+
+# Build and install recovery busybox.
+# The only difference of this configuration is that it includes a recovery
+# shell.
+clsed '/SH_STANDALONE/cCONFIG_FEATURE_SH_STANDALONE=y' .config
+
+# Create an embedded script for recovery sh
+mkdir embed
+
+# We are not trying to expand here.
+# shellcheck disable=SC2016
+printf '[ "$SHLVL" -gt 20 ] && exit 1; exec -a ash "$0" "$@"\n' > embed/rcsh
+chmod +x embed/rcsh
+
+make CC="$CC"
+make CONFIG_PREFIX="$1/usr" install
+mv "$1/usr/bin/busybox" "$1/usr/bin/rcsh"
 
 # Build and install suid busybox.
 # This _only_ includes utlities which require 'suid' to function.

@@ -19,7 +19,6 @@ PYTHONPATH=$(./pythonpath)
 
 export PYTHONPATH
 export DESTDIR="$1"
-export CFLAGS="-DGLX_X86_READONLY_TEXT $CFLAGS"
 
 # Fix issues with musl and firefox.
 # https://bugs.freedesktop.org/show_bug.cgi?id=35268
@@ -30,9 +29,16 @@ python3 bin/git_sha1_gen.py --output include/git_sha1.h
 
 cl-meson \
     -Dplatforms=x11,wayland \
+    -Ddri3=enabled \
+    -Dgles1=enabled \
+    -Dgles2=enabled \
+    -Dglx-read-only-text=true \
+    -Dglx=dri \
+    -Dllvm=enabled \
+    -Dshared-glapi=enabled \
     -Dvulkan-drivers="$vulkan_drivers" \
-    -Dzstd=false \
     -Dxmlconfig=enabled \
+    -Dzstd=disabled \
     . output
 
 ninja -C output

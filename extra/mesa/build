@@ -30,6 +30,8 @@ python3 bin/git_sha1_gen.py --output include/git_sha1.h
 cl-meson \
     -Dplatforms=x11,wayland \
     -Ddri3=enabled \
+    -Degl=enabled \
+    -Dgbm=enabled \
     -Dgles1=enabled \
     -Dgles2=enabled \
     -Dglx-read-only-text=true \

@@ -1,11 +1,16 @@
 #!/bin/sh -e
 
+# Fix build of SourceBrush.cpp
+patch -p1 < fix-sourcebrush.patch
+
 make -C unifdef
 
 # Remove gettext requirement.
-clsed 's/ngettext/printf/g' Tools/MiniBrowser/gtk/BrowserDownloadsBar.c
-clsed '/po_files \*\.po/d'  Source/WebCore/platform/gtk/po/CMakeLists.txt
-clsed '/^GETTEXT_C/d'       Source/WebCore/platform/gtk/po/CMakeLists.txt
+clsed 's/ngettext/printf/g'           Tools/MiniBrowser/gtk/BrowserDownloadsBar.c
+clsed '/po_files \*\.po/d'            Source/WebCore/platform/gtk/po/CMakeLists.txt
+clsed '/if.*GETTEXT_FOUND/,/^endif/d' Source/WebCore/platform/gtk/po/CMakeLists.txt
+clsed '/^GETTEXT_C/d'                 Source/WebCore/platform/gtk/po/CMakeLists.txt
+                            
 
 # Fix clang build.
 clsed '/LC_ALL/d'       Source/JavaScriptCore/jsc.cpp
@@ -48,5 +53,5 @@ cmake -B build \
     -DUSE_WPE_RENDERER=OFF \
     -Wno-dev
 
-cmake --build   build
+SAMUFLAGS='-j4' cmake --build   build
 cmake --install build

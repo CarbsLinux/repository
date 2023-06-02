@@ -6,7 +6,7 @@ export LDFLAGS="$LDFLAGS -static -lsasl2 -ldl -lresolv"
 	--prefix=/usr \
 	--ssl \
 	--disable-doc \
-	--disable-idn \
+	--disable-idn2 \
 	--disable-nls \
 
 make

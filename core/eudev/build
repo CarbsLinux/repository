@@ -5,6 +5,7 @@
     --sbindir=/usr/bin \
     --sysconfdir=/etc \
     --enable-hwdb \
+    --enable-manpages \
     --disable-introspection
 
 make

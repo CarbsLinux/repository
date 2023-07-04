@@ -1,4 +1,4 @@
-https://cdn.kernel.org/pub/linux/network/wireless/iwd-2.5.tar.xz
+https://cdn.kernel.org/pub/linux/network/wireless/iwd-2.6.tar.xz
 patches/fix-name-request.patch
 files/ead.run
 files/iwd.run

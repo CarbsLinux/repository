@@ -1,0 +1,12 @@
+--- a/dirmngr/server.c	Fri Jun 30 10:53:58 2023
++++ b/dirmngr/server.c	Thu Jul  6 11:56:44 2023
+@@ -2776,7 +2776,9 @@
+ 
+   if (opt_help)
+     {
++#if USE_LDAP
+       ks_ldap_help_variables (ctrl);
++#endif /*USE_LDAP*/
+       err = 0;
+       goto leave;
+     }

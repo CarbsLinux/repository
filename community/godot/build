@@ -19,6 +19,11 @@ export PYTHONPATH PATH
 clsed 's/#ifdef CRASH_HANDLER_ENABLED/#if defined(CRASH_HANDLER_ENABLED) \&\& defined(__GLIBC__)/' \
       platform/x11/crash_handler_x11.cpp
 
+# Fix build with GCC13
+clsed '/^#define/a#include <cstdint>' \
+    modules/fbx/fbx_parser/FBXCommon.h \
+    thirdparty/vhacd/inc/vhacdManifoldMesh.h
+
 scons \
     platform=x11 \
     target=release_debug \

@@ -7,5 +7,8 @@
     --disable-nls \
     --disable-gpg-test \
     --disable-gpgconf-test
+
+clsed '$a#define _LARGEFILE64_SOURCE' conf/config.h
+
 make
 make DESTDIR="$1" install

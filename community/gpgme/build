@@ -8,7 +8,7 @@
     --disable-gpg-test \
     --disable-gpgconf-test
 
-clsed '$a#define _LARGEFILE64_SOURCE' conf/config.h
+printf '%s\n' '#define _LARGEFILE64_SOURCE' >> conf/config.h
 
 make
 make DESTDIR="$1" install

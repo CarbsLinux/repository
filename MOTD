@@ -5,6 +5,10 @@
 #### #### #    #### ###  #### # #  # ###  #  #
 ------------------------------------------------------------
 
+- 2023-07-15 :: Godot 4 has been added to the testing
+   repository and version 3 of godot has been renamed to
+   'godot3'.
+
 - 2022-02-17 :: Users who have 'xorg-server' should install
   'libxcvt' package and switch to it using the alternative
   system:

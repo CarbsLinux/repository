@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Godot
+Name=Godot3
 Comment=Application for making games
-Exec=/usr/bin/godot %U
+Exec=/usr/bin/godot3 %U
 Icon=godot
 Terminal=false
 Type=Application

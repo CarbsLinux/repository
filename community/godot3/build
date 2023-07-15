@@ -39,6 +39,7 @@ scons \
     builtin_opus=false \
     builtin_libtheora=false
 
-clinst -Dm755 bin/godot.x11.opt.tools.x64 "$1/usr/bin/godot"
+clinst -Dm755 bin/godot.x11.opt.tools.x64 "$1/usr/bin/godot3"
 clinst -Dm644 icon.png                    "$1/usr/share/pixmaps/godot.png"
-clinst -Dm644 godot.desktop               "$1/usr/share/applications/godot.desktop"
+clinst -Dm644 godot3.desktop              "$1/usr/share/applications/godot3.desktop"
+ln -s godot3 "$1/usr/bin/godot"

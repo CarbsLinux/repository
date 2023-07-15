@@ -1,0 +1,6 @@
+#!/usr/bin/python3
+import os
+import sys
+
+print("%s/scons/dist/usr/lib/python%d.%d/site-packages:%s"
+      % (os.getcwd(), sys.version_info.major, sys.version_info.minor, ':'.join(sys.path)))

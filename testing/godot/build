@@ -1,0 +1,54 @@
+#!/bin/sh -e
+# TODO
+
+# Temporarily install scons to build godot
+(
+    cd scons
+
+    python3 setup.py build
+    python3 setup.py install \
+        --prefix=/usr \
+        --root="$PWD/dist"
+
+)
+
+for patch in *.patch; do
+    [ -f "$patch" ] && patch -p1 < "$patch"
+done
+
+PYTHONPATH=$(./pythonpath)
+PATH=$PWD/scons/dist/usr/bin:$PATH
+LDFLAGS="$LDFLAGS -L$PWD/execinfo"
+CFLAGS="$CFLAGS -I$PWD/execinfo"
+CXXFLAGS="$CXXFLAGS -I$PWD/execinfo"
+
+export PYTHONPATH PATH LDFLAGS CFLAGS CXXFLAGS
+
+# clsed 's/#ifdef CRASH_HANDLER_ENABLED/#if defined(CRASH_HANDLER_ENABLED) \&\& defined(__GLIBC__)/' \
+#       platform/linuxbsd/crash_handler_linuxbsd.cpp
+
+scons \
+    LINKFLAGS="$LDFLAGS" \
+    CFLAGS="$CFLAGS" \
+    CXXFLAGS="$CXXFLAGS" \
+    progress=true \
+    arch=x64 \
+    speechd=no \
+    graphite=false \
+    builtin_freetype=false \
+    builtin_zlib=false \
+    builtin_glslang=true \
+    builtin_graphite=false \
+    builtin_harfbuzz=false \
+    builtin_icu4c=false \
+    builtin_libpng=false \
+    builtin_libogg=false \
+    builtin_libtheora=false \
+    builtin_libvorbis=false \
+    builtin_libwebp=false \
+    builtin_zstd=false
+
+clinst -Dm755 bin/godot.linuxbsd.editor.x86_64 "$1/usr/bin/godot4"
+clinst -Dm644 icon.png                         "$1/usr/share/pixmaps/godot.png"
+clinst -Dm644 godot4.desktop                   "$1/usr/share/applications/godot4.desktop"
+ln -s godot4 "$1/usr/bin/godot"

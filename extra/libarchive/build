@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# See: https://github.com/libarchive/libarchive/pull/1924
+patch -p1 < replace-namelen.patch
+
 ./configure \
     --prefix=/usr \
     --without-nettle \

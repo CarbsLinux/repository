@@ -4,3 +4,4 @@ pixman
 scdoc make
 wayland
 wayland-protocols make
+wlroots

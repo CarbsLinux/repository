@@ -1,5 +1,16 @@
 #!/bin/sh -e
 
+# We have multiple issues thanks to p11-kit.
+# - p11-kit does not support static linking (instead of writing proper code that
+#   just works they have decided to go out of their way to make sure you can't
+#   statically link it), so if you build the static gnutls library with it, you
+#   can link nothing to gnutls statically.
+# - If you build gnutls without p11-kit, you can't compile glib-networking as it
+#   depends on the PKCS#11 API in gnutls that they don't even have enabled by
+#   default.
+# - If libressl was fully compatible with openssl, we wouldn't have to use
+#   gnutls for glib-networking, therefore removing the p11-kit dependency.
+
 ./configure \
     --prefix=/usr \
     --disable-nls \

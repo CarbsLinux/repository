@@ -1,5 +1,5 @@
 %BLAKE3
-a2c1ed3d72a545ee007d7eccb158fb7e0e58f007daa78f07ce6393f988e9b7f1  gst-plugins-good-1.22.4.tar.xz
-a69254049ac6f5e97ca55274fde8fe40e6f7f61a370cfceba80e1383858e8ee2  gst-plugins-bad-1.22.4.tar.xz
-aa575ec98c90c35a247b2cc98def909db581480e9c24ab5c32e7dc0c52f55c71  gst-plugins-ugly-1.22.4.tar.xz
-dc6753e146c773e5d66bb0c63aad42723e76b9cfcffb6b46d0b5815e656fd081  gst-libav-1.22.4.tar.xz
+a4eff097d38fee513e630b1522f1864033344e67eb20ccbcf10e9bd6d2382a52  gst-plugins-good-1.22.5.tar.xz
+ef42ad6a7da2662fb88a419c93e7c50decd530fe5f0325f49e63e26878c921ba  gst-plugins-bad-1.22.5.tar.xz
+af31579980b89ace8e594c0b24de7082aa2f50a01a7806b99f5082a385ca428d  gst-plugins-ugly-1.22.5.tar.xz
+00c60611ba7e3b5f7291dfab3bac58f4295fa2cb61867f7b6b86087e87989745  gst-libav-1.22.5.tar.xz

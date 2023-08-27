@@ -3,12 +3,10 @@
 ./configure \
     --prefix=/usr \
     --with-modules \
-    --with-xft \
-    --with-x-toolkit=athena \
-    --without-toolkit-scroll-bars \
+    --with-x-toolkit=gtk3 \
+    --with-pgtk \
+    --without-rsvg \
     --without-dbus \
-    --without-gconf \
-    --without-gsettings \
     --with-xpm=no \
     --with-gnutls=yes
 
@@ -25,7 +23,7 @@ cat << EOF > "$1/usr/share/emacs/site-lisp/site-start.el"
 (setq-default shr-blocked-images ".*\.svg$")
 EOF
 
-make
+make V=1 -j1
 make DESTDIR="$1" install
 
 rm -rf "$1/usr/lib/systemd"

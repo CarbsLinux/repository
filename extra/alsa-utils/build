@@ -1,10 +1,13 @@
 #!/bin/sh -e
 
+clsed '37a #include <sys/types.h>' nhlt/nhlt-dmic-info.c
+
 ./configure \
+    --prefix=/usr \
     --disable-alsaconf \
     --disable-bat \
     --disable-xmlto \
-    --prefix=/usr
+    --disable-nls
 
 make
 make DESTDIR="$1" install

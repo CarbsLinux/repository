@@ -1,0 +1,16 @@
+This adds a busybox-style usage that a lot of people are used to, to the
+coreutils(1) program.
+--- a/src/coreutils.c	Wed Jul  5 13:09:55 2023
++++ b/src/coreutils.c	Wed Sep  6 16:21:00 2023
+@@ -169,6 +169,11 @@
+           else
+             arg_name = prog_name;
+         }
++      else if (!STRPREFIX (argv[1], "-"))
++        {
++          nskip = 1;
++          arg_name = prog_name = argv[1];
++        }
+ 
+       if (nskip)
+         {

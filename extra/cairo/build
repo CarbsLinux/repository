@@ -1,27 +1,18 @@
 #!/bin/sh -e
 
-sed_i() {
-    for file; do :; done
-    sed "$@" >_
-    cat _ > "$file"; rm -f _
-}
+export DESTDIR="$1"
 
-# Disable building 'cairo-sphinx'.
-sed_i "s/BUILD_SPHINX_TRUE=/BUILD_SPHINX_TRUE='#'/"   configure
-sed_i "s/BUILD_SPHINX_FALSE='#'/BUILD_SPHINX_FALSE=/" configure
+cl-meson \
+    -Ddefault_library=both \
+    -Dtee=enabled \
+    -Dglib=enabled \
+    -Dfontconfig=enabled \
+    -Dfreetype=enabled \
+    -Dgtk_doc=false \
+    -Dxcb=enabled \
+    -Dzlib=enabled \
+    -Dpng=enabled \
+    . output
 
-./configure \
-    --prefix=/usr \
-    --enable-tee \
-    --enable-gl \
-    --enable-egl \
-    --enable-xlib-xcb \
-    --enable-xcb \
-    --enable-xlib-xrender \
-    --enable-xlib \
-    --disable-trace \
-    --disable-valgrind \
-    --disable-gtk-doc-html
-
-make
-make DESTDIR="$1" install
+ninja -C output
+ninja -C output install

@@ -1,16 +1,16 @@
 atk
+cairo
+fontconfig
+freetype-harfbuzz
 fribidi
 gdk-pixbuf
-gobject-introspection
-libXcomposite
-libXcursor
-libXdamage
-libXext
-libXi
-libXinerama
-libXrandr
+glib
+gobject-introspection make
 libepoxy
+libxkbcommon
 meson  make
 pango
 python make
 shared-mime-info
+wayland
+wayland-protocols make

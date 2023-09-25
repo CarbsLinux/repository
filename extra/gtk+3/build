@@ -16,8 +16,8 @@ tests=false; [ "$CPT_TEST" = 1 ] && tests=true
 cl-meson \
     -Ddefault_library=both \
     -Dxinerama=yes \
-    -Dx11_backend=true \
-    -Dwayland_backend="$(cpt l -C wayland true false)" \
+    -Dx11_backend=false \
+    -Dwayland_backend=true \
     -Dprint_backends=file \
     -Ddemos=false \
     -Dexamples=false \

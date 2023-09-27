@@ -1,19 +1,16 @@
 binutils make
 cairo
+fontconfig
+freetype-harfbuzz
 fribidi
 gdk-pixbuf
 glib
 graphene
-libXcomposite
-libXcursor
-libXdamage
-libXext
-libXi
-libXinerama
-libXrandr
 libepoxy
+libxkbcommon
 meson make
 pango
-perl   make
 python make
 shared-mime-info
+wayland
+wayland-protocols make

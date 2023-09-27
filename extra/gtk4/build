@@ -9,8 +9,9 @@ clsed '/#ifndef G_OS_WIN32/c#if !defined(G_OS_WIN32) && defined(__GLIBC__)' \
 
 cl-meson \
     -Dgtk_doc=false \
-    -Dwayland-backend="$(cpt l -C wayland true false)" \
+    -Dwayland-backend=true \
     -Dwin32-backend=false \
+    -Dx11-backend=false \
     -Dintrospection=disabled \
     -Dmedia-gstreamer=disabled \
     -Dprint-cups=disabled \

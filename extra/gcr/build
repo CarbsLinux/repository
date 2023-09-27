@@ -2,6 +2,9 @@
 
 export DESTDIR="$1"
 
+# Remove gettext requirement.
+clsed '/^i18n/,/^)/s/^/#/' ui/meson.build
+
 cl-meson \
     -Dintrospection=false \
     -Dgtk_doc=false \

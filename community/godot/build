@@ -18,19 +18,10 @@ done
 
 PYTHONPATH=$(./pythonpath)
 PATH=$PWD/scons/dist/usr/bin:$PATH
-LDFLAGS="$LDFLAGS -L$PWD/execinfo"
-CFLAGS="$CFLAGS -I$PWD/execinfo"
-CXXFLAGS="$CXXFLAGS -I$PWD/execinfo"
 
-export PYTHONPATH PATH LDFLAGS CFLAGS CXXFLAGS
-
-# clsed 's/#ifdef CRASH_HANDLER_ENABLED/#if defined(CRASH_HANDLER_ENABLED) \&\& defined(__GLIBC__)/' \
-#       platform/linuxbsd/crash_handler_linuxbsd.cpp
+export PYTHONPATH PATH
 
 scons \
-    LINKFLAGS="$LDFLAGS" \
-    CFLAGS="$CFLAGS" \
-    CXXFLAGS="$CXXFLAGS" \
     progress=true \
     arch=x64 \
     speechd=no \

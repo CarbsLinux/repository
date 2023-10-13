@@ -17,6 +17,7 @@
     --without-libpsl \
     --with-openssl \
     --without-zstd \
+    --without-brotli \
     --with-pic
 
 make

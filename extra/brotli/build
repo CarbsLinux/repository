@@ -2,11 +2,19 @@
 
 export DESTDIR="$1"
 
-cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DBUILD_SHARED_LIBS=True
+shared() {
+    LIBS=$1; shift
+    cmake -B build \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DBUILD_TESTING=OFF \
+        -DBUILD_SHARED_LIBS="$LIBS" \
+        "$@"
 
-cmake --build   build
-cmake --install build
+    cmake --build   build
+    cmake --install build
+}
+
+shared ON
+shared OFF -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS -static"

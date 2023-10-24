@@ -1,0 +1,6 @@
+Vulkan-Headers make
+cmake make
+libX11 make
+libxcb make
+pkgconf make
+python make

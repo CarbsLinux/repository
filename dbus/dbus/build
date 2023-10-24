@@ -21,3 +21,6 @@ make
 make DESTDIR="$1" install
 
 clsv -d "$1" dbus.run
+
+# Remove systemd files
+rm -r "$1/usr/lib/systemd"

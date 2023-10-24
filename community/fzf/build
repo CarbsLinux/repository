@@ -2,7 +2,7 @@
 
 export GOPATH="$PWD/gopath"
 
-clsed '/^BUILD_FLAGS/s/$/ -mod=vendor/' Makefile
+clsed '/^BUILD_FLAGS/s/$/ -v -mod=vendor/' Makefile
 
 make FZF_VERSION="$2" FZF_REVISION="${2##*.}"
 make FZF_VERSION="$2" FZF_REVISION="${2##*.}" install

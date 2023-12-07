@@ -8,7 +8,8 @@ export LDFLAGS="$LDFLAGS -static"
     --sbindir=/usr/bin \
     --sysconfdir=/etc \
     --rundir=/run \
-    --without-udev
+    --without-udev \
+    --without-openssl
 
 make
 make DESTDIR="$1" install

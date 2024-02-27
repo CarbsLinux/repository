@@ -1,0 +1,9 @@
+atk
+automake make
+cairo
+freetype-harfbuzz
+gdk-pixbuf
+gettext-tiny make
+glib
+gtk+3
+pango

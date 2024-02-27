@@ -1,0 +1,430 @@
+From add8246df3a3e7e2bda84a813d4fabcf17ce39d7 Mon Sep 17 00:00:00 2001
+From: Cem Keylan <cem@ckyln.com>
+Date: Tue, 27 Feb 2024 13:01:10 +0100
+Subject: [PATCH] Separate X11-dependent modules
+
+---
+ configure.ac    | 17 +++++++++++++++++
+ src/Makefile.am |  6 ++++--
+ src/main.c      | 28 ++++++++++++++++++++++++----
+ src/option.c    | 26 +++++++++++++++++++++++---
+ src/util.c      |  4 ++++
+ src/yad.h       |  8 +++++++-
+ 6 files changed, 79 insertions(+), 10 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 252cace..e0adf21 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -46,6 +46,23 @@ if test x$have_html = xyes; then
+     AC_DEFINE([HAVE_HTML], [1], [Define this if you have webkit2gt library])
+ fi
+ 
++dnl paned and notebook
++AC_ARG_WITH([x11],
++    [AS_HELP_STRING([--with-x11],
++        [Build YAD modules that require x11 (notebook, paned)])],
++    [with_x11=$enableval], [with_x11=yes]
++)
++if test x$with_html = xyes; then
++   PKG_CHECK_MODULES([GTK_X11], [gtk+-x11-3.0], [with_x11=yes], [with_x11=no])
++else
++    with_x11=no
++fi
++AM_CONDITIONAL([X11], [test x$with_x11 = xyes])
++
++if test x$with_x11 = xyes; then
++   AC_DEFINE([HAVE_X11], [1], [Define this if you are using GTK+3 with X11 backend])
++fi
++
+ dnl status icon widget
+ AC_ARG_ENABLE([tray],
+ 	[AS_HELP_STRING([--enable-tray],
+diff --git a/src/Makefile.am b/src/Makefile.am
+index efe905c..f9f2d55 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -20,9 +20,7 @@ yad_SOURCES = 		\
+ 	form.c			\
+ 	icons.c			\
+ 	list.c			\
+-	notebook.c		\
+ 	option.c		\
+-	paned.c			\
+ 	picture.c       \
+ 	print.c			\
+ 	progress.c		\
+@@ -42,6 +40,10 @@ if HTML
+ yad_SOURCES += html.c
+ endif
+ 
++if X11
++yad_SOURCES += notebook.c paned.c
++endif
++
+ if STANDALONE
+ yad_SOURCES += defaults.h
+ endif
+diff --git a/src/main.c b/src/main.c
+index 1359a14..53e7a43 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -28,7 +28,9 @@
+ 
+ #ifndef G_OS_WIN32
+ # include <sys/shm.h>
+-# include <gdk/gdkx.h>
++#endif
++#ifdef HAVE_X11
++#include <gdk/gdkx.h>
+ #endif
+ 
+ #include "yad.h"
+@@ -290,6 +292,7 @@ create_layout (GtkWidget *dlg)
+     case YAD_MODE_LIST:
+       mw = list_create_widget (dlg);
+       break;
++#ifdef HAVE_X11
+     case YAD_MODE_NOTEBOOK:
+       if (options.plug == -1)
+         mw = notebook_create_widget (dlg);
+@@ -298,6 +301,7 @@ create_layout (GtkWidget *dlg)
+       if (options.plug == -1)
+         mw = paned_create_widget (dlg);
+       break;
++#endif
+     case YAD_MODE_PICTURE:
+       mw = picture_create_widget (dlg);
+       break;
+@@ -612,6 +616,7 @@ create_dialog (void)
+         gtk_window_fullscreen (GTK_WINDOW (dlg));
+     }
+ 
++#ifdef HAVE_X11
+   /* print xid */
+   if (is_x11 && options.print_xid)
+     {
+@@ -632,6 +637,7 @@ create_dialog (void)
+             fflush (xf);
+         }
+     }
++#endif
+ 
+   return dlg;
+ }
+@@ -648,10 +654,12 @@ create_plug (void)
+       tabs = get_tabs (options.plug, FALSE);
+     }
+ 
++#ifdef HAVE_X11
+   while (!tabs[0].xid)
+     usleep (1000);
+ 
+   win = gtk_plug_new (0);
++#endif
+   /* set window borders */
+   if (options.data.borders == -1)
+     options.data.borders = (gint) gtk_container_get_border_width (GTK_CONTAINER (win));
+@@ -666,7 +674,9 @@ create_plug (void)
+   /* add plug data */
+   /* notebook/paned will count non-zero xids */
+   tabs[options.tabnum].pid = getpid ();
++#ifdef HAVE_X11
+   tabs[options.tabnum].xid = gtk_plug_get_id (GTK_PLUG (win));
++#endif
+   shmdt (tabs);
+ }
+ 
+@@ -699,12 +709,14 @@ yad_print_result (void)
+     case YAD_MODE_LIST:
+       list_print_result ();
+       break;
++#ifdef HAVE_X11
+     case YAD_MODE_NOTEBOOK:
+       notebook_print_result ();
+       break;
+     case YAD_MODE_PANED:
+       paned_print_result ();
+       break;
++#endif
+     case YAD_MODE_SCALE:
+       scale_print_result ();
+       break;
+@@ -885,6 +897,7 @@ main (gint argc, gchar ** argv)
+       return ret;
+     }
+ 
++#ifdef HAVE_X11
+   if (!is_x11)
+     {
+       if (options.mode == YAD_MODE_NOTEBOOK || options.mode == YAD_MODE_PANED
+@@ -897,6 +910,7 @@ main (gint argc, gchar ** argv)
+           return 1;
+         }
+     }
++#endif
+ 
+   switch (options.mode)
+     {
+@@ -921,20 +935,24 @@ main (gint argc, gchar ** argv)
+     default:
+       dialog = create_dialog ();
+ 
++#ifdef HAVE_X11
+       if (is_x11)
+         {
+           /* add YAD_XID variable */
+           str = g_strdup_printf ("0x%lX", GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
+           g_setenv ("YAD_XID", str, TRUE);
+         }
++#endif
+ 
+       /* make some specific init actions */
+-      if (options.mode == YAD_MODE_NOTEBOOK)
++      if (options.mode == YAD_MODE_TEXTINFO)
++        text_goto_line ();
++#ifdef HAVE_X11
++      else if (options.mode == YAD_MODE_NOTEBOOK)
+         notebook_swallow_childs ();
+       else if (options.mode == YAD_MODE_PANED)
+         paned_swallow_childs ();
+-      else if (options.mode == YAD_MODE_TEXTINFO)
+-        text_goto_line ();
++#endif
+       else if (options.mode == YAD_MODE_PICTURE)
+         {
+           if (options.picture_data.size == YAD_PICTURE_FIT)
+@@ -963,10 +981,12 @@ main (gint argc, gchar ** argv)
+             }
+         }
+ #ifndef G_OS_WIN32
++#ifdef HAVE_X11
+       if (options.mode == YAD_MODE_NOTEBOOK)
+         notebook_close_childs ();
+       else if (options.mode == YAD_MODE_PANED)
+         paned_close_childs ();
++#endif
+       /* autokill option for progress dialog */
+       if (!options.kill_parent)
+         {
+diff --git a/src/option.c b/src/option.c
+index 322e2b1..e6577ae 100644
+--- a/src/option.c
++++ b/src/option.c
+@@ -77,11 +77,13 @@ static gboolean html_mode = FALSE;
+ #endif
+ static gboolean icons_mode = FALSE;
+ static gboolean list_mode = FALSE;
++#ifdef HAVE_X11
+ static gboolean notebook_mode = FALSE;
++static gboolean paned_mode = FALSE;
++#endif
+ #ifdef HAVE_TRAY
+ static gboolean notification_mode = FALSE;
+ #endif
+-static gboolean paned_mode = FALSE;
+ static gboolean picture_mode = FALSE;
+ static gboolean print_mode = FALSE;
+ static gboolean progress_mode = FALSE;
+@@ -519,6 +521,7 @@ static GOptionEntry list_options[] = {
+   { NULL }
+ };
+ 
++#ifdef HAVE_X11
+ static GOptionEntry notebook_options[] = {
+   { "notebook", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &notebook_mode,
+     N_("Display notebook dialog"), NULL },
+@@ -536,6 +539,7 @@ static GOptionEntry notebook_options[] = {
+     N_("Use stack mode"), NULL },
+   { NULL }
+ };
++#endif
+ 
+ #ifdef HAVE_TRAY
+ static GOptionEntry notification_options[] = {
+@@ -553,6 +557,7 @@ static GOptionEntry notification_options[] = {
+ };
+ #endif
+ 
++#ifdef HAVE_X11
+ static GOptionEntry paned_options[] = {
+   { "paned", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &paned_mode,
+     N_("Display paned dialog"), NULL },
+@@ -564,6 +569,7 @@ static GOptionEntry paned_options[] = {
+     N_("Set focused pane (1 or 2)"), N_("PANE") },
+   { NULL }
+ };
++#endif
+ 
+ static GOptionEntry picture_options[] = {
+   { "picture", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &picture_mode,
+@@ -1128,6 +1134,7 @@ set_justify (const gchar * option_name, const gchar * value, gpointer data, GErr
+   return TRUE;
+ }
+ 
++#ifdef HAVE_X11
+ static gboolean
+ set_tab_pos (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+ {
+@@ -1144,6 +1151,7 @@ set_tab_pos (const gchar * option_name, const gchar * value, gpointer data, GErr
+ 
+   return TRUE;
+ }
++#endif
+ 
+ static gboolean
+ set_expander (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+@@ -1182,6 +1190,7 @@ set_ellipsize (const gchar * option_name, const gchar * value, gpointer data, GE
+   return TRUE;
+ }
+ 
++#ifdef HAVE_X11
+ static gboolean
+ set_orient (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+ {
+@@ -1194,6 +1203,7 @@ set_orient (const gchar * option_name, const gchar * value, gpointer data, GErro
+ 
+   return TRUE;
+ }
++#endif
+ 
+ static gboolean
+ set_print_type (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+@@ -1534,14 +1544,16 @@ yad_set_mode (void)
+     options.mode = YAD_MODE_ICONS;
+   else if (list_mode)
+     options.mode = YAD_MODE_LIST;
++#ifdef HAVE_X11
+   else if (notebook_mode)
+     options.mode = YAD_MODE_NOTEBOOK;
++  else if (paned_mode)
++    options.mode = YAD_MODE_PANED;
++#endif
+ #ifdef HAVE_TRAY
+   else if (notification_mode)
+     options.mode = YAD_MODE_NOTIFICATION;
+ #endif
+-  else if (paned_mode)
+-    options.mode = YAD_MODE_PANED;
+   else if (picture_mode)
+     options.mode = YAD_MODE_PICTURE;
+   else if (print_mode)
+@@ -1821,6 +1833,7 @@ yad_options_init (void)
+   options.list_data.col_align = NULL;
+   options.list_data.hdr_align = NULL;
+ 
++#ifdef HAVE_X11
+   /* Initialize notebook data */
+   options.notebook_data.tabs = NULL;
+   options.notebook_data.borders = 5;
+@@ -1828,6 +1841,7 @@ yad_options_init (void)
+   options.notebook_data.active = 1;
+   options.notebook_data.expand = FALSE;
+   options.notebook_data.stack = FALSE;
++#endif
+ 
+ #ifdef HAVE_TRAY
+   /* Initialize notification data */
+@@ -1836,10 +1850,12 @@ yad_options_init (void)
+   options.notification_data.menu = NULL;
+ #endif
+ 
++#ifdef HAVE_X11
+   /* Initialize paned data */
+   options.paned_data.orient = GTK_ORIENTATION_VERTICAL;
+   options.paned_data.splitter = -1;
+   options.paned_data.focused = 1;
++#endif
+ 
+   /* Initialize picture data */
+   options.picture_data.size = YAD_PICTURE_ORIG;
+@@ -2029,11 +2045,13 @@ yad_create_context (void)
+   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+   g_option_context_add_group (tmp_ctx, a_group);
+ 
++#ifdef HAVE_X11
+   /* Adds notebook option entries */
+   a_group = g_option_group_new ("notebook", _("Notebook options"), _("Show notebook dialog options"), NULL, NULL);
+   g_option_group_add_entries (a_group, notebook_options);
+   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+   g_option_context_add_group (tmp_ctx, a_group);
++#endif
+ 
+ #ifdef HAVE_TRAY
+   /* Adds notification option entries */
+@@ -2044,11 +2062,13 @@ yad_create_context (void)
+   g_option_context_add_group (tmp_ctx, a_group);
+ #endif
+ 
++#ifdef HAVE_X11
+   /* Adds paned option entries */
+   a_group = g_option_group_new ("paned", _("Paned dialog options"), _("Show paned dialog options"), NULL, NULL);
+   g_option_group_add_entries (a_group, paned_options);
+   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+   g_option_context_add_group (tmp_ctx, a_group);
++#endif
+ 
+   /* Adds picture option entries */
+   a_group = g_option_group_new ("picture", _("Picture dialog options"), _("Show picture dialog options"), NULL, NULL);
+diff --git a/src/util.c b/src/util.c
+index 6750dff..c65f0f4 100644
+--- a/src/util.c
++++ b/src/util.c
+@@ -305,11 +305,15 @@ get_tabs (key_t key, gboolean create)
+       for (i = 1; i < max_tab; i++)
+         {
+           t[i].pid = -1;
++#ifdef HAVE_X11
+           t[i].xid = 0;
++#endif
+         }
+       t[0].pid = shmid;
+       /* lastly, allow plugs to write shmem */
++#ifdef HAVE_X11
+       t[0].xid = 1;
++#endif
+     }
+ 
+   return t;
+diff --git a/src/yad.h b/src/yad.h
+index 2ed7be9..bc05c9e 100644
+--- a/src/yad.h
++++ b/src/yad.h
+@@ -27,7 +27,9 @@
+ #include <sys/ipc.h>
+ #include <fcntl.h>
+ 
++#ifdef HAVE_X11
+ #include <gdk/gdkx.h>
++#endif
+ 
+ #include <gtk/gtk.h>
+ #include <gtk/gtkx.h>
+@@ -82,11 +84,13 @@ typedef enum {
+ #endif
+   YAD_MODE_ICONS,
+   YAD_MODE_LIST,
++#ifdef HAVE_X11
+   YAD_MODE_NOTEBOOK,
++  YAD_MODE_PANED,
++#endif
+ #ifdef HAVE_TRAY
+   YAD_MODE_NOTIFICATION,
+ #endif
+-  YAD_MODE_PANED,
+   YAD_MODE_PICTURE,
+   YAD_MODE_PRINT,
+   YAD_MODE_PROGRESS,
+@@ -629,7 +633,9 @@ extern gboolean ignore_esc;
+ /* TABS */
+ typedef struct {
+   pid_t pid;
++#ifdef HAVE_X11
+   Window xid;
++#endif
+ } YadNTabs;
+ 
+ /* pointer to shared memory for tabbed dialog */
+-- 
+2.43.2
+

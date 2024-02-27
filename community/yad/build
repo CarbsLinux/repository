@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+patch -p1 < 0001-Separate-X11-dependent-modules.patch
+
+autoreconf -fi
+
+./configure \
+    --prefix=/usr \
+    --disable-nls \
+    --disable-html \
+    --disable-sourceview \
+    --disable-spell \
+    --disable-tray
+
+clsed '/gdkx\.h/d;s/Window xid/unsigned long xid/' src/yad.h
+clsed 's/gdk\/gdkx\.h/gtk\/gtkx.h/' src/main.c
+
+
+make
+make DESTDIR="$1" install
+
+rm -r "$1/usr/share/locale"

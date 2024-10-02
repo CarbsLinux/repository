@@ -5,6 +5,7 @@ export DESTDIR="$1"
 cmake -Bbuild \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
+    -DENABLE_OPT=0 \
     -DBUILD_TYPE=Release
 
 cmake --build   build

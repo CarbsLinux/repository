@@ -4,5 +4,7 @@
 	--prefix=/usr \
 	--enable-static
 
+clsed 's/defined(__USE_UNIX98) || defined(__USE_XOPEN2K)/1/' src/npth.h
+
 make
 make DESTDIR="$1" install

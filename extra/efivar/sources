@@ -1,2 +1,1 @@
-https://github.com/rhboot/efivar/releases/download/38/efivar-38.tar.bz2
-patches/musl-compat.patch
+https://github.com/rhboot/efivar/archive/refs/tags/39.tar.gz

@@ -18,7 +18,6 @@ mk() {
 
     # Build static targets.
     mk libefiboot.a libefivar.a efiboot.pc efivar.pc
-    patch -p2 < ../musl-compat.patch
     mk efivar-static
 
     # Install the binary.

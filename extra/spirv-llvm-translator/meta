@@ -1,0 +1,3 @@
+description: API and commands for processing SPIR-V modules
+license: NCSA
+maintainer: Cem Keylan <cem@carbslinux.org>

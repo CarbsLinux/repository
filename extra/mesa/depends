@@ -8,6 +8,7 @@ libXext
 libXrandr
 libXrender
 libXxf86vm
+libclc
 libdrm
 libelf
 libxcb
@@ -15,7 +16,8 @@ libxshmfence
 llvm
 meson             make
 python            make
+spirv-llvm-translator make
 wayland
 wayland-protocols make
-xorgproto
+xorgproto         make
 zlib

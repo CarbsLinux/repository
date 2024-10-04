@@ -1,6 +1,8 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr
+export DESTDIR="$1"
 
-make DESTDIR="$1" install
+cl-meson \
+    . output
+
+ninja -C output install

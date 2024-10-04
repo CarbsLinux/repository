@@ -8,11 +8,10 @@ if cpt l gnutls; then
     export LIBGNUTLS_CFLAGS LIBGNUTLS_LIBS
 fi
 
-patch -p1 < fix-ldap.patch
-
 ./configure \
     --prefix=/usr \
-    --sbindir=/usr/bin
+    --sbindir=/usr/bin \
+    --disable-scdaemon
 
 make
 make DESTDIR="$1" install

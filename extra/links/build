@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+export LDFLAGS="$LDFLAGS -static"
+
 ./configure \
     --prefix=/usr \
     --mandir=/usr/share/man \
@@ -10,5 +12,5 @@
 printf '#undef HAVE_LIBBSD\n' >> config.h
 clsed 's/-lbsd//' Makefile
 
-make LDFLAGS="$LDFLAGS -static"
+make
 make DESTDIR="$1" install

@@ -4,7 +4,7 @@ export DESTDIR="$1"
 
 cl-meson \
     -Denable-docs=false \
-    -Denable-wayland="$(cpt l -C wayland true false)" \
+    -Denable-wayland=true \
     . output
 
 ninja -C output

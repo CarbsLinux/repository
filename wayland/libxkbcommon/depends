@@ -1,0 +1,4 @@
+libxcb
+libxml2
+meson make
+wayland

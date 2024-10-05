@@ -17,4 +17,5 @@ cl-meson \
 ninja -C output
 ninja -C output install
 
+# TODO update manual pages
 clman zathura.1 zathurarc.5

@@ -1,0 +1,4 @@
+Vulkan-Headers
+lcms2
+meson make
+vulkan-loader make

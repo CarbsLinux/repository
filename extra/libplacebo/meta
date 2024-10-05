@@ -1,0 +1,3 @@
+description: Reusable library for GPU-accelerated image/video processing primitives and shaders, as well a batteries-included, extensible, high-quality rendering pipeline
+license: LGPL-2.1-or-later
+maintainer: Cem Keylan <cem@carbslinux.org>

@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+export CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++"
+
+cl-meson \
+    -Dlcms=enabled \
+    -Dopengl=enabled \
+    -Dvulkan=enabled \
+    -Ddemos=false \
+    . output
+
+ninja -C output
+ninja -C output install

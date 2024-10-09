@@ -9,6 +9,7 @@ cl-meson \
     -Dxwayland=enabled \
     -Dbackends=drm,libinput,x11 \
     -Drenderers=gles2 \
+    -Dsession=enabled \
     . build
 
 ninja -C build

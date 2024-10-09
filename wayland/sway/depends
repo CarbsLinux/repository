@@ -6,4 +6,4 @@ pcre2
 scdoc make
 wayland
 wayland-protocols make
-wlroots
+wlroots-0.17

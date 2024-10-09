@@ -1,0 +1,17 @@
+eudev
+hwdata
+libX11
+libdisplay-info make
+libdrm
+libinput
+libxcb
+libxkbcommon
+mesa
+meson make
+pixman
+seatd
+wayland
+wayland-protocols make
+xcb-util-renderutil
+xcb-util-wm
+xkeyboard-config

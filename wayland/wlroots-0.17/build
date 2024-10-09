@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+cl-meson \
+    --default-library=both \
+    -Db_lto=true \
+    -Dexamples=false \
+    -Dxwayland=enabled \
+    -Dbackends=drm,libinput,x11 \
+    -Drenderers=gles2 \
+    -Dsession=enabled \
+    . build
+
+ninja -C build
+ninja -C build install

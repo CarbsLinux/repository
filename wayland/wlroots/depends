@@ -1,6 +1,7 @@
 eudev
 hwdata
 libX11
+libdisplay-info make
 libdrm
 libinput
 libxcb
